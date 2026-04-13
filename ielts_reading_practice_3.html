@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Academic Reading Practice Test 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f2f1f4;
+  --surface: #fdfcff;
+  --surface2: #eeecf4;
+  --ink: #1a1820;
+  --ink-soft: #44414e;
+  --ink-muted: #857f96;
+  --border: #d8d4e4;
+  --border-light: #e8e4f0;
+  --blue: #2a1a8a;
+  --blue-light: #eeeafc;
+  --blue-mid: #5a4acc;
+  --teal: #1a5a6a;
+  --teal-light: #e0eef4;
+  --amber: #6a440a;
+  --amber-light: #faf0d8;
+  --red: #7a1a2a;
+  --red-light: #fce8ea;
+  --green: #1a4a2a;
+  --green-light: #e4f4e8;
+  --accent: #4a2aaa;
+  --accent-light: #f0eaff;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--ink); min-height: 100vh; font-size: 15px; line-height: 1.65; }
+
+/* HEADER */
+.site-header { background: #1a1820; padding: 2rem 2rem 1.75rem; border-bottom: 3px solid #4a2aaa; }
+.site-header-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.header-title-group h1 { font-family: 'Source Serif 4', serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 600; color: #fdfcff; line-height: 1.2; margin-bottom: 4px; }
+.header-title-group p { font-size: 12px; font-weight: 400; color: #9a95aa; letter-spacing: 0.12em; text-transform: uppercase; }
+.header-timer-box { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 0.7rem 1.25rem; text-align: center; }
+.timer-label { font-size: 10px; color: #9a95aa; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2px; }
+.timer-display { font-family: 'DM Mono', monospace; font-size: 1.6rem; font-weight: 500; color: #fdfcff; }
+.timer-display.warning { color: #f59e0b; }
+.timer-display.danger { color: #ef4444; }
+.header-score { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 0.7rem 1.25rem; text-align: center; min-width: 120px; }
+.score-label { font-size: 10px; color: #9a95aa; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2px; }
+.score-display { font-family: 'DM Mono', monospace; font-size: 1.3rem; font-weight: 500; color: #fdfcff; }
+
+/* TABS */
+.passage-tabs { background: #1a1820; border-bottom: 1px solid #2e2a3a; padding: 0 2rem; }
+.passage-tabs-inner { max-width: 1200px; margin: 0 auto; display: flex; overflow-x: auto; scrollbar-width: none; }
+.passage-tabs-inner::-webkit-scrollbar { display: none; }
+.ptab { padding: 0.85rem 1.4rem; border: none; background: transparent; cursor: pointer; font-family: 'Outfit', sans-serif; font-size: 12.5px; font-weight: 500; color: #6a6480; border-bottom: 3px solid transparent; white-space: nowrap; transition: all 0.2s; letter-spacing: 0.03em; }
+.ptab:hover { color: #c0b8d8; }
+.ptab.active { color: #fdfcff; border-bottom-color: #4a2aaa; }
+
+/* LAYOUT */
+.main-wrap { max-width: 1200px; margin: 0 auto; padding: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+@media (max-width: 900px) { .main-wrap { grid-template-columns: 1fr; } }
+
+/* PASSAGE PANEL */
+.passage-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; position: sticky; top: 1rem; max-height: calc(100vh - 2rem); }
+.passage-panel-header { background: var(--surface2); padding: 1rem 1.4rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.passage-panel-title { font-family: 'Source Serif 4', serif; font-size: 1rem; font-weight: 600; color: var(--ink); }
+.passage-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; background: var(--accent-light); color: var(--accent); border: 1px solid #c8b8f0; }
+.passage-body { padding: 1.5rem; overflow-y: auto; max-height: calc(100vh - 8rem); font-family: 'Source Serif 4', serif; font-size: 14px; line-height: 1.9; color: var(--ink-soft); }
+.passage-body h3 { font-size: 1.1rem; font-weight: 600; color: var(--ink); margin-bottom: 1rem; }
+.passage-body p { margin-bottom: 1rem; }
+.passage-body p:last-child { margin-bottom: 0; }
+.passage-section { display: none; }
+.passage-section.active { display: block; }
+.passage-num { font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 5px; }
+
+/* QUESTIONS */
+.q-section { display: none; animation: fadeIn 0.2s ease; }
+.q-section.active { display: block; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:translateY(0); } }
+.q-block { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 1.25rem; overflow: hidden; }
+.q-block-header { background: var(--surface2); padding: 0.9rem 1.25rem; border-bottom: 1px solid var(--border); }
+.q-block-title { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-mid); }
+.q-block-subtitle { font-size: 12.5px; color: var(--ink-muted); margin-top: 3px; line-height: 1.5; }
+.q-block-body { padding: 1.1rem 1.25rem; }
+
+/* QUESTION ITEM */
+.question-item { margin-bottom: 1.1rem; padding-bottom: 1.1rem; border-bottom: 1px solid var(--border-light); }
+.question-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.q-number { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 5px; }
+.q-text { font-size: 13.5px; color: var(--ink); line-height: 1.6; margin-bottom: 0.75rem; }
+
+/* MCQ */
+.mcq-options { display: flex; flex-direction: column; gap: 6px; }
+.mcq-opt { display: flex; align-items: flex-start; gap: 10px; padding: 8px 12px; border: 1.5px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 13px; color: var(--ink); line-height: 1.5; transition: all 0.15s; background: transparent; text-align: left; font-family: 'Outfit', sans-serif; width: 100%; }
+.mcq-opt:hover:not(:disabled) { background: var(--surface2); border-color: var(--blue-mid); }
+.mcq-opt:disabled { cursor: default; }
+.opt-letter { font-size: 10px; font-weight: 600; min-width: 20px; height: 20px; border-radius: 50%; background: var(--surface2); color: var(--ink-muted); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; transition: all 0.15s; }
+.mcq-opt.correct { background: var(--green-light); border-color: var(--green); color: #1a4a28; }
+.mcq-opt.wrong { background: var(--red-light); border-color: var(--red); color: var(--red); }
+.mcq-opt.correct .opt-letter { background: var(--green); color: white; }
+.mcq-opt.wrong .opt-letter { background: var(--red); color: white; }
+.q-feedback { margin-top: 6px; padding: 7px 10px; border-radius: 6px; font-size: 12px; line-height: 1.5; display: none; }
+.q-feedback.show { display: block; }
+.q-feedback.correct { background: var(--green-light); color: var(--green); }
+.q-feedback.wrong { background: var(--red-light); color: var(--red); }
+
+/* GAP */
+.sentence-gap-wrap { font-size: 13.5px; color: var(--ink); line-height: 2.2; }
+.inline-gap { display: inline-flex; align-items: center; gap: 5px; vertical-align: middle; margin: 0 2px; }
+.inline-input { border: none; border-bottom: 2px solid var(--border); background: transparent; font-family: 'Outfit', sans-serif; font-size: 13.5px; color: var(--ink); outline: none; width: 140px; padding: 1px 4px; transition: border-color 0.2s; }
+.inline-input:focus { border-bottom-color: var(--blue-mid); }
+.inline-input.correct { border-bottom-color: var(--green); color: var(--green); }
+.inline-input.wrong { border-bottom-color: var(--red); color: var(--red); }
+.answer-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.reveal-btn { padding: 6px 16px; border: 1.5px solid var(--border); border-radius: 7px; background: transparent; font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 500; color: var(--ink-muted); cursor: pointer; white-space: nowrap; transition: all 0.15s; }
+.reveal-btn:hover { background: var(--surface2); color: var(--ink); border-color: var(--ink-muted); }
+.correct-badge { font-size: 11px; font-weight: 600; color: var(--green); background: var(--green-light); padding: 3px 10px; border-radius: 12px; display: none; }
+.wrong-badge { font-size: 11px; color: var(--red); background: var(--red-light); padding: 3px 10px; border-radius: 12px; display: none; }
+.answer-reveal { font-size: 12px; font-weight: 600; color: var(--teal); background: var(--teal-light); padding: 3px 10px; border-radius: 12px; display: none; }
+
+/* T/F/NG */
+.tfng-options { display: flex; gap: 6px; flex-wrap: wrap; }
+.tfng-btn { padding: 6px 14px; border: 1.5px solid var(--border); border-radius: 7px; background: transparent; cursor: pointer; font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 500; color: var(--ink-muted); transition: all 0.15s; }
+.tfng-btn:hover:not(:disabled) { background: var(--surface2); color: var(--ink); }
+.tfng-btn:disabled { cursor: default; }
+.tfng-btn.correct { background: var(--green-light); border-color: var(--green); color: var(--green); }
+.tfng-btn.wrong { background: var(--red-light); border-color: var(--red); color: var(--red); }
+
+/* DROPDOWN */
+.match-dropdown { appearance: none; -webkit-appearance: none; border: 1.5px solid var(--border); border-radius: 7px; padding: 5px 28px 5px 10px; font-family: 'Outfit', sans-serif; font-size: 13px; color: var(--ink); background: var(--bg); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23857f96' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 8px center; cursor: pointer; outline: none; transition: border-color 0.2s; min-width: 80px; }
+.match-dropdown:focus { border-color: var(--blue-mid); }
+.match-dropdown.correct { border-color: var(--green); background-color: var(--green-light); color: var(--green); }
+.match-dropdown.wrong { border-color: var(--red); background-color: var(--red-light); color: var(--red); }
+
+/* SCORE BAR */
+.section-score { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.section-score-label { font-size: 12px; color: var(--ink-muted); font-weight: 500; }
+.section-score-bar { flex: 1; min-width: 100px; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+.section-score-fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width 0.5s ease; width: 0%; }
+.section-score-num { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--accent); font-weight: 500; }
+
+/* SUMMARY */
+.para-completion { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.25rem; font-size: 13px; line-height: 2.2; color: var(--ink); margin-bottom: 1rem; }
+.check-all-btn { width: 100%; padding: 10px; border: 1.5px solid var(--accent); border-radius: 8px; background: var(--accent); color: white; font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 0.5rem; transition: all 0.15s; letter-spacing: 0.03em; }
+.check-all-btn:hover { background: #3a1a9a; }
+
+/* ENDINGS */
+.endings-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 0.9rem 1.1rem; margin-bottom: 1rem; font-size: 13px; color: var(--ink-soft); line-height: 1.8; }
+.endings-box strong { font-weight: 600; color: var(--ink); }
+
+footer { text-align: center; padding: 2rem; font-size: 11px; color: var(--ink-muted); letter-spacing: 0.05em; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="header-title-group">
+      <h1>IELTS Academic Reading</h1>
+      <p>Practice Test 3 · 3 Passages · 40 Questions</p>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <div class="header-score">
+        <div class="score-label">Score</div>
+        <div class="score-display" id="global-score">0 / 40</div>
+      </div>
+      <div class="header-timer-box">
+        <div class="timer-label">Time Remaining</div>
+        <div class="timer-display" id="timer">60:00</div>
+      </div>
+      <button onclick="resetTest()" style="padding:8px 14px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;background:transparent;color:#9a95aa;font-family:'Outfit',sans-serif;font-size:11px;font-weight:500;cursor:pointer;letter-spacing:0.06em;text-transform:uppercase;transition:all 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.08)';this.style.color='#fdfcff'" onmouseout="this.style.background='transparent';this.style.color='#9a95aa'">↺ Reset</button>
+    </div>
+  </div>
+</header>
+
+<nav class="passage-tabs">
+  <div class="passage-tabs-inner">
+    <button class="ptab active" onclick="switchPassage(1,this)">Passage 1 · Bike-Sharing</button>
+    <button class="ptab" onclick="switchPassage(2,this)">Passage 2 · Sleep & Learning</button>
+    <button class="ptab" onclick="switchPassage(3,this)">Passage 3 · The Role of Zoos</button>
+  </div>
+</nav>
+
+<div class="main-wrap">
+
+  <!-- PASSAGE TEXT -->
+  <div class="passage-panel">
+    <div class="passage-panel-header">
+      <div class="passage-panel-title" id="passage-heading">Reading Passage 1</div>
+      <span class="passage-tag">20 minutes</span>
+    </div>
+    <div class="passage-body">
+
+      <div class="passage-section active" id="ptext-1">
+        <div class="passage-num">Passage 1</div>
+        <h3>The Rise of Bike-Sharing in Cities</h3>
+        <p>In many cities around the world, the bicycle has re-emerged as a practical form of urban transport. Although bicycles have long been used for commuting and leisure, the rapid expansion of bike-sharing systems over the past two decades has changed the scale at which they are available. Instead of owning a bicycle, users can now borrow one for a short journey and return it to a station, or in some systems leave it within a designated area. Advocates argue that this model can reduce traffic congestion, lower pollution, and make cities more efficient. Critics, however, point out that the success of bike-sharing depends heavily on infrastructure, regulation, and public behaviour.</p>
+        <p>The earliest large-scale bike-sharing schemes were relatively simple. Bicycles were placed in public spaces and could be used freely by anyone. These early programmes were often unsuccessful because bikes were stolen, damaged, or abandoned. Later generations introduced coin deposits, docking stations, and, eventually, digital tracking systems. Modern bike-sharing now usually relies on smartphone apps, membership accounts, <strong>GPS</strong> technology, and electronic payment. These developments have made it easier to manage fleets and encourage responsible use.</p>
+        <p>One of the key arguments in favour of bike-sharing is flexibility. For short urban trips, especially those too long to walk but too short to justify driving, bicycles can be an efficient option. They are particularly useful for what transport planners call the "last <strong>mile</strong>": the final part of a journey between a station stop and a person's destination. A commuter may, for example, travel by train into a city centre and then use a shared bicycle for the remaining distance. In this sense, bike-sharing is often presented not as a replacement for public transport, but as a complement to it.</p>
+        <p>Environmental benefits are also frequently cited. If shared bicycles replace journeys that would otherwise be made by private car or taxi, cities may experience lower emissions and improved air quality. Bike-sharing can also reduce pressure on parking space and encourage a broader shift towards active transport. However, measuring these benefits is not always straightforward. Some studies suggest that a significant proportion of bike-share trips replace walking or public transport rather than car use. In addition, the redistribution of bicycles across a city, often carried out by motor vehicles, can reduce some of the environmental gains.</p>
+        <p>The success of a bike-sharing programme depends greatly on urban design. In cities with safe cycling lanes, moderate traffic, and compact layouts, uptake tends to be stronger. Where roads are dangerous or cycling is culturally unfamiliar, usage may remain low even when bicycles are widely available. Weather also matters. Heavy rain, steep hills, and extreme temperatures can discourage use, though electric bikes have helped address some of these barriers. The availability of e-bikes has expanded bike-sharing to users who might otherwise avoid cycling because of distance, age, or physical effort.</p>
+        <p>Despite its advantages, bike-sharing has faced criticism. In some cities, rapid expansion by private operators led to streets cluttered with poorly parked bicycles. Local authorities had to introduce stricter rules on parking and fleet <strong>size</strong>. There have also been questions about financial sustainability. Many systems rely on subsidies, advertising, or public-private <strong>partnerships</strong>. User fees alone are often insufficient to cover maintenance, redistribution, repair, and technology costs. As a result, bike-sharing may provide social value even when it is not highly profitable.</p>
+        <p>Some researchers argue that the greatest value of bike-sharing lies not only in the trips themselves, but in the behavioural change it encourages. By making cycling visible and convenient, these schemes may help normalise the bicycle as a legitimate form of urban transport. This can influence political decisions, leading to more cycle lanes, lower-speed streets, and greater public support for non-car mobility. In that sense, bike-sharing may act both as a transport service and as a catalyst for wider change.</p>
+        <p>In the future, the role of bike-sharing is likely to evolve further as cities rethink transport systems in response to climate goals, public health concerns, and changing travel habits. It is unlikely to solve urban transport problems on its own. Yet where it is carefully integrated with infrastructure and planning, bike-sharing can become an important part of a more connected and less car-dependent city.</p>
+      </div>
+
+      <div class="passage-section" id="ptext-2">
+        <div class="passage-num">Passage 2</div>
+        <h3>Why Sleep Matters for Learning</h3>
+        <p><strong>A.</strong> Sleep was once regarded simply as a period of rest in which the body and mind became inactive. Modern research has challenged that view. Although consciousness is reduced during sleep, the brain remains highly active, carrying out processes that are essential for physical health, emotional regulation, and learning. Among the most important of these functions is the consolidation of memory: the transformation of recent experiences into more stable forms of knowledge.</p>
+        <p><strong>B.</strong> When people encounter new information, the brain does not immediately store it in a final, permanent form. Instead, newly learned material is initially fragile and vulnerable to <strong>interference</strong>. Sleep appears to strengthen these memory traces, making later recall more reliable. This is one reason why students who study and then sleep often perform better than those who remain awake for long periods afterwards. The benefit is not limited to factual learning; sleep also seems to support the improvement of motor skills, language patterns, and problem-solving abilities.</p>
+        <p><strong>C.</strong> Different stages of sleep may contribute in different ways. During deep non-rapid eye movement sleep, for example, the brain is thought to replay certain patterns of neural activity associated with recent learning. This process may help stabilise declarative memories, such as facts and <strong>events</strong>. Rapid eye movement sleep, by contrast, has often been linked to emotional processing, creativity, and the integration of information across wider networks of knowledge. Although scientists continue to debate the precise role of each stage, there is broad agreement that sleep is not a uniform state and that its internal structure matters.</p>
+        <p><strong>D.</strong> The timing of sleep is also important. In modern societies, many people reduce their sleep in order to work, study, or use digital devices late into the night. This habit may seem manageable in the short term, but chronic sleep restriction can impair attention, judgment, and learning <strong>efficiency</strong>. A tired student may spend longer studying while actually retaining less. Moreover, people who are sleep-deprived often underestimate the extent of their own impairment, believing they are functioning better than they really are.</p>
+        <p><strong>E.</strong> Napping has attracted considerable interest as well. Short daytime sleep can improve alertness and, in some cases, memory performance. However, the effects depend on duration, timing, and the individual's prior level of fatigue. A brief nap may be refreshing, whereas a long one taken late in the day may interfere with nighttime sleep. For this reason, researchers tend to describe napping not as a universal solution, but as a tool whose value depends on context.</p>
+        <p><strong>F.</strong> Sleep also interacts with emotion in ways that affect learning. Anxiety and stress can make it harder to fall asleep, while insufficient sleep can in turn increase emotional reactivity. This creates a cycle in which poor sleep and poor learning reinforce one another. In educational settings, therefore, improving performance may require attention not only to teaching methods, but also to habits and environments that support healthy sleep.</p>
+        <p><strong>G.</strong> Technology has complicated the issue. Artificial light in the evening, particularly from screens, can delay the body's internal signals for sleep by affecting circadian <strong>rhythms</strong>. Notifications, entertainment, and late-night online activity may further reduce sleep time or fragment sleep quality. As a result, advice about learning increasingly includes guidance on digital habits as well as study techniques.</p>
+        <p><strong>H.</strong> Despite growing public awareness, sleep is still sometimes treated as optional, especially in competitive academic or professional cultures. Yet the evidence suggests that sacrificing sleep in the hope of gaining more productive hours is often counterproductive. Sleep is not time lost from learning. On the contrary, it is part of the learning process itself.</p>
+        <p><strong>I.</strong> Understanding this has practical consequences. Schools, universities, employers, and families may all need to reconsider assumptions that reward long waking hours at any cost. If learning is the goal, then sleep should be viewed not as an obstacle to achievement, but as one of its conditions.</p>
+      </div>
+
+      <div class="passage-section" id="ptext-3">
+        <div class="passage-num">Passage 3</div>
+        <h3>The Changing Role of Zoos</h3>
+        <p>Few public institutions provoke as much disagreement as zoos. To some people, they are valuable centres of conservation, research, and education. To others, they are outdated establishments that keep wild animals in artificial conditions for human entertainment. The modern zoo stands at the centre of this debate, attempting to balance ethical concerns with scientific goals and public expectations.</p>
+        <p>Historically, the keeping of exotic animals was closely associated with status and power. Rulers and wealthy collectors displayed rare species as symbols of prestige, and public access was limited. Over time, however, zoological collections became more institutionalised. In the nineteenth century, many zoos presented themselves as scientific and educational establishments, reflecting a broader interest in <strong>classification</strong>, empire, and the study of the natural world. Cages were often arranged to maximise visibility for visitors rather than comfort for animals, revealing how priorities differed from those of most modern zoos.</p>
+        <p>During the twentieth century, ideas about animal welfare began to influence zoo design more strongly. Enclosures increasingly aimed to imitate natural habitats, allow more movement, and support species-specific behaviour. This change did not solve all ethical concerns, but it marked a significant shift. The purpose of the zoo was being redefined: not merely to display animals, but to care for them in ways that acknowledged their biological and psychological needs.</p>
+        <p>Conservation is now one of the strongest justifications offered by zoos. Many species face severe threats in the wild from habitat destruction, hunting, climate change, and pollution. Some zoo-based breeding programmes have helped preserve small populations of endangered animals and, in rare cases, support reintroduction into natural environments. Zoos also contribute to veterinary knowledge, reproductive science, and public awareness of species decline. Supporters argue that, without such institutions, some species would be at even greater risk.</p>
+        <p>Critics, however, question how far these claims apply across the sector. They note that only a small proportion of zoo animals belong to species that are part of serious conservation breeding programmes. Popular large mammals may attract visitors and funding, but they are not always those most urgently in need of protection. There is also debate about whether money spent maintaining captive collections might in some cases achieve more if directed towards <strong>habitat</strong> protection in the wild.</p>
+        <p>Education is another frequently cited benefit, yet its effectiveness is debated. Seeing a live animal can produce curiosity and emotional engagement in ways that books or screens may not. For some visitors, a zoo visit may be the first experience that inspires lasting interest in biology or conservation. On the other hand, simply observing animals in enclosures does not guarantee understanding. Educational value depends greatly on how information is presented and whether visitors are encouraged to think critically about ecology, welfare, and human responsibility.</p>
+        <p>Ethical questions become especially intense when highly intelligent or wide-ranging animals are involved. Species such as elephants, great apes, dolphins, and large carnivores may have complex social and behavioural needs that are difficult to meet in captivity. Even in improved enclosures, the limits of space and control can raise concerns about boredom, stress, or abnormal behaviour. As a result, some people argue that certain species should no longer be kept in zoos at all.</p>
+        <p>In response to these criticisms, some zoos are changing their priorities. They may reduce the number of species they keep, focus more heavily on conservation work, redesign exhibits around welfare, or integrate digital tools that reduce pressure for constant display. The image of the zoo as a collection of as many animals as possible is gradually weakening. In its place is a more <strong>selective</strong> model that tries to justify captivity in relation to specific goals.</p>
+        <p>Whether zoos can fully resolve the tensions within their mission remains uncertain. They are asked to entertain, educate, conserve, research, and protect animal welfare at the same time. These aims do not always fit comfortably together. The future of zoos may therefore depend on their willingness to accept limits, make difficult choices, and defend their role with evidence rather than tradition.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- QUESTIONS -->
+  <div class="questions-panel">
+
+    <!-- PASSAGE 1 -->
+    <div class="q-section active" id="qs-1">
+      <div class="section-score">
+        <span class="section-score-label">Passage 1 · Questions 1–13</span>
+        <div class="section-score-bar"><div class="section-score-fill" id="p1-bar"></div></div>
+        <span class="section-score-num" id="p1-score">0 / 13</span>
+      </div>
+      <div class="q-block">
+        <div class="q-block-header"><div class="q-block-title">Questions 1–5</div><div class="q-block-subtitle">Choose the correct letter, A, B, C or D.</div></div>
+        <div class="q-block-body" id="p1-mcq"></div>
+      </div>
+      <div class="q-block">
+        <div class="q-block-header"><div class="q-block-title">Questions 6–9</div><div class="q-block-subtitle">Complete the sentences. Choose ONE WORD ONLY from the passage.</div></div>
+        <div class="q-block-body" id="p1-gap"></div>
+      </div>
+      <div class="q-block">
+        <div class="q-block-header"><div class="q-block-title">Questions 10–13</div><div class="q-block-subtitle">TRUE / FALSE / NOT GIVEN</div></div>
+        <div class="q-block-body" id="p1-tfng"></div>
+      </div>
+    </div>
+
+    <!-- PASSAGE 2 -->
+    <div class="q-section" id="qs-2">
+      <div class="section-score">
+        <span class="section-score-label">Passage 2 · Questions 14–26</span>
+        <div class="section-score-bar"><div class="section-score-fill" id="p2-bar"></div></div>
+        <span class="section-score-num" id="p2-score">0 / 13</span>
+      </div>
+      <div class="q-block">
+        <div class="q-block-header"><div class="q-block-title">Questions 14–18</div><div class="q-block-subtitle">Which paragraph (A–I) contains the following information?</div></div>
+        <div class="q-block-body" id="p2-para"></div>
+      </div>
+      <div class="q-block">
+        <div class="q-block-header"><div class="q-block-title">Questions 19–23</div><div class="q-block-subtitle">Complete the summary. Choose ONE WORD ONLY from the passage.</div></div>
+        <div class="q-block-body" id="p2-summary"></div>
+      </div>
+      <div class="q-block">
+        <div class="q-block-header"><div class="q-block-title">Questions 24–26</div><div class="q-block-subtitle">Choose the correct letter, A, B, C or D.</div></div>
+        <div class="q-block-body" id="p2-mcq"></div>
+      </div>
+    </div>
+
+    <!-- PASSAGE 3 -->
+    <div class="q-section" id="qs-3">
+      <div class="section-score">
+        <span class="section-score-label">Passage 3 · Questions 27–40</span>
+        <div class="section-score-bar"><div class="section-score-fill" id="p3-bar"></div></div>
+        <span class="section-score-num" id="p3-score">0 / 14</span>
+      </div>
+      <div class="q-block">
+        <div class="q-block-header"><div class="q-block-title">Questions 27–32</div><div class="q-block-subtitle">YES / NO / NOT GIVEN</div></div>
+        <div class="q-block-body" id="p3-yesno"></div>
+      </div>
+      <div class="q-block">
+        <div class="q-block-header"><div class="q-block-title">Questions 33–36</div><div class="q-block-subtitle">Choose the correct letter, A, B, C or D.</div></div>
+        <div class="q-block-body" id="p3-mcq"></div>
+      </div>
+      <div class="q-block">
+        <div class="q-block-header"><div class="q-block-title">Questions 37–40</div><div class="q-block-subtitle">Complete each sentence with the correct ending (A–F).</div></div>
+        <div class="q-block-body" id="p3-endings"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>IELTS Academic Reading Practice Test 3 · All questions based on the provided passages · <span style="color:var(--accent);">✓ Progress auto-saved</span> — your answers persist across page refreshes</footer>
+
+<script>
+// ══════════ DATA: PASSAGE 1 ══════════
+const p1MCQ = [
+  { n:1, text:"What is the main point of the first paragraph?",
+    opts:["Bike-sharing has replaced all other forms of transport","Bike-sharing can help cities, but its success depends on several conditions","Most people prefer owning bicycles to borrowing them","Bike-sharing works equally well in every city"],
+    correct:1, exp:"The passage states that 'advocates argue that this model can help cities' but 'critics point out that success depends heavily on infrastructure, regulation, and public behaviour'." },
+  { n:2, text:"Why did early bike-sharing programmes often fail?",
+    opts:["They were too expensive for users","They operated only in rural areas","Bicycles were often stolen or misused","They used too much digital technology"],
+    correct:2, exp:"The passage says 'early programmes were often unsuccessful because bikes were stolen, damaged, or abandoned'." },
+  { n:3, text:"According to the passage, bike-sharing is especially useful for",
+    opts:["international travel","the final part of a journey","long-distance freight transport","replacing all train services"],
+    correct:1, exp:"The passage describes the 'last mile': 'the final part of a journey between a station stop and a person's destination'." },
+  { n:4, text:"What does the writer say about the environmental benefits of bike-sharing?",
+    opts:["They are always easy to measure","They depend entirely on weather conditions","They may be reduced by the need to move bicycles around","They are greater when users replace walking trips"],
+    correct:2, exp:"'The redistribution of bicycles across a city, often carried out by motor vehicles, can reduce some of the environmental gains'." },
+  { n:5, text:"What is suggested about the wider impact of bike-sharing?",
+    opts:["It may influence attitudes and transport policy","It discourages investment in cycling infrastructure","It is valuable only when privately profitable","It has no effect beyond the journeys themselves"],
+    correct:0, exp:"'This can influence political decisions, leading to more cycle lanes, lower-speed streets' — bike-sharing as a 'catalyst for wider change'." },
+];
+
+const p1Gap = [
+  { n:6, before:"Modern bike-sharing systems often use smartphone apps and", after:"technology.", answer:"GPS", hint:"See paragraph 2 — digital tracking uses ___ technology." },
+  { n:7, before:"Transport planners sometimes describe the final stage of a journey as the last", after:".", answer:"mile", hint:"See paragraph 3 — the 'last ___' describes the final part of a journey." },
+  { n:8, before:"In some cities, authorities introduced stricter rules on parking and fleet", after:".", answer:"size", hint:"See paragraph 6 — 'stricter rules on parking and fleet ___'." },
+  { n:9, before:"Some systems are funded partly through subsidies, advertising, or public-private", after:".", answer:"partnerships", hint:"See paragraph 6 — 'subsidies, advertising, or public-private ___'." },
+];
+
+const p1TFNG = [
+  { n:10, text:"The first bike-sharing schemes required users to pay through smartphone apps.", answer:"FALSE", exp:"Early schemes were simple — apps came with later generations. The first schemes let anyone use bikes freely." },
+  { n:11, text:"Some bike-share trips replace journeys that people would otherwise make on foot.", answer:"TRUE", exp:"'Some studies suggest that a significant proportion of bike-share trips replace walking or public transport'." },
+  { n:12, text:"Electric bikes have eliminated all problems caused by weather and hills.", answer:"FALSE", exp:"The passage says e-bikes 'helped address some of these barriers' — not that they eliminated all problems." },
+  { n:13, text:"Bike-sharing systems usually earn enough from user fees to cover all costs.", answer:"FALSE", exp:"'User fees alone are often insufficient to cover maintenance, redistribution, repair, and technology costs'." },
+];
+
+// ══════════ DATA: PASSAGE 2 ══════════
+const p2Para = [
+  { n:14, text:"a reference to the mistaken belief that tired people can judge their own performance accurately", answer:"D", exp:"Paragraph D: 'people who are sleep-deprived often underestimate the extent of their own impairment, believing they are functioning better than they really are'." },
+  { n:15, text:"a warning that sleep loss may become part of a self-reinforcing problem", answer:"F", exp:"Paragraph F: 'This creates a cycle in which poor sleep and poor learning reinforce one another'." },
+  { n:16, text:"mention of a process in which the brain may repeat recent activity during sleep", answer:"C", exp:"Paragraph C: 'the brain is thought to replay certain patterns of neural activity associated with recent learning'." },
+  { n:17, text:"the idea that sleep contributes to more than one kind of learning", answer:"B", exp:"Paragraph B: sleep supports 'motor skills, language patterns, and problem-solving abilities' — not only factual learning." },
+  { n:18, text:"a point that daytime sleeping is helpful only in some situations", answer:"E", exp:"Paragraph E: napping is 'a tool whose value depends on context' — not a universal solution." },
+];
+
+const p2SummaryText = "Researchers say sleep is important because it helps with memory [19], turning recent experiences into more stable knowledge. Newly learned information is at first fragile and can be affected by [20]. Scientists believe that different sleep stages support different mental functions. Deep sleep may help strengthen memories for facts and [21], while rapid eye movement sleep may be linked to creativity and emotional processing. Lack of sleep can damage attention and [22], and many people do not realise how impaired they are. Evening screen use may also affect the body's circadian [23].";
+
+const p2SummaryAnswers = ["consolidation","interference","events","efficiency","rhythms"];
+
+const p2MCQ = [
+  { n:24, text:"What is the writer's view of sleep in relation to learning?",
+    opts:["It is useful only for young children","It reduces the amount of study people can do and is therefore harmful","It is a necessary part of effective learning","It matters only for physical health"],
+    correct:2, exp:"Paragraph H: 'Sleep is not time lost from learning. On the contrary, it is part of the learning process itself'." },
+  { n:25, text:"According to the passage, what is one problem with late-night technology use?",
+    opts:["It permanently damages memory","It can delay the body's readiness for sleep","It improves concentration too much","It makes napping impossible"],
+    correct:1, exp:"Paragraph G: 'Artificial light in the evening can delay the body's internal signals for sleep by affecting circadian rhythms'." },
+  { n:26, text:"Which statement best matches the writer's overall argument?",
+    opts:["The best way to learn is to stay awake longer","Sleep should be considered part of achievement, not separate from it","Only deep sleep matters for education","Schools cannot influence student sleep habits"],
+    correct:1, exp:"Paragraph I: 'sleep should be viewed not as an obstacle to achievement, but as one of its conditions'." },
+];
+
+// ══════════ DATA: PASSAGE 3 ══════════
+const p3YesNo = [
+  { n:27, text:"Early collections of exotic animals were partly a sign of wealth and authority.", answer:"YES", exp:"'The keeping of exotic animals was closely associated with status and power. Rulers and wealthy collectors displayed rare species as symbols of prestige'." },
+  { n:28, text:"Nineteenth-century zoos were mainly designed around animal comfort.", answer:"NO", exp:"'Cages were often arranged to maximise visibility for visitors rather than comfort for animals'." },
+  { n:29, text:"Modern zoo design has been influenced by concern for animal welfare.", answer:"YES", exp:"'During the twentieth century, ideas about animal welfare began to influence zoo design more strongly'." },
+  { n:30, text:"The passage claims that zoo breeding programmes have saved a large number of species in the wild.", answer:"NO", exp:"The passage says 'in rare cases, support reintroduction into natural environments' — only in rare cases, not a large number." },
+  { n:31, text:"The writer suggests that seeing live animals always produces meaningful education.", answer:"NO", exp:"'Simply observing animals in enclosures does not guarantee understanding. Educational value depends greatly on how information is presented'." },
+  { n:32, text:"Some people believe that certain animals should not be kept in zoos.", answer:"YES", exp:"'Some people argue that certain species should no longer be kept in zoos at all'." },
+];
+
+const p3MCQ = [
+  { n:33, text:"According to the passage, one criticism of zoo conservation claims is that",
+    opts:["zoos never contribute to scientific knowledge","most zoo animals are involved in urgent conservation programmes","funding might sometimes be better spent protecting habitats directly","all zoos refuse to breed endangered species"],
+    correct:2, exp:"'There is also debate about whether money spent maintaining captive collections might in some cases achieve more if directed towards habitat protection in the wild'." },
+  { n:34, text:"What does the passage say about the educational role of zoos?",
+    opts:["It is automatic whenever visitors see animals","It depends partly on how information is provided","It is no longer considered important","It is stronger in old-fashioned zoo cages"],
+    correct:1, exp:"'Educational value depends greatly on how information is presented and whether visitors are encouraged to think critically'." },
+  { n:35, text:"Why are some species considered especially problematic in captivity?",
+    opts:["They are too small to be observed clearly","They require less care than other animals","Their needs may be too complex to meet well in enclosures","They are not interesting to the public"],
+    correct:2, exp:"'Species such as elephants, great apes, dolphins… may have complex social and behavioural needs that are difficult to meet in captivity'." },
+  { n:36, text:"What change is described in some modern zoos?",
+    opts:["They are trying to keep more species than before","They are abandoning all conservation work","They are moving towards a more selective model","They are ending public access completely"],
+    correct:2, exp:"'In its place is a more selective model that tries to justify captivity in relation to specific goals'." },
+];
+
+const p3EndingsSentences = [
+  { n:37, stem:"In the nineteenth century, zoos often reflected", answer:"B", exp:"B: 'a broader interest in science, empire, and classification' — the passage states zoos 'reflecting a broader interest in classification, empire, and the study of the natural world'." },
+  { n:38, stem:"Supporters of zoos argue that they can help", answer:"C", exp:"C: 'endangered species conservation and public awareness' — zoos contribute to 'veterinary knowledge… and public awareness of species decline'." },
+  { n:39, stem:"Critics of zoos sometimes argue that resources should go instead to", answer:"A", exp:"A: 'habitat protection in natural environments' — 'money might… achieve more if directed towards habitat protection in the wild'." },
+  { n:40, stem:"The future of zoos may depend on", answer:"E", exp:"E: 'their ability to justify their purpose with evidence' — 'defend their role with evidence rather than tradition'." },
+];
+
+const endings = {
+  A: "habitat protection in natural environments",
+  B: "a broader interest in science, empire, and classification",
+  C: "endangered species conservation and public awareness",
+  D: "refusing to display any animals at all",
+  E: "their ability to justify their purpose with evidence",
+  F: "returning all animals immediately to the wild",
+};
+
+// ══════════ PERSISTENCE ══════════
+const STORE_KEY = 'ielts_practice3_v1';
+function loadState() { try { const r=localStorage.getItem(STORE_KEY); return r?JSON.parse(r):{}; } catch(e) { return {}; } }
+function saveState(p) { try { const c=loadState(); localStorage.setItem(STORE_KEY,JSON.stringify({...c,...p})); } catch(e) {} }
+function clearState() { try { localStorage.removeItem(STORE_KEY); } catch(e) {} }
+
+// ══════════ SCORES ══════════
+let scores={p1:0,p2:0,p3:0};
+const totals={p1:13,p2:13,p3:14};
+const answered={p1:new Set(),p2:new Set(),p3:new Set()};
+
+function updateScore(passage,qNum,correct) {
+  const key='p'+passage;
+  if(!answered[key].has(qNum)){answered[key].add(qNum);if(correct)scores[key]++;}
+  const pct=Math.round(scores[key]/totals[key]*100);
+  document.getElementById(key+'-bar').style.width=pct+'%';
+  document.getElementById(key+'-score').textContent=scores[key]+' / '+totals[key];
+  const g=scores.p1+scores.p2+scores.p3;
+  document.getElementById('global-score').textContent=g+' / '+(totals.p1+totals.p2+totals.p3);
+}
+
+// ══════════ MCQ ══════════
+function buildMCQ(data,cId,passage) {
+  const c=document.getElementById(cId);
+  data.forEach(q=>{
+    const div=document.createElement('div'); div.className='question-item';
+    const opts=q.opts.map((o,i)=>`<button class="mcq-opt" onclick="answerMCQ(this,${i},${q.correct},${passage},${q.n})" data-idx="${i}"><span class="opt-letter">${String.fromCharCode(65+i)}</span>${o}</button>`).join('');
+    div.innerHTML=`<div class="q-number">Question ${q.n}</div><div class="q-text">${q.text}</div><div class="mcq-options" data-qi="${passage}-${q.n}">${opts}</div><div class="q-feedback" id="fb-${passage}-${q.n}"></div>`;
+    c.appendChild(div);
+  });
+}
+function answerMCQ(btn,idx,correct,passage,qNum) {
+  const wrap=btn.closest('.mcq-options');
+  if(wrap.querySelector('.correct,.wrong'))return;
+  const btns=wrap.querySelectorAll('.mcq-opt'); btns.forEach(b=>b.disabled=true);
+  const isRight=idx===correct;
+  btn.classList.add(isRight?'correct':'wrong'); btns[correct].classList.add('correct');
+  const data=(passage===1?p1MCQ:passage===2?p2MCQ:p3MCQ).find(q=>q.n===qNum);
+  const fb=document.getElementById(`fb-${passage}-${qNum}`);
+  fb.className='q-feedback show '+(isRight?'correct':'wrong');
+  fb.textContent=isRight?'✓ Correct. '+data.exp:'✗ Incorrect. '+data.exp;
+  updateScore(passage,qNum,isRight);
+  saveState({[`mcq_${passage}_${qNum}`]:{chosen:idx,correct,isRight}});
+}
+function restoreMCQ(passage,qNum,chosen,correct,isRight) {
+  const wrap=document.querySelector(`[data-qi="${passage}-${qNum}"]`); if(!wrap)return;
+  const btns=wrap.querySelectorAll('.mcq-opt'); btns.forEach(b=>b.disabled=true);
+  btns[chosen].classList.add(isRight?'correct':'wrong'); btns[correct].classList.add('correct');
+  const data=(passage===1?p1MCQ:passage===2?p2MCQ:p3MCQ).find(q=>q.n===qNum);
+  const fb=document.getElementById(`fb-${passage}-${qNum}`);
+  fb.className='q-feedback show '+(isRight?'correct':'wrong');
+  fb.textContent=isRight?'✓ Correct. '+data.exp:'✗ Incorrect. '+data.exp;
+  updateScore(passage,qNum,isRight);
+}
+
+// ══════════ GAP ══════════
+function buildGap(data,cId,passage) {
+  const c=document.getElementById(cId);
+  data.forEach(q=>{
+    const div=document.createElement('div'); div.className='question-item';
+    div.innerHTML=`<div class="q-number">Question ${q.n}</div>
+      <div class="sentence-gap-wrap">${q.before} <span class="inline-gap"><input class="inline-input" id="gi-${passage}-${q.n}" placeholder="type answer" autocomplete="off" spellcheck="false"></span> ${q.after}</div>
+      <div class="answer-row" style="margin-top:8px;">
+        <button class="reveal-btn" onclick="checkGap(${passage},${q.n})">Check</button>
+        <span class="correct-badge" id="cb-${passage}-${q.n}">✓ Correct</span>
+        <span class="wrong-badge" id="wb-${passage}-${q.n}"></span>
+        <span class="answer-reveal" id="ar-${passage}-${q.n}">Answer: ${q.answer}</span>
+      </div>
+      <div style="font-size:11px;color:var(--ink-muted);margin-top:4px;">${q.hint}</div>`;
+    c.appendChild(div);
+  });
+}
+function checkGap(passage,qNum) {
+  const data=p1Gap.find(q=>q.n===qNum); if(!data)return;
+  const input=document.getElementById(`gi-${passage}-${qNum}`);
+  const val=input.value.trim().toLowerCase();
+  const isRight=val===data.answer.toLowerCase()||val===data.answer.toLowerCase()+'s';
+  input.classList.remove('correct','wrong'); input.classList.add(isRight?'correct':'wrong'); input.disabled=true;
+  const cb=document.getElementById(`cb-${passage}-${qNum}`),wb=document.getElementById(`wb-${passage}-${qNum}`),ar=document.getElementById(`ar-${passage}-${qNum}`);
+  if(isRight){cb.style.display='inline-block';}
+  else{wb.style.display='inline-block';wb.textContent='✗ '+(val?'"'+input.value.trim()+'"':'No answer entered');ar.style.display='inline-block';}
+  updateScore(passage,qNum,isRight);
+  saveState({[`gap_${passage}_${qNum}`]:{value:input.value.trim(),isRight}});
+}
+function restoreGap(passage,qNum,value,isRight) {
+  const input=document.getElementById(`gi-${passage}-${qNum}`); if(!input)return;
+  input.value=value; input.classList.add(isRight?'correct':'wrong'); input.disabled=true;
+  const cb=document.getElementById(`cb-${passage}-${qNum}`),wb=document.getElementById(`wb-${passage}-${qNum}`),ar=document.getElementById(`ar-${passage}-${qNum}`);
+  if(isRight){cb.style.display='inline-block';}
+  else{wb.style.display='inline-block';wb.textContent='✗ '+(value?'"'+value+'"':'No answer entered');ar.style.display='inline-block';}
+  updateScore(passage,qNum,isRight);
+}
+
+// ══════════ T/F/NG ══════════
+function buildTFNG(data,cId,passage,labels) {
+  const c=document.getElementById(cId),labs=labels||['TRUE','FALSE','NOT GIVEN'];
+  data.forEach(q=>{
+    const div=document.createElement('div'); div.className='question-item';
+    const btns=labs.map(l=>`<button class="tfng-btn" onclick="answerTFNG(this,'${l}','${q.answer}',${passage},${q.n})">${l}</button>`).join('');
+    div.innerHTML=`<div class="q-number">Question ${q.n}</div><div class="q-text">${q.text}</div><div class="tfng-options">${btns}</div><div class="q-feedback" id="tfb-${passage}-${q.n}"></div>`;
+    c.appendChild(div);
+  });
+}
+function answerTFNG(btn,choice,correct,passage,qNum) {
+  const wrap=btn.closest('.tfng-options');
+  if(wrap.querySelector('.correct,.wrong'))return;
+  wrap.querySelectorAll('.tfng-btn').forEach(b=>b.disabled=true);
+  const isRight=choice===correct;
+  btn.classList.add(isRight?'correct':'wrong');
+  if(!isRight)wrap.querySelectorAll('.tfng-btn').forEach(b=>{if(b.textContent===correct)b.classList.add('correct');});
+  const allData=[...p1TFNG,...p3YesNo]; const data=allData.find(q=>q.n===qNum);
+  const fb=document.getElementById(`tfb-${passage}-${qNum}`);
+  fb.className='q-feedback show '+(isRight?'correct':'wrong');
+  fb.textContent=isRight?'✓ Correct. '+data.exp:'✗ Incorrect. The answer is '+correct+'. '+data.exp;
+  updateScore(passage,qNum,isRight);
+  saveState({[`tfng_${passage}_${qNum}`]:{choice,correct,isRight}});
+}
+function restoreTFNG(passage,qNum,choice,correct,isRight) {
+  const fb=document.getElementById(`tfb-${passage}-${qNum}`); if(!fb)return;
+  const wrap=fb.previousElementSibling;
+  wrap.querySelectorAll('.tfng-btn').forEach(b=>{b.disabled=true;if(b.textContent===choice)b.classList.add(isRight?'correct':'wrong');if(!isRight&&b.textContent===correct)b.classList.add('correct');});
+  const allData=[...p1TFNG,...p3YesNo]; const data=allData.find(q=>q.n===qNum);
+  fb.className='q-feedback show '+(isRight?'correct':'wrong');
+  fb.textContent=isRight?'✓ Correct. '+data.exp:'✗ Incorrect. The answer is '+correct+'. '+data.exp;
+  updateScore(passage,qNum,isRight);
+}
+
+// ══════════ PARAGRAPH MATCH ══════════
+function buildParaMatch(data,cId,passage) {
+  const c=document.getElementById(cId),paraOpts=['A','B','C','D','E','F','G','H','I'];
+  data.forEach(q=>{
+    const div=document.createElement('div'); div.className='question-item';
+    const opts=paraOpts.map(p=>`<option value="${p}">${p}</option>`).join('');
+    div.innerHTML=`<div class="q-number">Question ${q.n}</div><div class="q-text">${q.text}</div>
+      <div class="answer-row" style="margin-top:6px;">
+        <select class="match-dropdown" id="pm-${passage}-${q.n}"><option value="">Select</option>${opts}</select>
+        <button class="reveal-btn" onclick="checkParaMatch(${passage},${q.n})">Check</button>
+        <span class="correct-badge" id="pcb-${passage}-${q.n}">✓ Correct</span>
+        <span class="wrong-badge" id="pwb-${passage}-${q.n}"></span>
+        <span class="answer-reveal" id="par-${passage}-${q.n}">Answer: ${q.answer}</span>
+      </div>
+      <div class="q-feedback" id="pfb-${passage}-${q.n}" style="margin-top:6px;"></div>`;
+    c.appendChild(div);
+  });
+}
+function checkParaMatch(passage,qNum) {
+  const data=p2Para.find(q=>q.n===qNum);
+  const sel=document.getElementById(`pm-${passage}-${qNum}`),val=sel.value; if(!val)return;
+  const isRight=val===data.answer; sel.classList.add(isRight?'correct':'wrong'); sel.disabled=true;
+  const cb=document.getElementById(`pcb-${passage}-${qNum}`),wb=document.getElementById(`pwb-${passage}-${qNum}`),ar=document.getElementById(`par-${passage}-${qNum}`),fb=document.getElementById(`pfb-${passage}-${qNum}`);
+  if(isRight){cb.style.display='inline-block';fb.className='q-feedback show correct';fb.textContent='✓ '+data.exp;}
+  else{wb.textContent='✗ You chose: '+val;wb.style.display='inline-block';ar.style.display='inline-block';fb.className='q-feedback show wrong';fb.textContent='✗ '+data.exp;}
+  updateScore(passage,qNum,isRight);
+  saveState({[`para_${passage}_${qNum}`]:{val,isRight}});
+}
+function restoreParaMatch(passage,qNum,val,isRight) {
+  const sel=document.getElementById(`pm-${passage}-${qNum}`); if(!sel)return;
+  sel.value=val; sel.classList.add(isRight?'correct':'wrong'); sel.disabled=true;
+  const data=p2Para.find(q=>q.n===qNum);
+  const cb=document.getElementById(`pcb-${passage}-${qNum}`),wb=document.getElementById(`pwb-${passage}-${qNum}`),ar=document.getElementById(`par-${passage}-${qNum}`),fb=document.getElementById(`pfb-${passage}-${qNum}`);
+  if(isRight){cb.style.display='inline-block';fb.className='q-feedback show correct';fb.textContent='✓ '+data.exp;}
+  else{wb.textContent='✗ You chose: '+val;wb.style.display='inline-block';ar.style.display='inline-block';fb.className='q-feedback show wrong';fb.textContent='✗ '+data.exp;}
+  updateScore(passage,qNum,isRight);
+}
+
+// ══════════ SUMMARY ══════════
+function buildSummary(cId,passage) {
+  const c=document.getElementById(cId);
+  let text=p2SummaryText;
+  p2SummaryAnswers.forEach((ans,i)=>{
+    const num=19+i;
+    text=text.replace(`[${num}]`,`<span class="inline-gap"><input class="inline-input" id="si-${passage}-${num}" placeholder="${num}" autocomplete="off" spellcheck="false" style="width:120px;"></span>`);
+  });
+  const div=document.createElement('div'); div.className='question-item'; div.style.borderBottom='none';
+  div.innerHTML=`<div class="para-completion">${text}</div><button class="check-all-btn" onclick="checkSummary(${passage})">Check All Answers</button><div class="q-feedback" id="sfb-${passage}" style="margin-top:8px;"></div>`;
+  c.appendChild(div);
+}
+function checkSummary(passage) {
+  let correct=0; const savedVals={};
+  p2SummaryAnswers.forEach((ans,i)=>{
+    const num=19+i; const input=document.getElementById(`si-${passage}-${num}`); if(input.disabled)return;
+    const val=input.value.trim().toLowerCase(); const isRight=val===ans.toLowerCase();
+    input.classList.remove('correct','wrong'); input.classList.add(isRight?'correct':'wrong'); input.disabled=true;
+    savedVals[num]={value:input.value.trim(),isRight};
+    if(!isRight){const sp=document.createElement('span');sp.className='answer-reveal';sp.style.display='inline-block';sp.style.marginLeft='4px';sp.style.fontSize='11px';sp.textContent=ans;input.parentNode.appendChild(sp);}
+    if(isRight)correct++;
+    updateScore(passage,num,isRight);
+  });
+  const fb=document.getElementById(`sfb-${passage}`);
+  fb.className='q-feedback show '+(correct===5?'correct':'wrong');
+  fb.textContent=correct===5?'✓ All 5 correct!':correct+'/5 correct. Incorrect answers are shown above.';
+  saveState({[`summary_${passage}`]:{vals:savedVals,scoreCorrect:correct}});
+}
+function restoreSummary(passage,vals,scoreCorrect) {
+  p2SummaryAnswers.forEach((ans,i)=>{
+    const num=19+i; const saved=vals[num]; if(!saved)return;
+    const input=document.getElementById(`si-${passage}-${num}`); if(!input)return;
+    input.value=saved.value; input.classList.add(saved.isRight?'correct':'wrong'); input.disabled=true;
+    if(!saved.isRight){const sp=document.createElement('span');sp.className='answer-reveal';sp.style.display='inline-block';sp.style.marginLeft='4px';sp.style.fontSize='11px';sp.textContent=ans;input.parentNode.appendChild(sp);}
+    updateScore(passage,num,saved.isRight);
+  });
+  const fb=document.getElementById(`sfb-${passage}`);
+  fb.className='q-feedback show '+(scoreCorrect===5?'correct':'wrong');
+  fb.textContent=scoreCorrect===5?'✓ All 5 correct!':scoreCorrect+'/5 correct. Incorrect answers are shown above.';
+}
+
+// ══════════ ENDINGS ══════════
+function buildEndings(data,cId,passage) {
+  const c=document.getElementById(cId);
+  const eBox=document.createElement('div'); eBox.className='endings-box';
+  eBox.innerHTML=Object.entries(endings).map(([k,v])=>`<strong>${k}</strong> ${v}<br>`).join('');
+  c.appendChild(eBox);
+  data.forEach(q=>{
+    const div=document.createElement('div'); div.className='question-item';
+    const opts=Object.keys(endings).map(k=>`<option value="${k}">${k}</option>`).join('');
+    div.innerHTML=`<div class="q-number">Question ${q.n}</div>
+      <div class="q-text">${q.stem} <select class="match-dropdown" id="en-${passage}-${q.n}"><option value="">—</option>${opts}</select></div>
+      <div class="answer-row" style="margin-top:6px;">
+        <button class="reveal-btn" onclick="checkEnding(${passage},${q.n})">Check</button>
+        <span class="correct-badge" id="ecb-${passage}-${q.n}">✓ Correct</span>
+        <span class="wrong-badge" id="ewb-${passage}-${q.n}"></span>
+        <span class="answer-reveal" id="ear-${passage}-${q.n}">Answer: ${q.answer}</span>
+      </div>
+      <div class="q-feedback" id="efb-${passage}-${q.n}" style="margin-top:4px;"></div>`;
+    c.appendChild(div);
+  });
+}
+function checkEnding(passage,qNum) {
+  const data=p3EndingsSentences.find(q=>q.n===qNum);
+  const sel=document.getElementById(`en-${passage}-${qNum}`),val=sel.value; if(!val)return;
+  const isRight=val===data.answer; sel.classList.add(isRight?'correct':'wrong'); sel.disabled=true;
+  const cb=document.getElementById(`ecb-${passage}-${qNum}`),wb=document.getElementById(`ewb-${passage}-${qNum}`),ar=document.getElementById(`ear-${passage}-${qNum}`),fb=document.getElementById(`efb-${passage}-${qNum}`);
+  if(isRight){cb.style.display='inline-block';fb.className='q-feedback show correct';fb.textContent='✓ '+data.exp;}
+  else{wb.textContent='✗ '+val;wb.style.display='inline-block';ar.style.display='inline-block';fb.className='q-feedback show wrong';fb.textContent='✗ '+data.exp;}
+  updateScore(passage,qNum,isRight);
+  saveState({[`ending_${passage}_${qNum}`]:{val,isRight}});
+}
+function restoreEnding(passage,qNum,val,isRight) {
+  const sel=document.getElementById(`en-${passage}-${qNum}`); if(!sel)return;
+  sel.value=val; sel.classList.add(isRight?'correct':'wrong'); sel.disabled=true;
+  const data=p3EndingsSentences.find(q=>q.n===qNum);
+  const cb=document.getElementById(`ecb-${passage}-${qNum}`),wb=document.getElementById(`ewb-${passage}-${qNum}`),ar=document.getElementById(`ear-${passage}-${qNum}`),fb=document.getElementById(`efb-${passage}-${qNum}`);
+  if(isRight){cb.style.display='inline-block';fb.className='q-feedback show correct';fb.textContent='✓ '+data.exp;}
+  else{wb.textContent='✗ '+val;wb.style.display='inline-block';ar.style.display='inline-block';fb.className='q-feedback show wrong';fb.textContent='✗ '+data.exp;}
+  updateScore(passage,qNum,isRight);
+}
+
+// ══════════ PASSAGE SWITCHING ══════════
+function switchPassage(n,btn) {
+  document.querySelectorAll('.ptab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.q-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.passage-section').forEach(s=>s.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('qs-'+n).classList.add('active');
+  document.getElementById('ptext-'+n).classList.add('active');
+  const titles={1:'Reading Passage 1 · Bike-Sharing',2:'Reading Passage 2 · Sleep & Learning',3:'Reading Passage 3 · The Role of Zoos'};
+  document.getElementById('passage-heading').textContent=titles[n];
+  saveState({activePassage:n});
+}
+
+// ══════════ TIMER ══════════
+const timerEl=document.getElementById('timer');
+const st0=loadState();
+let secondsLeft=(st0.timerSeconds!==undefined&&st0.timerSeconds>0)?st0.timerSeconds:3600;
+function renderTimer(){
+  const m=Math.floor(secondsLeft/60),s=secondsLeft%60;
+  timerEl.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  timerEl.className='timer-display'+(secondsLeft<600?' danger':secondsLeft<1200?' warning':'');
+}
+renderTimer();
+const tick=setInterval(()=>{
+  if(secondsLeft<=0){clearInterval(tick);timerEl.textContent='00:00';timerEl.classList.add('danger');return;}
+  secondsLeft--;renderTimer();
+  if(secondsLeft%10===0)saveState({timerSeconds:secondsLeft});
+},1000);
+
+// ══════════ RESET ══════════
+function resetTest(){
+  if(!confirm('Reset the entire test? All your answers and the timer will be cleared.'))return;
+  clearState();location.reload();
+}
+
+// ══════════ RESTORE ══════════
+function restoreAll(){
+  const st=loadState();
+  [[p1MCQ,1],[p2MCQ,2],[p3MCQ,3]].forEach(([data,passage])=>{
+    data.forEach(q=>{const s=st[`mcq_${passage}_${q.n}`];if(s)restoreMCQ(passage,q.n,s.chosen,s.correct,s.isRight);});
+  });
+  p1Gap.forEach(q=>{const s=st[`gap_1_${q.n}`];if(s)restoreGap(1,q.n,s.value,s.isRight);});
+  p1TFNG.forEach(q=>{const s=st[`tfng_1_${q.n}`];if(s)restoreTFNG(1,q.n,s.choice,s.correct,s.isRight);});
+  p2Para.forEach(q=>{const s=st[`para_2_${q.n}`];if(s)restoreParaMatch(2,q.n,s.val,s.isRight);});
+  const ss=st[`summary_2`];if(ss)restoreSummary(2,ss.vals,ss.scoreCorrect);
+  p3YesNo.forEach(q=>{const s=st[`tfng_3_${q.n}`];if(s)restoreTFNG(3,q.n,s.choice,s.correct,s.isRight);});
+  p3EndingsSentences.forEach(q=>{const s=st[`ending_3_${q.n}`];if(s)restoreEnding(3,q.n,s.val,s.isRight);});
+  const ap=st.activePassage;
+  if(ap&&ap!==1){const tabs=document.querySelectorAll('.ptab');if(tabs[ap-1])switchPassage(ap,tabs[ap-1]);}
+}
+
+// ══════════ INIT ══════════
+buildMCQ(p1MCQ,'p1-mcq',1);
+buildGap(p1Gap,'p1-gap',1);
+buildTFNG(p1TFNG,'p1-tfng',1,['TRUE','FALSE','NOT GIVEN']);
+buildParaMatch(p2Para,'p2-para',2);
+buildSummary('p2-summary',2);
+buildMCQ(p2MCQ,'p2-mcq',2);
+buildTFNG(p3YesNo,'p3-yesno',3,['YES','NO','NOT GIVEN']);
+buildMCQ(p3MCQ,'p3-mcq',3);
+buildEndings(p3EndingsSentences,'p3-endings',3);
+restoreAll();
+</script>
+</body>
+</html>
