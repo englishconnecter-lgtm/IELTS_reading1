@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IELTS Academic Writing Test with AI Grading</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      color: #1f2933;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0f172a;
+      color: white;
+      padding: 34px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 10px;
+      font-size: 34px;
+    }
+
+    header p {
+      margin: 0;
+      color: #cbd5e1;
+      font-size: 16px;
+    }
+
+    main {
+      max-width: 1050px;
+      margin: 30px auto;
+      padding: 0 20px 50px;
+    }
+
+    section {
+      background: white;
+      margin-bottom: 24px;
+      padding: 28px;
+      border-radius: 14px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #111827;
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 10px;
+    }
+
+    h3 {
+      color: #1f2937;
+      margin-top: 26px;
+    }
+
+    .instruction-box {
+      background: #eef2ff;
+      border-left: 5px solid #4f46e5;
+      padding: 16px 18px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .prompt-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 18px;
+      margin: 18px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0;
+      background: white;
+    }
+
+    th, td {
+      border: 1px solid #d1d5db;
+      padding: 12px;
+      text-align: center;
+    }
+
+    th {
+      background: #f3f4f6;
+      font-weight: bold;
+    }
+
+    .chart-wrap {
+      margin: 22px 0;
+      padding: 18px;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      background: #ffffff;
+    }
+
+    .chart-title {
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 120px 1fr 55px;
+      gap: 12px;
+      align-items: center;
+      margin: 12px 0;
+    }
+
+    .bar-label {
+      font-size: 14px;
+    }
+
+    .bar-track {
+      height: 24px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: #2563eb;
+      border-radius: 999px;
+    }
+
+    .bar-value {
+      font-size: 14px;
+      text-align: right;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 270px;
+      padding: 14px;
+      font-size: 15px;
+      line-height: 1.5;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      resize: vertical;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    .task2 textarea {
+      min-height: 380px;
+    }
+
+    .word-count {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #4b5563;
+    }
+
+    .warning {
+      color: #b45309;
+      font-weight: bold;
+    }
+
+    button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 15px;
+      margin-top: 12px;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .secondary-button {
+      background: #374151;
+      margin-left: 8px;
+    }
+
+    .secondary-button:hover {
+      background: #111827;
+    }
+
+    pre {
+      background: #111827;
+      color: #e5e7eb;
+      padding: 18px;
+      border-radius: 10px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      font-size: 14px;
+    }
+
+    .rubric-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .rubric-card {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .rubric-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #111827;
+    }
+
+    .sample-answer {
+      background: #f8fafc;
+      border-left: 5px solid #64748b;
+      padding: 16px 18px;
+      border-radius: 8px;
+    }
+
+    footer {
+      text-align: center;
+      color: #6b7280;
+      font-size: 14px;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>IELTS Academic Writing Test</h1>
+    <p>Academic Task 1 and Task 2 with AI grading support</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>Test Instructions</h2>
+      <div class="instruction-box">
+        <p>You have 60 minutes to complete both writing tasks.</p>
+        <p>Academic Writing Task 1: spend about 20 minutes. Write at least 150 words.</p>
+        <p>Academic Writing Task 2: spend about 40 minutes. Write at least 250 words.</p>
+        <p>Write in a formal academic style. Do not use bullet points in your final answers.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Academic Writing Task 1</h2>
+      <p>You should spend about 20 minutes on this task.</p>
+
+      <div class="prompt-box">
+        <p>The chart below shows the percentage of electricity generated from renewable sources in four countries in 2010 and 2020.</p>
+        <p>Summarise the information by selecting and reporting the main features, and make comparisons where relevant.</p>
+        <p><strong>Write at least 150 words.</strong></p>
+      </div>
+
+      <div class="chart-wrap">
+        <div class="chart-title">Electricity generated from renewable sources, 2010 and 2020</div>
+
+        <div class="bar-row">
+          <div class="bar-label">Germany 2010</div>
+          <div class="bar-track"><div class="bar-fill" style="width: 17%;"></div></div>
+          <div class="bar-value">17%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Germany 2020</div>
+          <div class="bar-track"><div class="bar-fill" style="width: 42%;"></div></div>
+          <div class="bar-value">42%</div>
+        </div>
+
+        <div class="bar-row">
+          <div class="bar-label">Spain 2010</div>
+          <div class="bar-track"><div class="bar-fill" style="width: 32%;"></div></div>
+          <div class="bar-value">32%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Spain 2020</div>
+          <div class="bar-track"><div class="bar-fill" style="width: 48%;"></div></div>
+          <div class="bar-value">48%</div>
+        </div>
+
+        <div class="bar-row">
+          <div class="bar-label">France 2010</div>
+          <div class="bar-track"><div class="bar-fill" style="width: 14%;"></div></div>
+          <div class="bar-value">14%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">France 2020</div>
+          <div class="bar-track"><div class="bar-fill" style="width: 24%;"></div></div>
+          <div class="bar-value">24%</div>
+        </div>
+
+        <div class="bar-row">
+          <div class="bar-label">Sweden 2010</div>
+          <div class="bar-track"><div class="bar-fill" style="width: 46%;"></div></div>
+          <div class="bar-value">46%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Sweden 2020</div>
+          <div class="bar-track"><div class="bar-fill" style="width: 58%;"></div></div>
+          <div class="bar-value">58%</div>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Country</th>
+            <th>2010</th>
+            <th>2020</th>
+            <th>Change</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Germany</td>
+            <td>17%</td>
+            <td>42%</td>
+            <td>+25 percentage points</td>
+          </tr>
+          <tr>
+            <td>Spain</td>
+            <td>32%</td>
+            <td>48%</td>
+            <td>+16 percentage points</td>
+          </tr>
+          <tr>
+            <td>France</td>
+            <td>14%</td>
+            <td>24%</td>
+            <td>+10 percentage points</td>
+          </tr>
+          <tr>
+            <td>Sweden</td>
+            <td>46%</td>
+            <td>58%</td>
+            <td>+12 percentage points</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Student Response: Task 1</h3>
+      <textarea id="task1" placeholder="Type your Academic Task 1 answer here..."></textarea>
+      <div class="word-count">Word count: <span id="task1Count">0</span> <span id="task1Warning"></span></div>
+    </section>
+
+    <section class="task2">
+      <h2>Academic Writing Task 2</h2>
+      <p>You should spend about 40 minutes on this task.</p>
+
+      <div class="prompt-box">
+        <p><strong>Some people think that university students should study whatever subject they like, while others believe that they should only study subjects that will be useful in the future, such as science and technology.</strong></p>
+        <p><strong>Discuss both views and give your own opinion.</strong></p>
+        <p>Give reasons for your answer and include any relevant examples from your own knowledge or experience.</p>
+        <p><strong>Write at least 250 words.</strong></p>
+      </div>
+
+      <h3>Student Response: Task 2</h3>
+      <textarea id="task2" placeholder="Type your Academic Task 2 essay here..."></textarea>
+      <div class="word-count">Word count: <span id="task2Count">0</span> <span id="task2Warning"></span></div>
+    </section>
+
+    <section>
+      <h2>AI Grading Criteria</h2>
+      <div class="rubric-grid">
+        <div class="rubric-card">
+          <strong>Task Achievement / Task Response</strong>
+          Task 1 checks overview, key features, data selection, and comparisons. Task 2 checks whether all parts of the question are answered with a clear position.
+        </div>
+        <div class="rubric-card">
+          <strong>Coherence and Cohesion</strong>
+          Checks organisation, paragraphing, logical progression, linking, and referencing.
+        </div>
+        <div class="rubric-card">
+          <strong>Lexical Resource</strong>
+          Checks vocabulary range, accuracy, topic-specific language, collocation, and formality.
+        </div>
+        <div class="rubric-card">
+          <strong>Grammatical Range and Accuracy</strong>
+          Checks sentence variety, grammar control, punctuation, and error frequency.
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Generate AI Grading Prompt</h2>
+      <p>After completing both tasks, click the button below. Copy the generated prompt into an AI tool to receive IELTS-style feedback and estimated band scores.</p>
+      <button onclick="generatePrompt()">Generate AI Grading Prompt</button>
+      <button class="secondary-button" onclick="copyPrompt()">Copy Prompt</button>
+      <pre id="gradingPrompt">Your AI grading prompt will appear here.</pre>
+    </section>
+
+    <section>
+      <h2>Teacher Notes</h2>
+
+      <h3>Expected Task 1 Overview</h3>
+      <div class="sample-answer">
+        <p>Renewable electricity increased in all four countries between 2010 and 2020. Sweden had the highest proportion in both years, while France remained the lowest. Germany showed the largest overall rise, although it still did not overtake Spain or Sweden by 2020.</p>
+      </div>
+
+      <h3>Expected Task 2 Coverage</h3>
+      <p>A strong essay should discuss both sides: the value of personal choice and academic freedom, and the practical argument for subjects linked to future employment and economic needs. The student must give a clear personal opinion.</p>
+
+      <h3>Common Task 1 Problems</h3>
+      <p>Weak answers often list every number without a clear overview, make no comparisons, or describe reasons for the data even though the chart does not provide causes.</p>
+
+      <h3>Common Task 2 Problems</h3>
+      <p>Weak answers often discuss only one view, give an unclear opinion, use memorised phrases, or provide examples that are too general.</p>
+    </section>
+  </main>
+
+  <footer>
+    IELTS Academic Writing Test with AI Grading Support
+  </footer>
+
+  <script>
+    function countWords(text) {
+      const words = text.trim().match(/\b\S+\b/g);
+      return words ? words.length : 0;
+    }
+
+    const task1Box = document.getElementById('task1');
+    const task2Box = document.getElementById('task2');
+    const task1Count = document.getElementById('task1Count');
+    const task2Count = document.getElementById('task2Count');
+    const task1Warning = document.getElementById('task1Warning');
+    const task2Warning = document.getElementById('task2Warning');
+
+    task1Box.addEventListener('input', function () {
+      const count = countWords(task1Box.value);
+      task1Count.textContent = count;
+      task1Warning.textContent = count > 0 && count < 150 ? ' — below 150 words' : '';
+      task1Warning.className = count > 0 && count < 150 ? 'warning' : '';
+    });
+
+    task2Box.addEventListener('input', function () {
+      const count = countWords(task2Box.value);
+      task2Count.textContent = count;
+      task2Warning.textContent = count > 0 && count < 250 ? ' — below 250 words' : '';
+      task2Warning.className = count > 0 && count < 250 ? 'warning' : '';
+    });
+
+    function generatePrompt() {
+      const task1 = task1Box.value.trim();
+      const task2 = task2Box.value.trim();
+
+      const prompt = `You are an IELTS Academic Writing examiner. Grade the student's Academic Writing Task 1 and Task 2 responses using IELTS-style band scores from 0 to 9.
+
+Use the official IELTS Writing assessment categories:
+
+For Academic Task 1:
+1. Task Achievement
+2. Coherence and Cohesion
+3. Lexical Resource
+4. Grammatical Range and Accuracy
+
+For Academic Task 2:
+1. Task Response
+2. Coherence and Cohesion
+3. Lexical Resource
+4. Grammatical Range and Accuracy
+
+For each task, provide:
+
+1. Estimated band score for each criterion.
+2. Overall estimated band score.
+3. Three strengths.
+4. Three weaknesses.
+5. Specific corrections of grammar, vocabulary, sentence structure, and academic tone.
+6. A rewritten Band 7+ sample version.
+7. One clear study target for the next attempt.
+
+Be strict but fair. Do not give a high score only because the answer is long. Penalise answers that do not answer the question, lack an overview in Task 1, lack a clear opinion in Task 2, contain memorised phrases, overuse informal language, or have frequent grammar errors.
+
+Academic Task 1 question:
+The chart shows the percentage of electricity generated from renewable sources in four countries in 2010 and 2020.
+
+Data:
+Germany: 17% in 2010 and 42% in 2020.
+Spain: 32% in 2010 and 48% in 2020.
+France: 14% in 2010 and 24% in 2020.
+Sweden: 46% in 2010 and 58% in 2020.
+
+Student Academic Task 1 answer:
+${task1 || '[No Academic Task 1 answer entered]'}
+
+Academic Task 2 question:
+Some people think that university students should study whatever subject they like, while others believe that they should only study subjects that will be useful in the future, such as science and technology. Discuss both views and give your own opinion.
+
+Student Academic Task 2 answer:
+${task2 || '[No Academic Task 2 answer entered]'}
+
+Use this output format:
+
+Academic Task 1 Result
+Task Achievement: __ / 9
+Coherence and Cohesion: __ / 9
+Lexical Resource: __ / 9
+Grammatical Range and Accuracy: __ / 9
+Overall Academic Task 1 band: __ / 9
+
+Strengths:
+1.
+2.
+3.
+
+Weaknesses:
+1.
+2.
+3.
+
+Corrections:
+Original:
+Corrected:
+Reason:
+
+Original:
+Corrected:
+Reason:
+
+Band 7+ sample answer:
+
+Academic Task 2 Result
+Task Response: __ / 9
+Coherence and Cohesion: __ / 9
+Lexical Resource: __ / 9
+Grammatical Range and Accuracy: __ / 9
+Overall Academic Task 2 band: __ / 9
+
+Strengths:
+1.
+2.
+3.
+
+Weaknesses:
+1.
+2.
+3.
+
+Corrections:
+Original:
+Corrected:
+Reason:
+
+Original:
+Corrected:
+Reason:
+
+Band 7+ sample answer:
+
+Estimated overall IELTS Academic Writing band:
+
+Final study target:`;
+
+      document.getElementById('gradingPrompt').textContent = prompt;
+    }
+
+    function copyPrompt() {
+      const text = document.getElementById('gradingPrompt').textContent;
+      navigator.clipboard.writeText(text).then(function () {
+        alert('AI grading prompt copied.');
+      });
+    }
+  </script>
+</body>
+</html>
