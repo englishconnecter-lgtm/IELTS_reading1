@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IELTS Writing Practice Test with AI Grading</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      color: #1f2933;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #1f2937;
+      color: white;
+      padding: 32px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 10px;
+      font-size: 32px;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 16px;
+      color: #d1d5db;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 0 20px 50px;
+    }
+
+    section {
+      background: white;
+      margin-bottom: 24px;
+      padding: 28px;
+      border-radius: 14px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #111827;
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 10px;
+    }
+
+    h3 {
+      color: #1f2937;
+      margin-top: 26px;
+    }
+
+    .instruction-box {
+      background: #eef2ff;
+      border-left: 5px solid #4f46e5;
+      padding: 16px 18px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0;
+      background: white;
+    }
+
+    th, td {
+      border: 1px solid #d1d5db;
+      padding: 12px;
+      text-align: center;
+    }
+
+    th {
+      background: #f3f4f6;
+      font-weight: bold;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 260px;
+      padding: 14px;
+      font-size: 15px;
+      line-height: 1.5;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      resize: vertical;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    .task2 textarea {
+      min-height: 360px;
+    }
+
+    .word-count {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #4b5563;
+    }
+
+    button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 15px;
+      margin-top: 12px;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .secondary-button {
+      background: #374151;
+      margin-left: 8px;
+    }
+
+    .secondary-button:hover {
+      background: #111827;
+    }
+
+    pre {
+      background: #111827;
+      color: #e5e7eb;
+      padding: 18px;
+      border-radius: 10px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      font-size: 14px;
+    }
+
+    .rubric-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .rubric-card {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .rubric-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #111827;
+    }
+
+    footer {
+      text-align: center;
+      color: #6b7280;
+      font-size: 14px;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>IELTS Writing Practice Test</h1>
+    <p>Academic Writing Task 1 and Task 2 with AI grading support</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>Test Instructions</h2>
+      <div class="instruction-box">
+        <p>You have 60 minutes to complete both writing tasks.</p>
+        <p>Task 1: spend about 20 minutes. Write at least 150 words.</p>
+        <p>Task 2: spend about 40 minutes. Write at least 250 words.</p>
+        <p>Write your answers in formal academic English. Do not use bullet points in your final response.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Writing Task 1</h2>
+      <p>You should spend about 20 minutes on this task.</p>
+      <p>The table below shows the percentage of people in three age groups who used public transport in a European city in 2010, 2015 and 2020.</p>
+      <p>Summarise the information by selecting and reporting the main features, and make comparisons where relevant.</p>
+      <p><strong>Write at least 150 words.</strong></p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Age group</th>
+            <th>2010</th>
+            <th>2015</th>
+            <th>2020</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>18–30</td>
+            <td>52%</td>
+            <td>58%</td>
+            <td>64%</td>
+          </tr>
+          <tr>
+            <td>31–50</td>
+            <td>38%</td>
+            <td>41%</td>
+            <td>47%</td>
+          </tr>
+          <tr>
+            <td>Over 50</td>
+            <td>22%</td>
+            <td>29%</td>
+            <td>35%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Student Response: Task 1</h3>
+      <textarea id="task1" placeholder="Type your Task 1 answer here..."></textarea>
+      <div class="word-count">Word count: <span id="task1Count">0</span></div>
+    </section>
+
+    <section class="task2">
+      <h2>Writing Task 2</h2>
+      <p>You should spend about 40 minutes on this task.</p>
+      <p><strong>Some people believe that governments should invest more money in public transport rather than building new roads.</strong></p>
+      <p><strong>To what extent do you agree or disagree?</strong></p>
+      <p>Give reasons for your answer and include any relevant examples from your own knowledge or experience.</p>
+      <p><strong>Write at least 250 words.</strong></p>
+
+      <h3>Student Response: Task 2</h3>
+      <textarea id="task2" placeholder="Type your Task 2 answer here..."></textarea>
+      <div class="word-count">Word count: <span id="task2Count">0</span></div>
+    </section>
+
+    <section>
+      <h2>AI Grading Criteria</h2>
+      <div class="rubric-grid">
+        <div class="rubric-card">
+          <strong>Task Achievement / Task Response</strong>
+          Checks whether the student answers the question fully, includes an overview for Task 1, and gives a clear position for Task 2.
+        </div>
+        <div class="rubric-card">
+          <strong>Coherence and Cohesion</strong>
+          Checks paragraphing, logical organisation, progression, and linking.
+        </div>
+        <div class="rubric-card">
+          <strong>Lexical Resource</strong>
+          Checks vocabulary range, accuracy, collocation, and formality.
+        </div>
+        <div class="rubric-card">
+          <strong>Grammatical Range and Accuracy</strong>
+          Checks sentence variety, grammar control, punctuation, and error frequency.
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Generate AI Grading Prompt</h2>
+      <p>After completing both tasks, click the button below. Copy the generated prompt into an AI tool to receive IELTS-style feedback and band scores.</p>
+      <button onclick="generatePrompt()">Generate AI Grading Prompt</button>
+      <button class="secondary-button" onclick="copyPrompt()">Copy Prompt</button>
+      <pre id="gradingPrompt">Your AI grading prompt will appear here.</pre>
+    </section>
+
+    <section>
+      <h2>Teacher Notes</h2>
+      <h3>Expected Task 1 Overview</h3>
+      <p>Public transport use increased in all three age groups from 2010 to 2020. The youngest group used public transport the most in every year, while the over-50 group used it the least. The largest overall rise was among people over 50, although their final percentage remained lower than the other groups.</p>
+
+      <h3>Expected Task 2 Position</h3>
+      <p>A strong answer should clearly agree, disagree, or partly agree. It should explain why public transport may reduce congestion, pollution, and inequality, while also considering the possible need for road maintenance or infrastructure in some areas.</p>
+
+      <h3>Recommended Scoring Rule</h3>
+      <p>Task 2 normally carries more weight than Task 1 when estimating the student’s overall IELTS Writing performance.</p>
+    </section>
+  </main>
+
+  <footer>
+    IELTS Writing Practice Test with AI Grading Support
+  </footer>
+
+  <script>
+    function countWords(text) {
+      const words = text.trim().match(/\b\S+\b/g);
+      return words ? words.length : 0;
+    }
+
+    const task1Box = document.getElementById('task1');
+    const task2Box = document.getElementById('task2');
+    const task1Count = document.getElementById('task1Count');
+    const task2Count = document.getElementById('task2Count');
+
+    task1Box.addEventListener('input', function () {
+      task1Count.textContent = countWords(task1Box.value);
+    });
+
+    task2Box.addEventListener('input', function () {
+      task2Count.textContent = countWords(task2Box.value);
+    });
+
+    function generatePrompt() {
+      const task1 = task1Box.value.trim();
+      const task2 = task2Box.value.trim();
+
+      const prompt = `You are an IELTS Writing examiner. Grade the student's Task 1 and Task 2 responses using IELTS-style band scores from 0 to 9.
+
+Use the following criteria:
+
+For Task 1: Task Achievement, Coherence and Cohesion, Lexical Resource, Grammatical Range and Accuracy.
+
+For Task 2: Task Response, Coherence and Cohesion, Lexical Resource, Grammatical Range and Accuracy.
+
+For each task, provide:
+
+1. Estimated band score for each criterion.
+2. Overall estimated band score.
+3. Three strengths.
+4. Three weaknesses.
+5. Specific corrections of grammar, vocabulary, and sentence structure.
+6. A rewritten Band 7+ sample version.
+7. One clear study target for the next attempt.
+
+Be strict but fair. Do not give a high score only because the answer is long. Penalise answers that do not answer the question, lack an overview in Task 1, lack a clear opinion in Task 2, contain memorised phrases, or have frequent grammar errors.
+
+Task 1 question:
+The table shows the percentage of people in three age groups who used public transport in a European city in 2010, 2015 and 2020.
+
+Data:
+18–30: 52% in 2010, 58% in 2015, 64% in 2020.
+31–50: 38% in 2010, 41% in 2015, 47% in 2020.
+Over 50: 22% in 2010, 29% in 2015, 35% in 2020.
+
+Student Task 1 answer:
+${task1 || '[No Task 1 answer entered]'}
+
+Task 2 question:
+Some people believe that governments should invest more money in public transport rather than building new roads. To what extent do you agree or disagree?
+
+Student Task 2 answer:
+${task2 || '[No Task 2 answer entered]'}
+
+Use this output format:
+
+Task 1 result
+Task Achievement: __ / 9
+Coherence and Cohion: __ / 9
+Lexical Resource: __ / 9
+Grammatical Range and Accuracy: __ / 9
+Overall Task 1 band: __ / 9
+
+Strengths:
+1.
+2.
+3.
+
+Weaknesses:
+1.
+2.
+3.
+
+Corrections:
+Original:
+Corrected:
+Reason:
+
+Original:
+Corrected:
+Reason:
+
+Band 7+ sample answer:
+
+Task 2 result
+Task Response: __ / 9
+Coherence and Cohesion: __ / 9
+Lexical Resource: __ / 9
+Grammatical Range and Accuracy: __ / 9
+Overall Task 2 band: __ / 9
+
+Strengths:
+1.
+2.
+3.
+
+Weaknesses:
+1.
+2.
+3.
+
+Corrections:
+Original:
+Corrected:
+Reason:
+
+Original:
+Corrected:
+Reason:
+
+Band 7+ sample answer:
+
+Final study target:`;
+
+      document.getElementById('gradingPrompt').textContent = prompt;
+    }
+
+    function copyPrompt() {
+      const text = document.getElementById('gradingPrompt').textContent;
+      navigator.clipboard.writeText(text).then(function () {
+        alert('AI grading prompt copied.');
+      });
+    }
+  </script>
+</body>
+</html>
