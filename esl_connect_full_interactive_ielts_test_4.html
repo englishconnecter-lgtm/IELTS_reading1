@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IELTS Academic Reading Practice Test 4</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f1f3f2;
+  --surface: #fbfdfb;
+  --surface2: #edf0ed;
+  --ink: #181e18;
+  --ink-soft: #404840;
+  --ink-muted: #7a8a7a;
+  --border: #cdd8cd;
+  --border-light: #e2ebe2;
+  --blue: #1a4a1a;
+  --blue-light: #eaf4ea;
+  --blue-mid: #3a7a3a;
+  --teal: #1a4a5a;
+  --teal-light: #e0eef4;
+  --amber: #5a4a0a;
+  --amber-light: #faf4d8;
+  --red: #7a1a1a;
+  --red-light: #fce8e8;
+  --green: #1a4a1a;
+  --green-light: #e4f4e4;
+  --accent: #2a6a2a;
+  --accent-dark: #1a4a1a;
+  --accent-light: #eaf4ea;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--ink); min-height: 100vh; font-size: 15px; line-height: 1.65; }
+
+.site-header { background: #181e18; padding: 2rem 2rem 1.75rem; border-bottom: 3px solid #2a6a2a; }
+.site-header-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.header-title-group h1 { font-family: 'Source Serif 4', serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 600; color: #fbfdfb; line-height: 1.2; margin-bottom: 4px; }
+.header-title-group p { font-size: 12px; color: #8a9a8a; letter-spacing: 0.12em; text-transform: uppercase; }
+.header-timer-box, .header-score { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 0.7rem 1.25rem; text-align: center; }
+.header-score { min-width: 120px; }
+.timer-label, .score-label { font-size: 10px; color: #8a9a8a; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2px; }
+.timer-display { font-family: 'DM Mono', monospace; font-size: 1.6rem; font-weight: 500; color: #fbfdfb; }
+.timer-display.warning { color: #f59e0b; }
+.timer-display.danger { color: #ef4444; }
+.score-display { font-family: 'DM Mono', monospace; font-size: 1.3rem; font-weight: 500; color: #fbfdfb; }
+
+.passage-tabs { background: #181e18; border-bottom: 1px solid #2a362a; padding: 0 2rem; }
+.passage-tabs-inner { max-width: 1200px; margin: 0 auto; display: flex; overflow-x: auto; scrollbar-width: none; }
+.passage-tabs-inner::-webkit-scrollbar { display: none; }
+.ptab { padding: 0.85rem 1.4rem; border: none; background: transparent; cursor: pointer; font-family: 'Outfit', sans-serif; font-size: 12.5px; font-weight: 500; color: #5a7a5a; border-bottom: 3px solid transparent; white-space: nowrap; transition: all 0.2s; letter-spacing: 0.03em; }
+.ptab:hover { color: #aacaaa; }
+.ptab.active { color: #fbfdfb; border-bottom-color: #2a6a2a; }
+
+.main-wrap { max-width: 1200px; margin: 0 auto; padding: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+@media (max-width: 900px) { .main-wrap { grid-template-columns: 1fr; } }
+
+.passage-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; position: sticky; top: 1rem; max-height: calc(100vh - 2rem); }
+.passage-panel-header { background: var(--surface2); padding: 1rem 1.4rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.passage-panel-title { font-family: 'Source Serif 4', serif; font-size: 1rem; font-weight: 600; color: var(--ink); }
+.passage-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; background: var(--accent-light); color: var(--accent); border: 1px solid #aad4aa; }
+.passage-body { padding: 1.5rem; overflow-y: auto; max-height: calc(100vh - 8rem); font-family: 'Source Serif 4', serif; font-size: 14px; line-height: 1.9; color: var(--ink-soft); }
+.passage-body h3 { font-size: 1.1rem; font-weight: 600; color: var(--ink); margin-bottom: 1rem; }
+.passage-body p { margin-bottom: 1rem; }
+.passage-body p:last-child { margin-bottom: 0; }
+.passage-section { display: none; }
+.passage-section.active { display: block; }
+.passage-num { font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 5px; }
+
+.q-section { display: none; animation: fadeIn 0.2s ease; }
+.q-section.active { display: block; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:translateY(0); } }
+.q-block { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 1.25rem; overflow: hidden; }
+.q-block-header { background: var(--surface2); padding: 0.9rem 1.25rem; border-bottom: 1px solid var(--border); }
+.q-block-title { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.q-block-subtitle { font-size: 12.5px; color: var(--ink-muted); margin-top: 3px; line-height: 1.5; }
+.q-block-body { padding: 1.1rem 1.25rem; }
+
+.question-item { margin-bottom: 1.1rem; padding-bottom: 1.1rem; border-bottom: 1px solid var(--border-light); }
+.question-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.q-number { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 5px; }
+.q-text { font-size: 13.5px; color: var(--ink); line-height: 1.6; margin-bottom: 0.75rem; }
+
+.mcq-options { display: flex; flex-direction: column; gap: 6px; }
+.mcq-opt { display: flex; align-items: flex-start; gap: 10px; padding: 8px 12px; border: 1.5px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 13px; color: var(--ink); line-height: 1.5; transition: all 0.15s; background: transparent; text-align: left; font-family: 'Outfit', sans-serif; width: 100%; }
+.mcq-opt:hover:not(:disabled) { background: var(--surface2); border-color: var(--blue-mid); }
+.mcq-opt:disabled { cursor: default; }
+.opt-letter { font-size: 10px; font-weight: 600; min-width: 20px; height: 20px; border-radius: 50%; background: var(--surface2); color: var(--ink-muted); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.mcq-opt.correct { background: var(--green-light); border-color: var(--green); color: #1a4a1a; }
+.mcq-opt.wrong { background: var(--red-light); border-color: var(--red); color: var(--red); }
+.mcq-opt.correct .opt-letter { background: var(--green); color: white; }
+.mcq-opt.wrong .opt-letter { background: var(--red); color: white; }
+.q-feedback { margin-top: 6px; padding: 7px 10px; border-radius: 6px; font-size: 12px; line-height: 1.5; display: none; }
+.q-feedback.show { display: block; }
+.q-feedback.correct { background: var(--green-light); color: var(--green); }
+.q-feedback.wrong { background: var(--red-light); color: var(--red); }
+
+.sentence-gap-wrap { font-size: 13.5px; color: var(--ink); line-height: 2.2; }
+.inline-gap { display: inline-flex; align-items: center; vertical-align: middle; margin: 0 2px; }
+.inline-input { border: none; border-bottom: 2px solid var(--border); background: transparent; font-family: 'Outfit', sans-serif; font-size: 13.5px; color: var(--ink); outline: none; width: 140px; padding: 1px 4px; transition: border-color 0.2s; }
+.inline-input:focus { border-bottom-color: var(--blue-mid); }
+.inline-input.correct { border-bottom-color: var(--green); color: var(--green); }
+.inline-input.wrong { border-bottom-color: var(--red); color: var(--red); }
+.answer-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.reveal-btn { padding: 6px 16px; border: 1.5px solid var(--border); border-radius: 7px; background: transparent; font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 500; color: var(--ink-muted); cursor: pointer; white-space: nowrap; transition: all 0.15s; }
+.reveal-btn:hover { background: var(--surface2); color: var(--ink); }
+.correct-badge { font-size: 11px; font-weight: 600; color: var(--green); background: var(--green-light); padding: 3px 10px; border-radius: 12px; display: none; }
+.wrong-badge { font-size: 11px; color: var(--red); background: var(--red-light); padding: 3px 10px; border-radius: 12px; display: none; }
+.answer-reveal { font-size: 12px; font-weight: 600; color: var(--teal); background: var(--teal-light); padding: 3px 10px; border-radius: 12px; display: none; }
+
+.tfng-options { display: flex; gap: 6px; flex-wrap: wrap; }
+.tfng-btn { padding: 6px 14px; border: 1.5px solid var(--border); border-radius: 7px; background: transparent; cursor: pointer; font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 500; color: var(--ink-muted); transition: all 0.15s; }
+.tfng-btn:hover:not(:disabled) { background: var(--surface2); color: var(--ink); }
+.tfng-btn:disabled { cursor: default; }
+.tfng-btn.correct { background: var(--green-light); border-color: var(--green); color: var(--green); }
+.tfng-btn.wrong { background: var(--red-light); border-color: var(--red); color: var(--red); }
+
+.match-dropdown { appearance: none; -webkit-appearance: none; border: 1.5px solid var(--border); border-radius: 7px; padding: 5px 28px 5px 10px; font-family: 'Outfit', sans-serif; font-size: 13px; color: var(--ink); background: var(--bg); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%237a8a7a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 8px center; cursor: pointer; outline: none; transition: border-color 0.2s; min-width: 80px; }
+.match-dropdown:focus { border-color: var(--blue-mid); }
+.match-dropdown.correct { border-color: var(--green); background-color: var(--green-light); color: var(--green); }
+.match-dropdown.wrong { border-color: var(--red); background-color: var(--red-light); color: var(--red); }
+
+.section-score { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.section-score-label { font-size: 12px; color: var(--ink-muted); font-weight: 500; }
+.section-score-bar { flex: 1; min-width: 100px; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+.section-score-fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width 0.5s ease; width: 0%; }
+.section-score-num { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--accent); font-weight: 500; }
+
+.para-completion { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.25rem; font-size: 13px; line-height: 2.2; color: var(--ink); margin-bottom: 1rem; }
+.check-all-btn { width: 100%; padding: 10px; border: 1.5px solid var(--accent); border-radius: 8px; background: var(--accent); color: white; font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 0.5rem; transition: all 0.15s; }
+.check-all-btn:hover { background: var(--accent-dark); }
+
+.endings-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 0.9rem 1.1rem; margin-bottom: 1rem; font-size: 13px; color: var(--ink-soft); line-height: 1.8; }
+.endings-box strong { font-weight: 600; color: var(--ink); }
+
+footer { text-align: center; padding: 2rem; font-size: 11px; color: var(--ink-muted); letter-spacing: 0.05em; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="header-title-group">
+      <h1>IELTS Academic Reading</h1>
+      <p>Practice Test 4 · 3 Passages · 40 Questions</p>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <div class="header-score">
+        <div class="score-label">Score</div>
+        <div class="score-display" id="global-score">0 / 40</div>
+      </div>
+      <div class="header-timer-box">
+        <div class="timer-label">Time Remaining</div>
+        <div class="timer-display" id="timer">60:00</div>
+      </div>
+      <button onclick="resetTest()" style="padding:8px 14px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;background:transparent;color:#8a9a8a;font-family:'Outfit',sans-serif;font-size:11px;font-weight:500;cursor:pointer;letter-spacing:0.06em;text-transform:uppercase;transition:all 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.08)';this.style.color='#fbfdfb'" onmouseout="this.style.background='transparent';this.style.color='#8a9a8a'">↺ Reset</button>
+    </div>
+  </div>
+</header>
+
+<nav class="passage-tabs">
+  <div class="passage-tabs-inner">
+    <button class="ptab active" onclick="switchPassage(1,this)">Passage 1 · Night Trains</button>
+    <button class="ptab" onclick="switchPassage(2,this)">Passage 2 · How Habits Form</button>
+    <button class="ptab" onclick="switchPassage(3,this)">Passage 3 · Rethinking the Office</button>
+  </div>
+</nav>
+
+<div class="main-wrap">
+
+  <!-- PASSAGE TEXT -->
+  <div class="passage-panel">
+    <div class="passage-panel-header">
+      <div class="passage-panel-title" id="passage-heading">Reading Passage 1</div>
+      <span class="passage-tag">20 minutes</span>
+    </div>
+    <div class="passage-body">
+
+      <div class="passage-section active" id="ptext-1">
+        <div class="passage-num">Passage 1</div>
+        <h3>The Revival of Night Trains</h3>
+        <p>For much of the twentieth century, night trains were an important part of long-distance travel in many regions. They allowed passengers to cover large distances while sleeping, making efficient use of both time and transport networks. However, in the late twentieth and early twenty-first centuries, many night train services declined or disappeared. Low-cost airlines, improved highways, and the high operating costs of sleeper services made them seem old-fashioned and commercially uncompetitive. Recently, though, night trains have attracted renewed interest, especially in Europe, where concerns about climate change and sustainable travel have encouraged a reassessment of rail transport.</p>
+        <p>One reason for this renewed interest is environmental. Rail travel generally produces fewer greenhouse gas <strong>emissions</strong> per passenger than air travel, particularly on journeys where electricity comes from relatively low-carbon sources. For travellers seeking alternatives to short-haul flights, overnight rail offers the possibility of arriving in another city or country without the same environmental impact. It also avoids some of the hidden inefficiencies of air travel, such as time spent reaching distant airports, passing through security, and waiting for boarding.</p>
+        <p>Yet environmental appeal alone does not guarantee success. Night trains are operationally complex. Sleeping cars require more space per passenger than standard seating, which reduces <strong>capacity</strong>. Staff costs are also higher, since passengers need assistance throughout the night and services such as bedding, cleaning, and security must be provided. In addition, trains crossing national borders may face differences in signalling systems, track access charges, and scheduling rules, all of which complicate operations and raise costs.</p>
+        <p>Another challenge is passenger expectation. Modern travellers compare night trains not only with other rail services but with budget airlines and hotels. Comfort, privacy, punctuality, and pricing all influence whether a service is attractive. Some passengers value the experience of sleeping while travelling and arriving in a city centre the next morning. Others are discouraged by shared compartments, limited onboard facilities, or fares that sometimes exceed the combined cost of a cheap flight and a budget hotel. Operators must therefore decide whether to market night trains as practical transport, a premium experience, or something in between.</p>
+        <p>Despite these challenges, several governments and rail companies have begun to invest in night services again. New routes have been announced, older ones restored, and new rolling stock ordered in some countries. Public support has often been justified not only by environmental goals but by broader transport <strong>policy</strong>. Rail links can strengthen connections between regions, reduce pressure on busy airports, and offer mobility to passengers who prefer not to fly. In some cases, night trains are seen as part of a larger effort to shift travel away from high-emission modes.</p>
+        <p>Technology may also help improve the future of night rail. Better train design can increase comfort and use space more efficiently. Digital <strong>booking</strong> systems allow passengers to compare routes more easily, although international rail ticketing still remains less straightforward than airline booking in many cases. Some experts argue that the biggest obstacle is not lack of demand, but the fragmented nature of European rail governance, where infrastructure, pricing, and regulation are still organised largely at national rather than continental level.</p>
+        <p>There is also a cultural dimension to the return of night trains. For some travellers, they represent more than transport. They evoke a slower, more reflective style of travel, one in which the journey itself is part of the experience. This image has marketing value, but it can also create unrealistic nostalgia. A successful modern night train cannot rely only on romance. It must compete within a transport system shaped by speed, convenience, and price sensitivity.</p>
+        <p>Whether the revival of night trains will become a lasting transformation remains uncertain. Much depends on public investment, policy coordination, and travellers' willingness to choose lower-emission journeys even when they are not the absolute cheapest option. Nevertheless, the renewed attention given to night rail suggests that transport systems once dismissed as outdated may still have an important role in a more sustainable future.</p>
+      </div>
+
+      <div class="passage-section" id="ptext-2">
+        <div class="passage-num">Passage 2</div>
+        <h3>How Habits Are Formed</h3>
+        <p><strong>A.</strong> People often describe habits as behaviours they perform automatically: locking the door, checking a phone, making coffee, or taking the same route to work. Because such actions feel effortless, habits are sometimes treated as minor details of daily life. In reality, they are central to how human behaviour is organised. Much of what people do each day is not the result of fresh decision-making, but of routines built through repetition in familiar contexts.</p>
+        <p><strong>B.</strong> Psychologists generally define a habit as a learned behaviour that is triggered by a <strong>cue</strong> and carried out with limited conscious thought. The cue may be a place, a time of day, an emotional state, the presence of other people, or a preceding action. For example, someone may begin eating a snack every afternoon when they sit at a particular desk, or automatically reach for a seatbelt after closing a car door. Over time, the context comes to prompt the behaviour directly, reducing the need for deliberate choice.</p>
+        <p><strong>C.</strong> This process is often explained in terms of repetition, but repetition alone is not enough. A behaviour becomes habitual when it is repeated consistently in the same situation. The stability of the <strong>context</strong> matters because it allows the brain to form a reliable link between cue and action. This is why life changes, such as moving house or starting a new job, can disrupt old habits and create opportunities for new ones. When the surrounding cues change, established routines may weaken.</p>
+        <p><strong>D.</strong> Reward also plays an important role. Behaviours that produce some form of satisfaction, relief, convenience, or pleasure are more likely to be repeated. Importantly, the reward does not need to be large. Even a small sense of completion or <strong>comfort</strong> can reinforce a behaviour over time. This helps explain why some habits persist even when people know they are not beneficial in the long term. Immediate rewards often influence behaviour more strongly than distant consequences.</p>
+        <p><strong>E.</strong> Researchers distinguish habits from <strong>goals</strong>, although the two can interact. A person may initially begin exercising because of a conscious goal, such as improving health. If the behaviour is repeated under stable conditions, it may gradually become more automatic and require less motivation each time. This is one reason habit formation is often discussed in relation to self-control. Instead of relying on willpower for every action, people can structure their environments so that desirable behaviours occur more easily.</p>
+        <p><strong>F.</strong> However, habits are not the same as complete mindlessness. People can still reflect on, override, or change habitual behaviour, especially when they become aware of it. Yet changing a habit is often difficult because suppressing an old routine leaves the original cue in place. For this reason, experts often recommend replacing an unwanted habit with an alternative response rather than trying to eliminate behaviour altogether. The cue remains, but the action associated with it changes.</p>
+        <p><strong>G.</strong> Popular culture often presents habit formation as quick and simple, sometimes claiming that a new behaviour becomes automatic after a fixed number of <strong>days</strong>. Scientific evidence suggests the process is much more variable. Some habits develop relatively quickly, while others take far longer. The time required depends on the complexity of the behaviour, the consistency of repetition, and the circumstances of the individual. There is no single universal timetable.</p>
+        <p><strong>H.</strong> This has important practical implications. Efforts to change behaviour in health, education, and workplace settings are more effective when they focus not only on motivation, but also on context. Reminders, environmental design, and predictable routines can all help new behaviours take root. In this sense, habits are not merely private quirks. They are shaped by the environments in which people live.</p>
+        <p><strong>I.</strong> Understanding habits therefore changes the way behaviour itself is interpreted. People are not making every action from the beginning each time. Instead, much of daily life is guided by learned patterns attached to repeated situations. Habit may feel invisible, but it is one of the most powerful forms of behavioural organisation.</p>
+      </div>
+
+      <div class="passage-section" id="ptext-3">
+        <div class="passage-num">Passage 3</div>
+        <h3>Rethinking the Office</h3>
+        <p>For decades, the office was treated as the natural centre of professional work. People travelled to a shared building, used equipment provided there, and carried out tasks under a visible organisational structure. This arrangement shaped not only work itself, but also ideas about management, collaboration, and productivity. In recent years, however, remote and hybrid working have challenged long-established assumptions about what the office is for and whether it must remain the default setting for knowledge work.</p>
+        <p>The traditional office offered several obvious advantages. It concentrated people and resources in one place, making supervision easier and communication more immediate. Informal exchanges could happen spontaneously, and employees often developed a sense of shared identity through physical presence. Office buildings also reflected organisational hierarchy. Size, location, and layout often signalled status and control, reinforcing established patterns of <strong>authority</strong>.</p>
+        <p>Yet the office also carried costs that were often normalised rather than questioned. Commuting consumed time and energy, open-plan layouts could create distraction, and many workers performed tasks at a computer that could, in principle, be done elsewhere. When digital communication tools improved and large numbers of employees were required to work remotely, many organisations discovered that at least some forms of work could continue outside the office more effectively than they had assumed.</p>
+        <p>This did not mean that the office became irrelevant. Instead, its purpose began to shift. If individual concentrated work could be done at home or in another location, employers had to ask what the office was uniquely valuable for. Increasingly, the answer centred on collaboration, mentoring, social <strong>connection</strong>, and organisational culture. In this model, the office is less a default container for all work and more a specialised environment used for particular kinds of interaction.</p>
+        <p>Hybrid working has therefore created new design challenges. Offices intended for daily attendance may not function well when occupancy varies across the week. Some organisations have reduced assigned desks and created more shared project areas, meeting rooms, and informal spaces. Others have redesigned offices to make presence feel more purposeful, focusing on activities that benefit from face-to-face interaction rather than simply reproducing the conditions of individual desk work.</p>
+        <p>However, hybrid work also raises concerns about fairness and visibility. Employees who spend more time in the office may have greater access to managers, informal information, and promotion opportunities. Those working remotely may risk being overlooked, even when their output is equally strong. This has led some experts to argue that hybrid systems require careful management, clear expectations, and deliberate inclusion, rather than assuming that flexibility automatically benefits everyone equally.</p>
+        <p>Another issue is the social meaning of the office. For some people, it remains an important boundary between work and personal life. For others, especially those with long commutes or caregiving responsibilities, reducing office attendance can significantly improve daily life. The value of the office is therefore not fixed. It depends on the type of work, the design of the organisation, and the circumstances of the worker.</p>
+        <p>As debates continue, some companies have tried to restore full-time office attendance, while others have adopted remote-first policies. Between these positions lies a wide range of hybrid arrangements. What is becoming clear is that the office is no longer taken for granted in the same way. It must now justify itself not through tradition, but through the specific forms of <strong>value</strong> it creates.</p>
+        <p>The future office may be smaller, more flexible, and more intentional than its predecessor. It may serve less as a place where people prove they are working and more as a setting for coordination, trust-building, and complex collaboration. If so, the most important change will not simply be where people work, but how organisations understand work itself.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- QUESTIONS -->
+  <div class="questions-panel">
+
+    <!-- PASSAGE 1 -->
+    <div class="q-section active" id="qs-1">
+      <div class="section-score">
+        <span class="section-score-label">Passage 1 · Questions 1–13</span>
+        <div class="section-score-bar"><div class="section-score-fill" id="p1-bar"></div></div>
+        <span class="section-score-num" id="p1-score">0 / 13</span>
+      </div>
+      <div class="q-block">
+        <div class="q-block-header"><div class="q-block-title">Questions 1–5</div><div class="q-block-subtitle">Choose the correct letter, A, B, C or D.</div></div>
+        <div class="q-block-body" id="p1-mcq"></div>
+      </div>
+      <div class="q-block">
+        <div class="q-block-header"><div class="q-block-title">Questions 6–9</div><div class="q-block-subtitle">Complete the sentences. Choose ONE WORD ONLY from the passage.</div></div>
+        <div class="q-block-body" id="p1-gap"></div>
+      </div>
+      <div class="q-block">
+        <div class="q-block-header"><div class="q-block-title">Questions 10–13</div><div class="q-block-subtitle">TRUE / FALSE / NOT GIVEN</div></div>
+        <div class="q-block-body" id="p1-tfng"></div>
+      </div>
+    </div>
+
+    <!-- PASSAGE 2 -->
+    <div class="q-section" id="qs-2">
+      <div class="section-score">
+        <span class="section-score-label">Passage 2 · Questions 14–26</span>
+        <div class="section-score-bar"><div class="section-score-fill" id="p2-bar"></div></div>
+        <span class="section-score-num" id="p2-score">0 / 13</span>
+      </div>
+      <div class="q-block">
+        <div class="q-block-header"><div class="q-block-title">Questions 14–18</div><div class="q-block-subtitle">Which paragraph (A–I) contains the following information?</div></div>
+        <div class="q-block-body" id="p2-para"></div>
+      </div>
+      <div class="q-block">
+        <div class="q-block-header"><div class="q-block-title">Questions 19–23</div><div class="q-block-subtitle">Complete the summary. Choose ONE WORD ONLY from the passage.</div></div>
+        <div class="q-block-body" id="p2-summary"></div>
+      </div>
+      <div class="q-block">
+        <div class="q-block-header"><div class="q-block-title">Questions 24–26</div><div class="q-block-subtitle">Choose the correct letter, A, B, C or D.</div></div>
+        <div class="q-block-body" id="p2-mcq"></div>
+      </div>
+    </div>
+
+    <!-- PASSAGE 3 -->
+    <div class="q-section" id="qs-3">
+      <div class="section-score">
+        <span class="section-score-label">Passage 3 · Questions 27–40</span>
+        <div class="section-score-bar"><div class="section-score-fill" id="p3-bar"></div></div>
+        <span class="section-score-num" id="p3-score">0 / 14</span>
+      </div>
+      <div class="q-block">
+        <div class="q-block-header"><div class="q-block-title">Questions 27–32</div><div class="q-block-subtitle">YES / NO / NOT GIVEN</div></div>
+        <div class="q-block-body" id="p3-yesno"></div>
+      </div>
+      <div class="q-block">
+        <div class="q-block-header"><div class="q-block-title">Questions 33–36</div><div class="q-block-subtitle">Choose the correct letter, A, B, C or D.</div></div>
+        <div class="q-block-body" id="p3-mcq"></div>
+      </div>
+      <div class="q-block">
+        <div class="q-block-header"><div class="q-block-title">Questions 37–40</div><div class="q-block-subtitle">Complete each sentence with the correct ending (A–F).</div></div>
+        <div class="q-block-body" id="p3-endings"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>IELTS Academic Reading Practice Test 4 · All questions based on the provided passages · <span style="color:var(--accent);">✓ Progress auto-saved</span> — your answers persist across page refreshes</footer>
+
+<script>
+// ══════════ DATA: PASSAGE 1 ══════════
+const p1MCQ = [
+  { n:1, text:"What is the main reason night trains are receiving more attention again?",
+    opts:["Air travel has become illegal in some countries","They are now cheaper than all other forms of travel","Interest in lower-emission travel has increased","Most highways have closed"],
+    correct:2, exp:"The passage says 'concerns about climate change and sustainable travel have encouraged a reassessment of rail transport'." },
+  { n:2, text:"According to the passage, one advantage of night trains over air travel is that",
+    opts:["they never require public funding","they can reduce the time wasted in airport procedures","they always travel faster over long distances","they offer more food options"],
+    correct:1, exp:"The passage mentions avoiding 'time spent reaching distant airports, passing through security, and waiting for boarding'." },
+  { n:3, text:"Why are night trains expensive to operate?",
+    opts:["They need fewer staff than day trains","Sleeping cars allow more passengers to travel","They require more space and extra onboard services","They are only used for tourism"],
+    correct:2, exp:"'Sleeping cars require more space per passenger… Staff costs are also higher, since passengers need assistance throughout the night'." },
+  { n:4, text:"What does the writer say about passengers' views of night trains?",
+    opts:["All passengers mainly want nostalgia","Passengers compare them with flights and hotels","Comfort is irrelevant if prices are low","Most people refuse to sleep on trains"],
+    correct:1, exp:"'Modern travellers compare night trains not only with other rail services but with budget airlines and hotels'." },
+  { n:5, text:"What is suggested about the future of night trains?",
+    opts:["Their success is guaranteed","They will replace all short-haul flights","Their future depends on policy, investment, and demand","They can succeed without modernisation"],
+    correct:2, exp:"'Much depends on public investment, policy coordination, and travellers' willingness to choose lower-emission journeys'." },
+];
+
+const p1Gap = [
+  { n:6, before:"One environmental advantage of rail is that it may produce fewer greenhouse gas", after:"than air travel.", answer:"emissions", hint:"See paragraph 2 — 'fewer greenhouse gas ___ per passenger'." },
+  { n:7, before:"Sleeping cars reduce overall passenger", after:"because they take up more space.", answer:"capacity", hint:"See paragraph 3 — 'reduces ___' because sleeping cars need more space per person." },
+  { n:8, before:"Some governments support night trains as part of a wider transport", after:".", answer:"policy", hint:"See paragraph 5 — 'broader transport ___'." },
+  { n:9, before:"International rail ticketing is often less straightforward than airline", after:".", answer:"booking", hint:"See paragraph 6 — 'less straightforward than airline ___'." },
+];
+
+const p1TFNG = [
+  { n:10, text:"Night trains disappeared entirely in all countries during the early twenty-first century.", answer:"FALSE", exp:"The passage says many services 'declined or disappeared' — not that they vanished in every country." },
+  { n:11, text:"Differences between national rail systems can make international night train operations harder.", answer:"TRUE", exp:"'Trains crossing national borders may face differences in signalling systems, track access charges, and scheduling rules, all of which complicate operations'." },
+  { n:12, text:"The writer says nostalgia alone is enough to make modern night trains successful.", answer:"FALSE", exp:"'A successful modern night train cannot rely only on romance. It must compete within a transport system shaped by speed, convenience, and price sensitivity'." },
+  { n:13, text:"Some travellers may choose night trains even when they are not the cheapest option.", answer:"TRUE", exp:"The passage refers to 'travellers' willingness to choose lower-emission journeys even when they are not the absolute cheapest option'." },
+];
+
+// ══════════ DATA: PASSAGE 2 ══════════
+const p2Para = [
+  { n:14, text:"an explanation that habits are often linked to a particular setting", answer:"B", exp:"Paragraph B: 'the context comes to prompt the behaviour directly' — habits are triggered by cues in specific settings." },
+  { n:15, text:"a statement that major life changes can weaken existing routines", answer:"C", exp:"Paragraph C: 'life changes, such as moving house or starting a new job, can disrupt old habits'." },
+  { n:16, text:"a warning against believing a fixed timetable for forming habits", answer:"G", exp:"Paragraph G: 'Scientific evidence suggests the process is much more variable… There is no single universal timetable'." },
+  { n:17, text:"the idea that replacing a behaviour may work better than simply trying to stop it", answer:"F", exp:"Paragraph F: experts 'recommend replacing an unwanted habit with an alternative response rather than trying to eliminate behaviour altogether'." },
+  { n:18, text:"a point that behaviour-change programmes should focus on surroundings as well as motivation", answer:"H", exp:"Paragraph H: 'more effective when they focus not only on motivation, but also on context'." },
+];
+
+const p2SummaryText = "A habit is a learned behaviour triggered by a [19] and performed with limited conscious thought. Habit formation depends not only on repetition but on repetition in a stable [20]. Rewards also matter, because even small feelings of pleasure or [21] can strengthen a behaviour. Some actions begin as conscious [22] and later become more automatic. Scientists reject the idea that habits always form after a fixed number of [23].";
+
+const p2SummaryAnswers = ["cue","context","comfort","goals","days"];
+
+const p2MCQ = [
+  { n:24, text:"What does the passage say about reward?",
+    opts:["Only large rewards can build habits","Immediate rewards can strongly reinforce behaviour","Rewards matter only for children","Rewards make habits impossible to change"],
+    correct:1, exp:"Paragraph D: 'Immediate rewards often influence behaviour more strongly than distant consequences'." },
+  { n:25, text:"According to the writer, why can it be hard to break a habit?",
+    opts:["People completely lose the ability to reflect","Old cues often remain even when people try to stop the behaviour","Habits disappear only during childhood","Most habits are genetically determined"],
+    correct:1, exp:"Paragraph F: 'suppressing an old routine leaves the original cue in place' — the trigger remains even when people try to stop." },
+  { n:26, text:"Which statement best reflects the writer's overall view?",
+    opts:["Habits are trivial and have little effect on daily life","Habits are fixed and cannot be altered","Habits are shaped by repeated situations and can be studied systematically","Habit formation depends only on personality"],
+    correct:2, exp:"Paragraph I: habits are 'learned patterns attached to repeated situations' — they are systematic, not random or fixed." },
+];
+
+// ══════════ DATA: PASSAGE 3 ══════════
+const p3YesNo = [
+  { n:27, text:"The office was once widely seen as the normal location for professional work.", answer:"YES", exp:"'For decades, the office was treated as the natural centre of professional work'." },
+  { n:28, text:"Traditional offices had no role in expressing organisational hierarchy.", answer:"NO", exp:"'Office buildings also reflected organisational hierarchy. Size, location, and layout often signalled status and control'." },
+  { n:29, text:"Some work previously assumed to require an office was later shown to be possible elsewhere.", answer:"YES", exp:"'Many organisations discovered that at least some forms of work could continue outside the office more effectively than they had assumed'." },
+  { n:30, text:"The writer says remote work has made offices completely unnecessary.", answer:"NO", exp:"'This did not mean that the office became irrelevant. Instead, its purpose began to shift'." },
+  { n:31, text:"Hybrid work can create unequal access to opportunities within organisations.", answer:"YES", exp:"'Employees who spend more time in the office may have greater access to managers, informal information, and promotion opportunities'." },
+  { n:32, text:"The writer believes all companies should adopt the same working model.", answer:"NO", exp:"The passage describes a range of arrangements as valid and says 'the value of the office… depends on the type of work, the design of the organisation, and the circumstances of the worker'." },
+];
+
+const p3MCQ = [
+  { n:33, text:"According to the passage, one benefit of the traditional office was that",
+    opts:["it prevented all distractions","it allowed spontaneous communication","it eliminated commuting time","it made hierarchy invisible"],
+    correct:1, exp:"'Informal exchanges could happen spontaneously' — one of the benefits of concentrating people in one place." },
+  { n:34, text:"Why are some offices being redesigned?",
+    opts:["To make them more suitable for varied patterns of attendance","To remove all meeting spaces","To ensure every worker has a permanent private room","To discourage face-to-face interaction"],
+    correct:0, exp:"'Offices intended for daily attendance may not function well when occupancy varies across the week' — redesign responds to this change." },
+  { n:35, text:"What concern does the writer raise about hybrid working?",
+    opts:["Remote workers always perform worse","Workers in the office may gain advantages in visibility","Managers cannot communicate with staff online","Flexible working never benefits caregivers"],
+    correct:1, exp:"'Those working remotely may risk being overlooked, even when their output is equally strong'." },
+  { n:36, text:"What is the writer's view of the office's future?",
+    opts:["It will disappear entirely within a few years","It will return unchanged to its earlier form","It may become a more deliberate space for selected functions","It should be used only for training new staff"],
+    correct:2, exp:"'The future office may be smaller, more flexible, and more intentional' — a setting for coordination and complex collaboration, not all work." },
+];
+
+const p3EndingsSentences = [
+  { n:37, stem:"Traditional office buildings often reflected", answer:"B", exp:"B: 'organisational status and authority' — 'size, location, and layout often signalled status and control, reinforcing established patterns of authority'." },
+  { n:38, stem:"In a hybrid model, the office may increasingly be used for", answer:"E", exp:"E: 'collaboration and social interaction' — the office becomes 'a specialised environment used for particular kinds of interaction'." },
+  { n:39, stem:"Some people still value the office because it provides", answer:"A", exp:"A: 'a boundary between work and private life' — 'for some people, it remains an important boundary between work and personal life'." },
+  { n:40, stem:"According to the writer, the office must now justify itself through", answer:"C", exp:"C: 'the specific value it adds' — 'it must now justify itself not through tradition, but through the specific forms of value it creates'." },
+];
+
+const endings = {
+  A: "a boundary between work and private life",
+  B: "organisational status and authority",
+  C: "the specific value it adds",
+  D: "eliminating all forms of remote work",
+  E: "collaboration and social interaction",
+  F: "fixed attendance every day",
+};
+
+// ══════════ PERSISTENCE ══════════
+const STORE_KEY = 'ielts_practice4_v1';
+function loadState() { try { const r=localStorage.getItem(STORE_KEY); return r?JSON.parse(r):{}; } catch(e) { return {}; } }
+function saveState(p) { try { const c=loadState(); localStorage.setItem(STORE_KEY,JSON.stringify({...c,...p})); } catch(e) {} }
+function clearState() { try { localStorage.removeItem(STORE_KEY); } catch(e) {} }
+
+// ══════════ SCORES ══════════
+let scores={p1:0,p2:0,p3:0};
+const totals={p1:13,p2:13,p3:14};
+const answered={p1:new Set(),p2:new Set(),p3:new Set()};
+function updateScore(passage,qNum,correct) {
+  const key='p'+passage;
+  if(!answered[key].has(qNum)){answered[key].add(qNum);if(correct)scores[key]++;}
+  document.getElementById(key+'-bar').style.width=Math.round(scores[key]/totals[key]*100)+'%';
+  document.getElementById(key+'-score').textContent=scores[key]+' / '+totals[key];
+  document.getElementById('global-score').textContent=(scores.p1+scores.p2+scores.p3)+' / '+(totals.p1+totals.p2+totals.p3);
+}
+
+// ══════════ MCQ ══════════
+function buildMCQ(data,cId,passage) {
+  const c=document.getElementById(cId);
+  data.forEach(q=>{
+    const div=document.createElement('div'); div.className='question-item';
+    const opts=q.opts.map((o,i)=>`<button class="mcq-opt" onclick="answerMCQ(this,${i},${q.correct},${passage},${q.n})" data-idx="${i}"><span class="opt-letter">${String.fromCharCode(65+i)}</span>${o}</button>`).join('');
+    div.innerHTML=`<div class="q-number">Question ${q.n}</div><div class="q-text">${q.text}</div><div class="mcq-options" data-qi="${passage}-${q.n}">${opts}</div><div class="q-feedback" id="fb-${passage}-${q.n}"></div>`;
+    c.appendChild(div);
+  });
+}
+function answerMCQ(btn,idx,correct,passage,qNum) {
+  const wrap=btn.closest('.mcq-options');
+  if(wrap.querySelector('.correct,.wrong'))return;
+  const btns=wrap.querySelectorAll('.mcq-opt'); btns.forEach(b=>b.disabled=true);
+  const isRight=idx===correct;
+  btn.classList.add(isRight?'correct':'wrong'); btns[correct].classList.add('correct');
+  const data=(passage===1?p1MCQ:passage===2?p2MCQ:p3MCQ).find(q=>q.n===qNum);
+  const fb=document.getElementById(`fb-${passage}-${qNum}`);
+  fb.className='q-feedback show '+(isRight?'correct':'wrong');
+  fb.textContent=isRight?'✓ Correct. '+data.exp:'✗ Incorrect. '+data.exp;
+  updateScore(passage,qNum,isRight);
+  saveState({[`mcq_${passage}_${qNum}`]:{chosen:idx,correct,isRight}});
+}
+function restoreMCQ(passage,qNum,chosen,correct,isRight) {
+  const wrap=document.querySelector(`[data-qi="${passage}-${qNum}"]`); if(!wrap)return;
+  const btns=wrap.querySelectorAll('.mcq-opt'); btns.forEach(b=>b.disabled=true);
+  btns[chosen].classList.add(isRight?'correct':'wrong'); btns[correct].classList.add('correct');
+  const data=(passage===1?p1MCQ:passage===2?p2MCQ:p3MCQ).find(q=>q.n===qNum);
+  const fb=document.getElementById(`fb-${passage}-${qNum}`);
+  fb.className='q-feedback show '+(isRight?'correct':'wrong');
+  fb.textContent=isRight?'✓ Correct. '+data.exp:'✗ Incorrect. '+data.exp;
+  updateScore(passage,qNum,isRight);
+}
+
+// ══════════ GAP ══════════
+function buildGap(data,cId,passage) {
+  const c=document.getElementById(cId);
+  data.forEach(q=>{
+    const div=document.createElement('div'); div.className='question-item';
+    div.innerHTML=`<div class="q-number">Question ${q.n}</div>
+      <div class="sentence-gap-wrap">${q.before} <span class="inline-gap"><input class="inline-input" id="gi-${passage}-${q.n}" placeholder="type answer" autocomplete="off" spellcheck="false"></span> ${q.after}</div>
+      <div class="answer-row" style="margin-top:8px;">
+        <button class="reveal-btn" onclick="checkGap(${passage},${q.n})">Check</button>
+        <span class="correct-badge" id="cb-${passage}-${q.n}">✓ Correct</span>
+        <span class="wrong-badge" id="wb-${passage}-${q.n}"></span>
+        <span class="answer-reveal" id="ar-${passage}-${q.n}">Answer: ${q.answer}</span>
+      </div>
+      <div style="font-size:11px;color:var(--ink-muted);margin-top:4px;">${q.hint}</div>`;
+    c.appendChild(div);
+  });
+}
+function checkGap(passage,qNum) {
+  const data=p1Gap.find(q=>q.n===qNum); if(!data)return;
+  const input=document.getElementById(`gi-${passage}-${qNum}`);
+  const val=input.value.trim().toLowerCase();
+  const isRight=val===data.answer.toLowerCase();
+  input.classList.remove('correct','wrong'); input.classList.add(isRight?'correct':'wrong'); input.disabled=true;
+  const cb=document.getElementById(`cb-${passage}-${qNum}`),wb=document.getElementById(`wb-${passage}-${qNum}`),ar=document.getElementById(`ar-${passage}-${qNum}`);
+  if(isRight){cb.style.display='inline-block';}
+  else{wb.style.display='inline-block';wb.textContent='✗ '+(val?'"'+input.value.trim()+'"':'No answer entered');ar.style.display='inline-block';}
+  updateScore(passage,qNum,isRight);
+  saveState({[`gap_${passage}_${qNum}`]:{value:input.value.trim(),isRight}});
+}
+function restoreGap(passage,qNum,value,isRight) {
+  const input=document.getElementById(`gi-${passage}-${qNum}`); if(!input)return;
+  input.value=value; input.classList.add(isRight?'correct':'wrong'); input.disabled=true;
+  const cb=document.getElementById(`cb-${passage}-${qNum}`),wb=document.getElementById(`wb-${passage}-${qNum}`),ar=document.getElementById(`ar-${passage}-${qNum}`);
+  if(isRight){cb.style.display='inline-block';}
+  else{wb.style.display='inline-block';wb.textContent='✗ '+(value?'"'+value+'"':'No answer entered');ar.style.display='inline-block';}
+  updateScore(passage,qNum,isRight);
+}
+
+// ══════════ T/F/NG ══════════
+function buildTFNG(data,cId,passage,labels) {
+  const c=document.getElementById(cId),labs=labels||['TRUE','FALSE','NOT GIVEN'];
+  data.forEach(q=>{
+    const div=document.createElement('div'); div.className='question-item';
+    const btns=labs.map(l=>`<button class="tfng-btn" onclick="answerTFNG(this,'${l}','${q.answer}',${passage},${q.n})">${l}</button>`).join('');
+    div.innerHTML=`<div class="q-number">Question ${q.n}</div><div class="q-text">${q.text}</div><div class="tfng-options">${btns}</div><div class="q-feedback" id="tfb-${passage}-${q.n}"></div>`;
+    c.appendChild(div);
+  });
+}
+function answerTFNG(btn,choice,correct,passage,qNum) {
+  const wrap=btn.closest('.tfng-options');
+  if(wrap.querySelector('.correct,.wrong'))return;
+  wrap.querySelectorAll('.tfng-btn').forEach(b=>b.disabled=true);
+  const isRight=choice===correct;
+  btn.classList.add(isRight?'correct':'wrong');
+  if(!isRight)wrap.querySelectorAll('.tfng-btn').forEach(b=>{if(b.textContent===correct)b.classList.add('correct');});
+  const allData=[...p1TFNG,...p3YesNo]; const data=allData.find(q=>q.n===qNum);
+  const fb=document.getElementById(`tfb-${passage}-${qNum}`);
+  fb.className='q-feedback show '+(isRight?'correct':'wrong');
+  fb.textContent=isRight?'✓ Correct. '+data.exp:'✗ Incorrect. The answer is '+correct+'. '+data.exp;
+  updateScore(passage,qNum,isRight);
+  saveState({[`tfng_${passage}_${qNum}`]:{choice,correct,isRight}});
+}
+function restoreTFNG(passage,qNum,choice,correct,isRight) {
+  const fb=document.getElementById(`tfb-${passage}-${qNum}`); if(!fb)return;
+  const wrap=fb.previousElementSibling;
+  wrap.querySelectorAll('.tfng-btn').forEach(b=>{b.disabled=true;if(b.textContent===choice)b.classList.add(isRight?'correct':'wrong');if(!isRight&&b.textContent===correct)b.classList.add('correct');});
+  const allData=[...p1TFNG,...p3YesNo]; const data=allData.find(q=>q.n===qNum);
+  fb.className='q-feedback show '+(isRight?'correct':'wrong');
+  fb.textContent=isRight?'✓ Correct. '+data.exp:'✗ Incorrect. The answer is '+correct+'. '+data.exp;
+  updateScore(passage,qNum,isRight);
+}
+
+// ══════════ PARAGRAPH MATCH ══════════
+function buildParaMatch(data,cId,passage) {
+  const c=document.getElementById(cId),paraOpts=['A','B','C','D','E','F','G','H','I'];
+  data.forEach(q=>{
+    const div=document.createElement('div'); div.className='question-item';
+    const opts=paraOpts.map(p=>`<option value="${p}">${p}</option>`).join('');
+    div.innerHTML=`<div class="q-number">Question ${q.n}</div><div class="q-text">${q.text}</div>
+      <div class="answer-row" style="margin-top:6px;">
+        <select class="match-dropdown" id="pm-${passage}-${q.n}"><option value="">Select</option>${opts}</select>
+        <button class="reveal-btn" onclick="checkParaMatch(${passage},${q.n})">Check</button>
+        <span class="correct-badge" id="pcb-${passage}-${q.n}">✓ Correct</span>
+        <span class="wrong-badge" id="pwb-${passage}-${q.n}"></span>
+        <span class="answer-reveal" id="par-${passage}-${q.n}">Answer: ${q.answer}</span>
+      </div>
+      <div class="q-feedback" id="pfb-${passage}-${q.n}" style="margin-top:6px;"></div>`;
+    c.appendChild(div);
+  });
+}
+function checkParaMatch(passage,qNum) {
+  const data=p2Para.find(q=>q.n===qNum);
+  const sel=document.getElementById(`pm-${passage}-${qNum}`),val=sel.value; if(!val)return;
+  const isRight=val===data.answer; sel.classList.add(isRight?'correct':'wrong'); sel.disabled=true;
+  const cb=document.getElementById(`pcb-${passage}-${qNum}`),wb=document.getElementById(`pwb-${passage}-${qNum}`),ar=document.getElementById(`par-${passage}-${qNum}`),fb=document.getElementById(`pfb-${passage}-${qNum}`);
+  if(isRight){cb.style.display='inline-block';fb.className='q-feedback show correct';fb.textContent='✓ '+data.exp;}
+  else{wb.textContent='✗ You chose: '+val;wb.style.display='inline-block';ar.style.display='inline-block';fb.className='q-feedback show wrong';fb.textContent='✗ '+data.exp;}
+  updateScore(passage,qNum,isRight);
+  saveState({[`para_${passage}_${qNum}`]:{val,isRight}});
+}
+function restoreParaMatch(passage,qNum,val,isRight) {
+  const sel=document.getElementById(`pm-${passage}-${qNum}`); if(!sel)return;
+  sel.value=val; sel.classList.add(isRight?'correct':'wrong'); sel.disabled=true;
+  const data=p2Para.find(q=>q.n===qNum);
+  const cb=document.getElementById(`pcb-${passage}-${qNum}`),wb=document.getElementById(`pwb-${passage}-${qNum}`),ar=document.getElementById(`par-${passage}-${qNum}`),fb=document.getElementById(`pfb-${passage}-${qNum}`);
+  if(isRight){cb.style.display='inline-block';fb.className='q-feedback show correct';fb.textContent='✓ '+data.exp;}
+  else{wb.textContent='✗ You chose: '+val;wb.style.display='inline-block';ar.style.display='inline-block';fb.className='q-feedback show wrong';fb.textContent='✗ '+data.exp;}
+  updateScore(passage,qNum,isRight);
+}
+
+// ══════════ SUMMARY ══════════
+function buildSummary(cId,passage) {
+  const c=document.getElementById(cId);
+  let text=p2SummaryText;
+  p2SummaryAnswers.forEach((ans,i)=>{
+    const num=19+i;
+    text=text.replace(`[${num}]`,`<span class="inline-gap"><input class="inline-input" id="si-${passage}-${num}" placeholder="${num}" autocomplete="off" spellcheck="false" style="width:110px;"></span>`);
+  });
+  const div=document.createElement('div'); div.className='question-item'; div.style.borderBottom='none';
+  div.innerHTML=`<div class="para-completion">${text}</div><button class="check-all-btn" onclick="checkSummary(${passage})">Check All Answers</button><div class="q-feedback" id="sfb-${passage}" style="margin-top:8px;"></div>`;
+  c.appendChild(div);
+}
+function checkSummary(passage) {
+  let correct=0; const savedVals={};
+  p2SummaryAnswers.forEach((ans,i)=>{
+    const num=19+i; const input=document.getElementById(`si-${passage}-${num}`); if(input.disabled)return;
+    const val=input.value.trim().toLowerCase(); const isRight=val===ans.toLowerCase();
+    input.classList.remove('correct','wrong'); input.classList.add(isRight?'correct':'wrong'); input.disabled=true;
+    savedVals[num]={value:input.value.trim(),isRight};
+    if(!isRight){const sp=document.createElement('span');sp.className='answer-reveal';sp.style.display='inline-block';sp.style.marginLeft='4px';sp.style.fontSize='11px';sp.textContent=ans;input.parentNode.appendChild(sp);}
+    if(isRight)correct++;
+    updateScore(passage,num,isRight);
+  });
+  const fb=document.getElementById(`sfb-${passage}`);
+  fb.className='q-feedback show '+(correct===5?'correct':'wrong');
+  fb.textContent=correct===5?'✓ All 5 correct!':correct+'/5 correct. Incorrect answers are shown above.';
+  saveState({[`summary_${passage}`]:{vals:savedVals,scoreCorrect:correct}});
+}
+function restoreSummary(passage,vals,scoreCorrect) {
+  p2SummaryAnswers.forEach((ans,i)=>{
+    const num=19+i; const saved=vals[num]; if(!saved)return;
+    const input=document.getElementById(`si-${passage}-${num}`); if(!input)return;
+    input.value=saved.value; input.classList.add(saved.isRight?'correct':'wrong'); input.disabled=true;
+    if(!saved.isRight){const sp=document.createElement('span');sp.className='answer-reveal';sp.style.display='inline-block';sp.style.marginLeft='4px';sp.style.fontSize='11px';sp.textContent=ans;input.parentNode.appendChild(sp);}
+    updateScore(passage,num,saved.isRight);
+  });
+  const fb=document.getElementById(`sfb-${passage}`);
+  fb.className='q-feedback show '+(scoreCorrect===5?'correct':'wrong');
+  fb.textContent=scoreCorrect===5?'✓ All 5 correct!':scoreCorrect+'/5 correct. Incorrect answers are shown above.';
+}
+
+// ══════════ ENDINGS ══════════
+function buildEndings(data,cId,passage) {
+  const c=document.getElementById(cId);
+  const eBox=document.createElement('div'); eBox.className='endings-box';
+  eBox.innerHTML=Object.entries(endings).map(([k,v])=>`<strong>${k}</strong> ${v}<br>`).join('');
+  c.appendChild(eBox);
+  data.forEach(q=>{
+    const div=document.createElement('div'); div.className='question-item';
+    const opts=Object.keys(endings).map(k=>`<option value="${k}">${k}</option>`).join('');
+    div.innerHTML=`<div class="q-number">Question ${q.n}</div>
+      <div class="q-text">${q.stem} <select class="match-dropdown" id="en-${passage}-${q.n}"><option value="">—</option>${opts}</select></div>
+      <div class="answer-row" style="margin-top:6px;">
+        <button class="reveal-btn" onclick="checkEnding(${passage},${q.n})">Check</button>
+        <span class="correct-badge" id="ecb-${passage}-${q.n}">✓ Correct</span>
+        <span class="wrong-badge" id="ewb-${passage}-${q.n}"></span>
+        <span class="answer-reveal" id="ear-${passage}-${q.n}">Answer: ${q.answer}</span>
+      </div>
+      <div class="q-feedback" id="efb-${passage}-${q.n}" style="margin-top:4px;"></div>`;
+    c.appendChild(div);
+  });
+}
+function checkEnding(passage,qNum) {
+  const data=p3EndingsSentences.find(q=>q.n===qNum);
+  const sel=document.getElementById(`en-${passage}-${qNum}`),val=sel.value; if(!val)return;
+  const isRight=val===data.answer; sel.classList.add(isRight?'correct':'wrong'); sel.disabled=true;
+  const cb=document.getElementById(`ecb-${passage}-${qNum}`),wb=document.getElementById(`ewb-${passage}-${qNum}`),ar=document.getElementById(`ear-${passage}-${qNum}`),fb=document.getElementById(`efb-${passage}-${qNum}`);
+  if(isRight){cb.style.display='inline-block';fb.className='q-feedback show correct';fb.textContent='✓ '+data.exp;}
+  else{wb.textContent='✗ '+val;wb.style.display='inline-block';ar.style.display='inline-block';fb.className='q-feedback show wrong';fb.textContent='✗ '+data.exp;}
+  updateScore(passage,qNum,isRight);
+  saveState({[`ending_${passage}_${qNum}`]:{val,isRight}});
+}
+function restoreEnding(passage,qNum,val,isRight) {
+  const sel=document.getElementById(`en-${passage}-${qNum}`); if(!sel)return;
+  sel.value=val; sel.classList.add(isRight?'correct':'wrong'); sel.disabled=true;
+  const data=p3EndingsSentences.find(q=>q.n===qNum);
+  const cb=document.getElementById(`ecb-${passage}-${qNum}`),wb=document.getElementById(`ewb-${passage}-${qNum}`),ar=document.getElementById(`ear-${passage}-${qNum}`),fb=document.getElementById(`efb-${passage}-${qNum}`);
+  if(isRight){cb.style.display='inline-block';fb.className='q-feedback show correct';fb.textContent='✓ '+data.exp;}
+  else{wb.textContent='✗ '+val;wb.style.display='inline-block';ar.style.display='inline-block';fb.className='q-feedback show wrong';fb.textContent='✗ '+data.exp;}
+  updateScore(passage,qNum,isRight);
+}
+
+// ══════════ SWITCHING ══════════
+function switchPassage(n,btn) {
+  document.querySelectorAll('.ptab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.q-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.passage-section').forEach(s=>s.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('qs-'+n).classList.add('active');
+  document.getElementById('ptext-'+n).classList.add('active');
+  const titles={1:'Reading Passage 1 · Night Trains',2:'Reading Passage 2 · How Habits Form',3:'Reading Passage 3 · Rethinking the Office'};
+  document.getElementById('passage-heading').textContent=titles[n];
+  saveState({activePassage:n});
+}
+
+// ══════════ TIMER ══════════
+const timerEl=document.getElementById('timer');
+const st0=loadState();
+let secondsLeft=(st0.timerSeconds!==undefined&&st0.timerSeconds>0)?st0.timerSeconds:3600;
+function renderTimer(){
+  const m=Math.floor(secondsLeft/60),s=secondsLeft%60;
+  timerEl.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  timerEl.className='timer-display'+(secondsLeft<600?' danger':secondsLeft<1200?' warning':'');
+}
+renderTimer();
+const tick=setInterval(()=>{
+  if(secondsLeft<=0){clearInterval(tick);timerEl.textContent='00:00';timerEl.classList.add('danger');return;}
+  secondsLeft--;renderTimer();
+  if(secondsLeft%10===0)saveState({timerSeconds:secondsLeft});
+},1000);
+
+// ══════════ RESET ══════════
+function resetTest(){
+  if(!confirm('Reset the entire test? All your answers and the timer will be cleared.'))return;
+  clearState();location.reload();
+}
+
+// ══════════ RESTORE ══════════
+function restoreAll(){
+  const st=loadState();
+  [[p1MCQ,1],[p2MCQ,2],[p3MCQ,3]].forEach(([data,passage])=>{
+    data.forEach(q=>{const s=st[`mcq_${passage}_${q.n}`];if(s)restoreMCQ(passage,q.n,s.chosen,s.correct,s.isRight);});
+  });
+  p1Gap.forEach(q=>{const s=st[`gap_1_${q.n}`];if(s)restoreGap(1,q.n,s.value,s.isRight);});
+  p1TFNG.forEach(q=>{const s=st[`tfng_1_${q.n}`];if(s)restoreTFNG(1,q.n,s.choice,s.correct,s.isRight);});
+  p2Para.forEach(q=>{const s=st[`para_2_${q.n}`];if(s)restoreParaMatch(2,q.n,s.val,s.isRight);});
+  const ss=st[`summary_2`];if(ss)restoreSummary(2,ss.vals,ss.scoreCorrect);
+  p3YesNo.forEach(q=>{const s=st[`tfng_3_${q.n}`];if(s)restoreTFNG(3,q.n,s.choice,s.correct,s.isRight);});
+  p3EndingsSentences.forEach(q=>{const s=st[`ending_3_${q.n}`];if(s)restoreEnding(3,q.n,s.val,s.isRight);});
+  const ap=st.activePassage;
+  if(ap&&ap!==1){const tabs=document.querySelectorAll('.ptab');if(tabs[ap-1])switchPassage(ap,tabs[ap-1]);}
+}
+
+// ══════════ INIT ══════════
+buildMCQ(p1MCQ,'p1-mcq',1);
+buildGap(p1Gap,'p1-gap',1);
+buildTFNG(p1TFNG,'p1-tfng',1,['TRUE','FALSE','NOT GIVEN']);
+buildParaMatch(p2Para,'p2-para',2);
+buildSummary('p2-summary',2);
+buildMCQ(p2MCQ,'p2-mcq',2);
+buildTFNG(p3YesNo,'p3-yesno',3,['YES','NO','NOT GIVEN']);
+buildMCQ(p3MCQ,'p3-mcq',3);
+buildEndings(p3EndingsSentences,'p3-endings',3);
+restoreAll();
+</script>
+</body>
+</html>

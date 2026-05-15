@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<!-- saved from url=(0073)file:///Users/benjaminandfamily/Downloads/ielts_reading_practice_2_1.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESL CONNECT - Full Interactive IELTS Reading Test</title>
+<link href="./IELTS Academic Reading Practice Test 2_files/css2" rel="stylesheet">
+<style>
+:root {
+  --bg: #f4f1eb;
+  --surface: #fdfcf9;
+  --surface2: #f0ede4;
+  --ink: #1c1916;
+  --ink-soft: #4a4540;
+  --ink-muted: #8a847c;
+  --border: #ddd8ce;
+  --border-light: #eae6de;
+  --blue: #1a4a8a;
+  --blue-light: #e8f0fb;
+  --blue-mid: #4a7ac4;
+  --teal: #1a6a5a;
+  --teal-light: #e0f0ea;
+  --amber: #7a4a0a;
+  --amber-light: #fdf0d8;
+  --red: #8a2020;
+  --red-light: #fce8e8;
+  --green: #1a5a2a;
+  --green-light: #e4f4e8;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--ink); min-height: 100vh; font-size: 15px; line-height: 1.65; }
+
+/* HEADER */
+.site-header { background: var(--ink); padding: 2rem 2rem 1.75rem; border-bottom: 3px solid #2a6a4a; }
+.site-header-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.header-title-group h1 { font-family: 'Source Serif 4', serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 600; color: #fdfcf9; line-height: 1.2; margin-bottom: 4px; }
+.header-title-group p { font-size: 12px; font-weight: 400; color: #a09880; letter-spacing: 0.12em; text-transform: uppercase; }
+.header-timer-box { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 0.7rem 1.25rem; text-align: center; }
+.timer-label { font-size: 10px; color: #a09880; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2px; }
+.timer-display { font-family: 'DM Mono', monospace; font-size: 1.6rem; font-weight: 500; color: #fdfcf9; }
+.timer-display.warning { color: #f59e0b; }
+.timer-display.danger { color: #ef4444; }
+.header-score { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 0.7rem 1.25rem; text-align: center; min-width: 120px; }
+.score-label { font-size: 10px; color: #a09880; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2px; }
+.score-display { font-family: 'DM Mono', monospace; font-size: 1.3rem; font-weight: 500; color: #fdfcf9; }
+
+/* TABS */
+.passage-tabs { background: var(--ink); border-bottom: 1px solid #333; padding: 0 2rem; }
+.passage-tabs-inner { max-width: 1200px; margin: 0 auto; display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; }
+.passage-tabs-inner::-webkit-scrollbar { display: none; }
+.ptab { padding: 0.85rem 1.4rem; border: none; background: transparent; cursor: pointer; font-family: 'Outfit', sans-serif; font-size: 12.5px; font-weight: 500; color: #7a7060; border-bottom: 3px solid transparent; white-space: nowrap; transition: all 0.2s; letter-spacing: 0.03em; }
+.ptab:hover { color: #c4b898; }
+.ptab.active { color: #fdfcf9; border-bottom-color: #2a7a5a; }
+
+/* LAYOUT */
+.main-wrap { max-width: 1200px; margin: 0 auto; padding: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+@media (max-width: 900px) { .main-wrap { grid-template-columns: 1fr; } }
+
+/* PASSAGE PANEL */
+.passage-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; position: sticky; top: 1rem; max-height: calc(100vh - 2rem); }
+.passage-panel-header { background: var(--surface2); padding: 1rem 1.4rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.passage-panel-title { font-family: 'Source Serif 4', serif; font-size: 1rem; font-weight: 600; color: var(--ink); }
+.passage-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; background: #e0f0ea; color: #1a6a5a; border: 1px solid #a0d4c0; }
+.passage-body { padding: 1.5rem; overflow-y: auto; max-height: calc(100vh - 8rem); font-family: 'Source Serif 4', serif; font-size: 14px; line-height: 1.9; color: var(--ink-soft); }
+.passage-body h3 { font-size: 1.1rem; font-weight: 600; color: var(--ink); margin-bottom: 1rem; }
+.passage-body p { margin-bottom: 1rem; }
+.passage-body p:last-child { margin-bottom: 0; }
+.passage-section { display: none; }
+.passage-section.active { display: block; }
+.passage-num { font-size: 10px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #1a6a5a; margin-bottom: 5px; }
+
+/* QUESTIONS */
+.questions-panel { }
+.q-section { display: none; animation: fadeIn 0.2s ease; }
+.q-section.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+.q-block { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 1.25rem; overflow: hidden; }
+.q-block-header { background: var(--surface2); padding: 0.9rem 1.25rem; border-bottom: 1px solid var(--border); }
+.q-block-title { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); }
+.q-block-subtitle { font-size: 12.5px; color: var(--ink-muted); margin-top: 3px; line-height: 1.5; }
+.q-block-body { padding: 1.1rem 1.25rem; }
+
+/* QUESTION ITEM */
+.question-item { margin-bottom: 1.1rem; padding-bottom: 1.1rem; border-bottom: 1px solid var(--border-light); }
+.question-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.q-number { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 5px; }
+.q-text { font-size: 13.5px; color: var(--ink); line-height: 1.6; margin-bottom: 0.75rem; }
+
+/* MCQ */
+.mcq-options { display: flex; flex-direction: column; gap: 6px; }
+.mcq-opt { display: flex; align-items: flex-start; gap: 10px; padding: 8px 12px; border: 1.5px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 13px; color: var(--ink); line-height: 1.5; transition: all 0.15s; background: transparent; text-align: left; font-family: 'Outfit', sans-serif; width: 100%; }
+.mcq-opt:hover:not(:disabled) { background: var(--surface2); border-color: var(--blue-mid); }
+.mcq-opt:disabled { cursor: default; }
+.opt-letter { font-size: 10px; font-weight: 600; min-width: 20px; height: 20px; border-radius: 50%; background: var(--surface2); color: var(--ink-muted); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; transition: all 0.15s; }
+.mcq-opt.correct { background: var(--green-light); border-color: var(--green); color: #1a4a28; }
+.mcq-opt.wrong { background: var(--red-light); border-color: var(--red); color: var(--red); }
+.mcq-opt.correct .opt-letter { background: var(--green); color: white; }
+.mcq-opt.wrong .opt-letter { background: var(--red); color: white; }
+.q-feedback { margin-top: 6px; padding: 7px 10px; border-radius: 6px; font-size: 12px; line-height: 1.5; display: none; }
+.q-feedback.show { display: block; }
+.q-feedback.correct { background: var(--green-light); color: var(--green); }
+.q-feedback.wrong { background: var(--red-light); color: var(--red); }
+
+/* GAP / INLINE */
+.sentence-gap-wrap { font-size: 13.5px; color: var(--ink); line-height: 2.2; }
+.inline-gap { display: inline-flex; align-items: center; gap: 5px; vertical-align: middle; margin: 0 2px; }
+.inline-input { border: none; border-bottom: 2px solid var(--border); background: transparent; font-family: 'Outfit', sans-serif; font-size: 13.5px; color: var(--ink); outline: none; width: 130px; padding: 1px 4px; transition: border-color 0.2s; }
+.inline-input:focus { border-bottom-color: var(--blue-mid); }
+.inline-input.correct { border-bottom-color: var(--green); color: var(--green); }
+.inline-input.wrong { border-bottom-color: var(--red); color: var(--red); }
+.answer-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.reveal-btn { padding: 6px 16px; border: 1.5px solid var(--border); border-radius: 7px; background: transparent; font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 500; color: var(--ink-muted); cursor: pointer; white-space: nowrap; transition: all 0.15s; }
+.reveal-btn:hover { background: var(--surface2); color: var(--ink); border-color: var(--ink-soft); }
+.correct-badge { font-size: 11px; font-weight: 600; color: var(--green); background: var(--green-light); padding: 3px 10px; border-radius: 12px; display: none; }
+.wrong-badge { font-size: 11px; color: var(--red); background: var(--red-light); padding: 3px 10px; border-radius: 12px; display: none; }
+.answer-reveal { font-size: 12px; font-weight: 600; color: var(--teal); background: var(--teal-light); padding: 3px 10px; border-radius: 12px; display: none; }
+
+/* T/F/NG */
+.tfng-options { display: flex; gap: 6px; flex-wrap: wrap; }
+.tfng-btn { padding: 6px 14px; border: 1.5px solid var(--border); border-radius: 7px; background: transparent; cursor: pointer; font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 500; color: var(--ink-muted); transition: all 0.15s; }
+.tfng-btn:hover:not(:disabled) { background: var(--surface2); color: var(--ink); }
+.tfng-btn:disabled { cursor: default; }
+.tfng-btn.correct { background: var(--green-light); border-color: var(--green); color: var(--green); }
+.tfng-btn.wrong { background: var(--red-light); border-color: var(--red); color: var(--red); }
+
+/* DROPDOWN */
+.match-dropdown { appearance: none; -webkit-appearance: none; border: 1.5px solid var(--border); border-radius: 7px; padding: 5px 28px 5px 10px; font-family: 'Outfit', sans-serif; font-size: 13px; color: var(--ink); background: var(--bg); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%238a847c' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 8px center; cursor: pointer; outline: none; transition: border-color 0.2s; min-width: 80px; }
+.match-dropdown:focus { border-color: var(--blue-mid); }
+.match-dropdown.correct { border-color: var(--green); background-color: var(--green-light); color: var(--green); }
+.match-dropdown.wrong { border-color: var(--red); background-color: var(--red-light); color: var(--red); }
+
+/* SCORE BAR */
+.section-score { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.section-score-label { font-size: 12px; color: var(--ink-muted); font-weight: 500; }
+.section-score-bar { flex: 1; min-width: 100px; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+.section-score-fill { height: 100%; background: var(--teal); border-radius: 3px; transition: width 0.5s ease; width: 0%; }
+.section-score-num { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--teal); font-weight: 500; }
+
+/* SUMMARY */
+.para-completion { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.25rem; font-size: 13px; line-height: 2.2; color: var(--ink); margin-bottom: 1rem; }
+.check-all-btn { width: 100%; padding: 10px; border: 1.5px solid var(--blue); border-radius: 8px; background: var(--blue); color: white; font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 0.5rem; transition: all 0.15s; letter-spacing: 0.03em; }
+.check-all-btn:hover { background: #153d7a; }
+
+/* ENDINGS */
+.endings-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 0.9rem 1.1rem; margin-bottom: 1rem; font-size: 13px; color: var(--ink-soft); line-height: 1.8; }
+.endings-box strong { font-weight: 600; color: var(--ink); }
+
+footer { text-align: center; padding: 2rem; font-size: 11px; color: var(--ink-muted); letter-spacing: 0.05em; border-top: 1px solid var(--border); }
+
+
+/* ESL CONNECT visual template override */
+:root{
+  --bg:#f7f3e8;
+  --surface:#ffffff;
+  --surface2:#f7f3e8;
+  --ink:#132238;
+  --ink-soft:#284b63;
+  --ink-muted:#6f7778;
+  --border:rgba(19,34,56,.14);
+  --border-light:rgba(19,34,56,.09);
+  --blue:#284b63;
+  --blue-light:#eef4f4;
+  --blue-mid:#3c6e71;
+  --teal:#3c6e71;
+  --teal-light:#eef4f4;
+  --amber:#d96c4a;
+  --amber-light:#f7f3e8;
+  --red:#a6422b;
+  --red-light:#fdecea;
+  --green:#236147;
+  --green-light:#e8f5ed;
+  --coral:#d96c4a;
+}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);}
+.site-header{background:linear-gradient(135deg,#132238,#284b63);border-bottom:0;padding:34px 22px;}
+.site-header-inner{max-width:1120px;align-items:center;}
+.header-title-group::before{content:'ESL CONNECT · IELTS';display:inline-block;background:var(--coral);color:#fff;font-weight:700;padding:8px 12px;border-radius:12px;margin-bottom:14px;letter-spacing:.3px;font-size:14px;}
+.header-title-group h1{font-family:Arial,Helvetica,sans-serif;font-size:clamp(2rem,4vw,3.35rem);line-height:1.05;color:#fff;font-weight:700;margin:0 0 10px;}
+.header-title-group p{font-size:1.05rem;letter-spacing:0;text-transform:none;color:rgba(255,255,255,.92);max-width:760px;}
+.header-timer-box,.header-score{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);border-radius:18px;padding:12px 16px;box-shadow:0 10px 24px rgba(0,0,0,.15);}
+.timer-label,.score-label{color:rgba(255,255,255,.75);letter-spacing:.08em;}
+.timer-display,.score-display{color:#fff;font-family:Arial,Helvetica,sans-serif;font-weight:700;}
+.passage-tabs{background:#132238;padding:0 22px;border-bottom:0;}
+.passage-tabs-inner{max-width:1120px;gap:8px;padding-bottom:10px;}
+.ptab{background:rgba(255,255,255,.08);border-radius:14px;color:rgba(255,255,255,.72);border-bottom:0;margin:0;padding:12px 16px;font-family:Arial,Helvetica,sans-serif;}
+.ptab:hover{background:rgba(255,255,255,.14);color:#fff;}
+.ptab.active{background:var(--coral);color:#fff;border-bottom:0;}
+.main-wrap{max-width:1120px;padding:24px 18px 46px;gap:22px;}
+.passage-panel,.q-block,.section-score{border-radius:24px;border:1px solid rgba(19,34,56,.12);box-shadow:0 10px 26px rgba(19,34,56,.08);overflow:hidden;background:#fff;}
+.passage-panel-header,.q-block-header{background:#f7f3e8;border-bottom:1px solid rgba(19,34,56,.12);padding:16px 20px;}
+.passage-panel-title{font-family:Arial,Helvetica,sans-serif;color:#284b63;font-size:1.05rem;font-weight:700;}
+.passage-tag{background:#eef4f4;color:#3c6e71;border:1px solid rgba(60,110,113,.25);border-radius:999px;}
+.passage-body{font-family:Georgia,'Times New Roman',serif;font-size:15px;line-height:1.85;padding:22px;color:#283a45;}
+.passage-body h3{font-family:Arial,Helvetica,sans-serif;color:#132238;font-size:1.45rem;}
+.passage-num{color:#d96c4a;}
+.q-block-title{color:#284b63;letter-spacing:.08em;}
+.q-block-body{padding:18px 20px;}
+.question-item{background:#fbfaf6;border:1px solid rgba(19,34,56,.08);border-radius:16px;padding:14px;margin-bottom:12px;}
+.question-item:last-child{border-bottom:1px solid rgba(19,34,56,.08);margin-bottom:0;padding-bottom:14px;}
+.q-number{color:#3c6e71;font-weight:700;}
+.mcq-opt,.tfng-btn,.reveal-btn,.match-dropdown,.inline-input{font-family:Arial,Helvetica,sans-serif;}
+.mcq-opt{border-radius:12px;background:#fff;}
+.mcq-opt:hover:not(:disabled),.tfng-btn:hover:not(:disabled),.reveal-btn:hover{background:#f7f3e8;border-color:#3c6e71;}
+.check-all-btn{background:#3c6e71;border-color:#3c6e71;border-radius:12px;}
+.check-all-btn:hover{background:#284b63;}
+.section-score{background:#fff;padding:16px 20px;}
+.section-score-fill{background:#3c6e71;}
+.section-score-num{color:#3c6e71;font-family:Arial,Helvetica,sans-serif;font-weight:700;}
+.para-completion,.endings-box{background:#f7f3e8;border-radius:16px;}
+.esl-key-toggle{max-width:1120px;margin:18px auto 0;padding:0 18px;}
+.esl-key-toggle button{border:0;background:#3c6e71;color:#fff;font-weight:700;padding:10px 14px;border-radius:12px;cursor:pointer;}
+.esl-key-toggle button:hover{background:#284b63;}
+.answer-key-panel{display:none;max-width:1120px;margin:12px auto 0;padding:0 18px;}
+.answer-key-panel.show{display:block;}
+.answer-key-card{background:#fff;border-radius:24px;border:1px solid rgba(19,34,56,.12);box-shadow:0 10px 26px rgba(19,34,56,.08);padding:20px;}
+.answer-key-card h2{margin:0 0 12px;color:#284b63;}
+.answer-key-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.answer-key-grid div{background:#fbfaf6;border-radius:16px;padding:14px;border:1px solid rgba(19,34,56,.08);}
+.answer-key-grid strong{color:#3c6e71;}
+@media(max-width:900px){.answer-key-grid{grid-template-columns:1fr}.passage-panel{position:static;max-height:none}.passage-body{max-height:none}}
+
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="header-title-group">
+      <h1>Full Interactive IELTS Reading Test</h1>
+      <p>ESL CONNECT · Academic Reading · 3 Passages · 40 Questions · 60 minutes</p>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <div class="header-score">
+        <div class="score-label">Score</div>
+        <div class="score-display" id="global-score">0 / 40</div>
+      </div>
+      <div class="header-timer-box">
+        <div class="timer-label">Time Remaining</div>
+        <div class="timer-display" id="timer">59:46</div>
+      </div>
+      <button onclick="resetTest()" style="padding:8px 14px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;background:transparent;color:#a09880;font-family:&#39;Outfit&#39;,sans-serif;font-size:11px;font-weight:500;cursor:pointer;letter-spacing:0.06em;text-transform:uppercase;transition:all 0.15s;" onmouseover="this.style.background=&#39;rgba(255,255,255,0.08)&#39;;this.style.color=&#39;#fdfcf9&#39;" onmouseout="this.style.background=&#39;transparent&#39;;this.style.color=&#39;#a09880&#39;">↺ Reset</button>
+    </div>
+  </div>
+</header>
+
+<nav class="passage-tabs">
+  <div class="passage-tabs-inner">
+    <button class="ptab active" onclick="switchPassage(1,this)">Passage 1 · Rooftop Farming</button>
+    <button class="ptab" onclick="switchPassage(2,this)">Passage 2 · Working Together</button>
+    <button class="ptab" onclick="switchPassage(3,this)">Passage 3 · The Future of Museums</button>
+  </div>
+</nav>
+
+<div class="esl-key-toggle">
+  <button onclick="document.getElementById('answerKeyPanel').classList.toggle('show')">Reveal / hide full answer key</button>
+</div>
+<div class="answer-key-panel" id="answerKeyPanel">
+  <div class="answer-key-card">
+    <h2>Full answer key</h2>
+    <div class="answer-key-grid">
+      <div><strong>Passage 1</strong><br>1 B, 2 C, 3 C, 4 D, 5 C<br>6 nutrients, 7 birds, 8 assessment, 9 analysis<br>10 FALSE, 11 TRUE, 12 FALSE, 13 TRUE</div>
+      <div><strong>Passage 2</strong><br>14 D, 15 H, 16 B, 17 G, 18 C<br>19 diversity, 20 narrow, 21 disagreement, 22 harmony, 23 respect<br>24 C, 25 B, 26 C</div>
+      <div><strong>Passage 3</strong><br>27 YES, 28 NO, 29 YES, 30 NO, 31 NO, 32 YES<br>33 C, 34 D, 35 B, 36 C<br>37 D, 38 A, 39 C, 40 B</div>
+    </div>
+  </div>
+</div>
+
+
+<div class="main-wrap">
+
+  <!-- PASSAGE TEXT -->
+  <div class="passage-panel">
+    <div class="passage-panel-header">
+      <div class="passage-panel-title" id="passage-heading">Reading Passage 1</div>
+      <span class="passage-tag" id="passage-time">20 minutes</span>
+    </div>
+    <div class="passage-body">
+
+      <div class="passage-section active" id="ptext-1">
+        <div class="passage-num">Passage 1</div>
+        <h3>The Growth of Rooftop Farming</h3>
+        <p>In many large cities, open land is limited, expensive, or already heavily developed. As urban populations grow, planners and residents are looking for new ways to produce food close to where people live. One solution that has attracted increasing attention is rooftop farming, in which the tops of buildings are used to grow vegetables, herbs, fruit, and sometimes even keep bees or small livestock. Although the idea may seem modern, the use of roofs for cultivation has a longer history than many people realise. What has changed in recent years is the range of technologies and urban needs that have made rooftop farming more practical and more attractive.</p>
+        <p>Rooftop farming exists in several forms. At the simplest level, a building may have containers or raised beds where crops are grown in soil. More advanced systems use hydroponics, in which plants grow in water enriched with <strong>nutrients</strong>, or aeroponics, where roots are sprayed with a fine mist. These techniques can reduce the overall weight placed on a roof and allow growers to control water and nutrient supply more precisely. In some cities, commercial-scale rooftop greenhouses have been built to supply local markets and restaurants throughout much of the year.</p>
+        <p>Supporters of rooftop farming claim that it offers a number of advantages. Food produced on rooftops does not need to be transported over long distances, which may reduce emissions associated with delivery. Rooftop gardens can also make use of rainwater, reduce the amount of heat absorbed by buildings, and improve insulation. In addition, they may contribute to urban biodiversity by providing habitats for insects and <strong>birds</strong>. For residents, these spaces can have educational and social value, especially in neighbourhoods with limited access to parks or fresh produce.</p>
+        <p>However, rooftop farming is not a simple solution to urban food security. Not every building can support the additional weight of soil, water, equipment, and people. Structural <strong>assessments</strong> are usually required before a roof can be used for agriculture, and in some cases expensive reinforcement is necessary. Access can also be difficult. Lifts may be too small to transport materials efficiently, and some rooftops are awkward or unsafe for regular use. For these reasons, many promising projects remain small in scale.</p>
+        <p>Another challenge concerns economics. While rooftop farms can generate high-value produce, they often involve substantial start-up costs. Waterproofing, drainage, irrigation, safety barriers, and specialised growing systems all require investment. Labour costs may also be relatively high compared with conventional farming, especially where work must be done manually in restricted spaces. As a result, rooftop farming is often more viable when linked to premium markets, restaurants, community programmes, or public funding.</p>
+        <p>There are also important environmental questions. Although rooftop farming can shorten supply chains, its overall sustainability depends on how it is managed. Heated greenhouses, artificial lighting, and pumping systems may consume significant energy. Materials used in construction can also have a substantial environmental footprint. Some researchers therefore argue that rooftop farming should not be judged simply by whether food is grown locally, but by a broader <strong>analysis</strong> that includes energy use, water efficiency, and total output.</p>
+        <p>Despite these limitations, many cities continue to experiment with rooftop agriculture. Some municipal governments offer incentives or include rooftop growing spaces in new building policies. Others view such projects as part of wider efforts to create greener and more resilient urban environments. Even when rooftop farms produce only a modest quantity of food, they may still influence how citizens think about food systems, waste, water, and urban land use.</p>
+        <p>In the future, rooftop farming is unlikely to replace conventional agriculture. Cities will still depend heavily on food grown elsewhere. Yet rooftop cultivation may become an increasingly valuable complement, particularly where it is integrated thoughtfully into building design and local communities. Its importance may lie not only in the crops it yields, but also in the new relationship it encourages between urban life and food production.</p>
+      </div>
+
+      <div class="passage-section" id="ptext-2">
+        <div class="passage-num">Passage 2</div>
+        <h3>Why People Work Better Together</h3>
+        <p><strong>A.</strong> For much of modern history, creativity and achievement have often been described in terms of the exceptional individual: the inventor working alone, the scientist making a breakthrough in isolation, or the artist producing original work through solitary genius. While such figures certainly exist, research in psychology, business, and organisational behaviour increasingly suggests that many of the most effective forms of problem-solving emerge through collaboration. Teams, when structured well, can generate solutions that individuals might not reach by themselves.</p>
+        <p><strong>B.</strong> One reason for this is cognitive diversity. People with different backgrounds, skills, and experiences often approach the same problem in different ways. A designer may focus on usability, an engineer on technical reliability, and a manager on costs or timing. When these perspectives are brought together, a group may examine a wider range of possibilities than any one person would consider alone. This does not guarantee success, but it can reduce the risk of narrow thinking.</p>
+        <p><strong>C.</strong> Collaboration can also improve the quality of decisions by exposing ideas to challenge. Individuals working alone may become attached to early assumptions and fail to notice weaknesses in their own reasoning. In a group, however, proposals can be questioned, refined, or rejected before resources are committed to them. Under the right conditions, disagreement is not a sign of failure but an important part of intellectual progress. The key issue is whether criticism is used constructively rather than personally.</p>
+        <p><strong>D.</strong> Yet teamwork is not automatically beneficial. Groups can perform badly when responsibility is unclear, when strong personalities dominate discussion, or when members conform too quickly to a shared view. One of the best-known dangers is "groupthink", a process in which people suppress doubts in order to preserve harmony or loyalty. In such cases, teams may appear united while actually making poor decisions. Successful collaboration therefore depends not only on bringing people together, but also on creating an environment in which disagreement is safe.</p>
+        <p><strong>E.</strong> Trust plays a central role in this process. Team members are more likely to contribute honestly when they believe they will be respected, even if others disagree with them. This kind of psychological safety encourages people to ask questions, admit uncertainty, and share partially developed ideas. Without it, groups often remain polite but superficial, exchanging information without engaging deeply enough to improve it. Studies of high-performing teams repeatedly show that interpersonal climate is as important as technical expertise.</p>
+        <p><strong>F.</strong> Communication style matters as well. Effective groups do not simply talk more; they exchange information in ways that support shared understanding. This may involve clarifying assumptions, checking that others have understood, or making implicit knowledge more explicit. In complex tasks, teams often fail not because members lack ability, but because they assume others interpret terms and priorities in the same way. Clear communication reduces this risk.</p>
+        <p><strong>G.</strong> Technology has changed the nature of collaboration but has not removed its essential challenges. Digital platforms now allow teams to work across time zones and national borders, sharing documents and ideas almost instantly. This has widened access to expertise, but it can also produce new difficulties. Written messages may be misunderstood, spontaneous conversation may be reduced, and informal social bonds may be weaker in remote settings. As a result, successful virtual collaboration usually requires deliberate coordination rather than simply providing the tools.</p>
+        <p><strong>H.</strong> Another factor is the design of tasks themselves. Not every kind of work benefits equally from teamwork. Routine tasks with clear procedures may be completed more efficiently by individuals, while problems that require innovation, judgment, or the integration of different forms of knowledge are often better suited to collaboration. The value of teamwork therefore depends partly on whether the task actually requires multiple perspectives.</p>
+        <p><strong>I.</strong> The most productive teams are not those without conflict, but those that can manage conflict intelligently. They combine diversity with trust, challenge with respect, and coordination with flexibility. In this sense, collaboration is neither a natural miracle nor a bureaucratic necessity. It is a skill that organisations must learn to design, support, and sustain.</p>
+      </div>
+
+      <div class="passage-section" id="ptext-3">
+        <div class="passage-num">Passage 3</div>
+        <h3>The Future of Museums</h3>
+        <p>Museums were once widely understood as places that collected, preserved, and displayed valuable objects. Their role seemed clear: to care for physical artefacts and present them to the public in ways that promoted knowledge and appreciation. In recent decades, however, museums have undergone significant changes. They are still guardians of collections, but they are also expected to educate broader audiences, engage with communities, address difficult histories, and adopt digital technologies. As a result, the question of what a museum should be has become more complex.</p>
+        <p>Historically, many museums reflected the values of the institutions that founded them. National museums, for example, often presented objects in ways that supported particular narratives about culture, progress, or identity. Collections were not neutral. They were shaped by decisions about what was worth collecting, how items should be classified, and which stories should be told. In some cases, those stories excluded alternative perspectives or overlooked the unequal conditions under which objects had been acquired.</p>
+        <p>This has led to growing debate about representation. Communities whose histories were neglected or misinterpreted have increasingly challenged museums to reconsider how exhibitions are designed and whose voices are included. Curators are now more likely to consult source communities, collaborate with living artists or descendants, and acknowledge uncertainty or disagreement in interpretation. For some institutions, this means moving away from the idea that museums simply deliver expert knowledge to passive visitors.</p>
+        <p>Another issue concerns restitution, the return of objects acquired through colonialism, war, or other forms of coercion. Some argue that museums holding such collections have a moral duty to return them, particularly when there is clear evidence of wrongful removal. Others raise practical and legal questions, including how ownership should be determined, whether all cases are comparable, and how museums can continue to fulfil their educational role if major collections are reduced. The debate is often presented as a conflict between universal access and historical justice, though in practice it involves many intermediate positions.</p>
+        <p>At the same time, museums are experimenting with new forms of engagement. Interactive exhibits, public programmes, workshops, and digital installations are intended to make visits more participatory. Online collections and virtual tours allow people to explore material remotely, sometimes in greater detail than would be possible in a gallery. Yet digital access does not simply replace the physical museum. Many visitors still value the experience of encountering original objects in a shared public space, and museums continue to rely on their buildings as places for learning, discussion, and cultural presence.</p>
+        <p>Financial pressure has added further complexity. Museums in many countries face rising costs, uncertain public funding, and increasing expectations from audiences and policymakers. Some have responded by expanding retail spaces, cafés, venue hire, and commercial partnerships. Supporters see this as a realistic adaptation that helps institutions survive. Critics worry that commercial priorities can distort curatorial decisions, encouraging spectacular exhibitions or visitor numbers at the expense of scholarship and care.</p>
+        <p>Questions of trust are also increasingly important. In a world saturated with information, museums are often seen as reliable public institutions. However, trust cannot be assumed. It must be earned through transparency about methods, provenance, interpretation, and institutional history. A museum that acknowledges the limits of its knowledge may, in some cases, appear more credible than one that presents simplified certainty.</p>
+        <p>The museum of the future, then, is unlikely to be defined by a single model. Some institutions will remain strongly object-centred, while others will act more openly as forums for debate, community collaboration, and critical reflection. What unites them is the challenge of balancing preservation with change. Museums must care for material evidence of the past while responding to the ethical, social, and technological demands of the present.</p>
+        <p>For this reason, the future of museums will depend not only on what they contain, but on how they justify their role in public life. Their authority will rest less on possession alone and more on the quality of their relationships: with collections, with communities, and with the histories they are willing to confront.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- QUESTIONS -->
+  <div class="questions-panel">
+
+    <!-- PASSAGE 1 -->
+    <div class="q-section active" id="qs-1">
+      <div class="section-score">
+        <span class="section-score-label">Passage 1 · Questions 1–13</span>
+        <div class="section-score-bar"><div class="section-score-fill" id="p1-bar"></div></div>
+        <span class="section-score-num" id="p1-score">0 / 13</span>
+      </div>
+      <div class="q-block">
+        <div class="q-block-header"><div class="q-block-title">Questions 1–5</div><div class="q-block-subtitle">Choose the correct letter, A, B, C or D.</div></div>
+        <div class="q-block-body" id="p1-mcq"><div class="question-item"><div class="q-number">Question 1</div><div class="q-text">What is the main reason rooftop farming has attracted attention in cities?</div><div class="mcq-options" data-qi="1-1"><button class="mcq-opt" onclick="answerMCQ(this,0,1,1,1)" data-idx="0"><span class="opt-letter">A</span>Cities have too much unused farmland</button><button class="mcq-opt" onclick="answerMCQ(this,1,1,1,1)" data-idx="1"><span class="opt-letter">B</span>Urban areas need new ways to grow food locally</button><button class="mcq-opt" onclick="answerMCQ(this,2,1,1,1)" data-idx="2"><span class="opt-letter">C</span>Most city residents want to keep livestock</button><button class="mcq-opt" onclick="answerMCQ(this,3,1,1,1)" data-idx="3"><span class="opt-letter">D</span>Traditional farming has completely disappeared</button></div><div class="q-feedback" id="fb-1-1"></div></div><div class="question-item"><div class="q-number">Question 2</div><div class="q-text">What is said about hydroponics and aeroponics?</div><div class="mcq-options" data-qi="1-2"><button class="mcq-opt" onclick="answerMCQ(this,0,2,1,2)" data-idx="0"><span class="opt-letter">A</span>They are older than soil-based methods</button><button class="mcq-opt" onclick="answerMCQ(this,1,2,1,2)" data-idx="1"><span class="opt-letter">B</span>They can make rooftop farming less practical</button><button class="mcq-opt" onclick="answerMCQ(this,2,2,1,2)" data-idx="2"><span class="opt-letter">C</span>They allow more precise control of growing conditions</button><button class="mcq-opt" onclick="answerMCQ(this,3,2,1,2)" data-idx="3"><span class="opt-letter">D</span>They are used only for flowers</button></div><div class="q-feedback" id="fb-1-2"></div></div><div class="question-item"><div class="q-number">Question 3</div><div class="q-text">According to the passage, rooftop farming may help buildings by</div><div class="mcq-options" data-qi="1-3"><button class="mcq-opt" onclick="answerMCQ(this,0,2,1,3)" data-idx="0"><span class="opt-letter">A</span>increasing transport costs</button><button class="mcq-opt" onclick="answerMCQ(this,1,2,1,3)" data-idx="1"><span class="opt-letter">B</span>absorbing more heat from the sun</button><button class="mcq-opt" onclick="answerMCQ(this,2,2,1,3)" data-idx="2"><span class="opt-letter">C</span>improving insulation</button><button class="mcq-opt" onclick="answerMCQ(this,3,2,1,3)" data-idx="3"><span class="opt-letter">D</span>replacing the need for windows</button></div><div class="q-feedback" id="fb-1-3"></div></div><div class="question-item"><div class="q-number">Question 4</div><div class="q-text">Why do many rooftop farming projects remain limited in size?</div><div class="mcq-options" data-qi="1-4"><button class="mcq-opt" onclick="answerMCQ(this,0,3,1,4)" data-idx="0"><span class="opt-letter">A</span>Urban residents dislike local food</button><button class="mcq-opt" onclick="answerMCQ(this,1,3,1,4)" data-idx="1"><span class="opt-letter">B</span>Roofs are always unsuitable for agriculture</button><button class="mcq-opt" onclick="answerMCQ(this,2,3,1,4)" data-idx="2"><span class="opt-letter">C</span>Governments ban commercial production</button><button class="mcq-opt" onclick="answerMCQ(this,3,3,1,4)" data-idx="3"><span class="opt-letter">D</span>Buildings may have structural and access limitations</button></div><div class="q-feedback" id="fb-1-4"></div></div><div class="question-item"><div class="q-number">Question 5</div><div class="q-text">What is the writer's overall view of rooftop farming?</div><div class="mcq-options" data-qi="1-5"><button class="mcq-opt" onclick="answerMCQ(this,0,2,1,5)" data-idx="0"><span class="opt-letter">A</span>It will soon replace ordinary agriculture</button><button class="mcq-opt" onclick="answerMCQ(this,1,2,1,5)" data-idx="1"><span class="opt-letter">B</span>It is useless unless it produces large amounts of food</button><button class="mcq-opt" onclick="answerMCQ(this,2,2,1,5)" data-idx="2"><span class="opt-letter">C</span>It can be valuable, but mainly as a complement to other food systems</button><button class="mcq-opt" onclick="answerMCQ(this,3,2,1,5)" data-idx="3"><span class="opt-letter">D</span>It should be used only in wealthy cities</button></div><div class="q-feedback" id="fb-1-5"></div></div></div>
+      </div>
+      <div class="q-block">
+        <div class="q-block-header"><div class="q-block-title">Questions 6–9</div><div class="q-block-subtitle">Complete the sentences. Choose ONE WORD ONLY from the passage.</div></div>
+        <div class="q-block-body" id="p1-gap"><div class="question-item"><div class="q-number">Question 6</div>
+      <div class="sentence-gap-wrap">In hydroponic systems, plants grow in water containing <span class="inline-gap"><input class="inline-input" id="gi-1-6" placeholder="type answer" autocomplete="off" spellcheck="false"></span> .</div>
+      <div class="answer-row" style="margin-top:8px;">
+        <button class="reveal-btn" onclick="checkGap(1,6)">Check</button>
+        <span class="correct-badge" id="cb-1-6">✓ Correct</span>
+        <span class="wrong-badge" id="wb-1-6"></span>
+        <span class="answer-reveal" id="ar-1-6">Answer: nutrients</span>
+      </div>
+      <div style="font-size:11px;color:var(--ink-muted);margin-top:4px;">See paragraph 2 — water is 'enriched with ___'.</div></div><div class="question-item"><div class="q-number">Question 7</div>
+      <div class="sentence-gap-wrap">Rooftop gardens may create habitats for insects and <span class="inline-gap"><input class="inline-input" id="gi-1-7" placeholder="type answer" autocomplete="off" spellcheck="false"></span> .</div>
+      <div class="answer-row" style="margin-top:8px;">
+        <button class="reveal-btn" onclick="checkGap(1,7)">Check</button>
+        <span class="correct-badge" id="cb-1-7">✓ Correct</span>
+        <span class="wrong-badge" id="wb-1-7"></span>
+        <span class="answer-reveal" id="ar-1-7">Answer: birds</span>
+      </div>
+      <div style="font-size:11px;color:var(--ink-muted);margin-top:4px;">See paragraph 3 — biodiversity includes insects and ___.</div></div><div class="question-item"><div class="q-number">Question 8</div>
+      <div class="sentence-gap-wrap">Before using a roof for farming, a structural <span class="inline-gap"><input class="inline-input" id="gi-1-8" placeholder="type answer" autocomplete="off" spellcheck="false"></span> is usually needed.</div>
+      <div class="answer-row" style="margin-top:8px;">
+        <button class="reveal-btn" onclick="checkGap(1,8)">Check</button>
+        <span class="correct-badge" id="cb-1-8">✓ Correct</span>
+        <span class="wrong-badge" id="wb-1-8"></span>
+        <span class="answer-reveal" id="ar-1-8">Answer: assessment</span>
+      </div>
+      <div style="font-size:11px;color:var(--ink-muted);margin-top:4px;">See paragraph 4 — 'Structural ___ are usually required'.</div></div><div class="question-item"><div class="q-number">Question 9</div>
+      <div class="sentence-gap-wrap">Some researchers say rooftop farming should be judged by a broader <span class="inline-gap"><input class="inline-input" id="gi-1-9" placeholder="type answer" autocomplete="off" spellcheck="false"></span> of its sustainability.</div>
+      <div class="answer-row" style="margin-top:8px;">
+        <button class="reveal-btn" onclick="checkGap(1,9)">Check</button>
+        <span class="correct-badge" id="cb-1-9">✓ Correct</span>
+        <span class="wrong-badge" id="wb-1-9"></span>
+        <span class="answer-reveal" id="ar-1-9">Answer: analysis</span>
+      </div>
+      <div style="font-size:11px;color:var(--ink-muted);margin-top:4px;">See paragraph 6 — a broader ___ includes energy use and water efficiency.</div></div></div>
+      </div>
+      <div class="q-block">
+        <div class="q-block-header"><div class="q-block-title">Questions 10–13</div><div class="q-block-subtitle">TRUE / FALSE / NOT GIVEN</div></div>
+        <div class="q-block-body" id="p1-tfng"><div class="question-item"><div class="q-number">Question 10</div><div class="q-text">Rooftop farming is a completely new idea developed in recent years.</div><div class="tfng-options"><button class="tfng-btn" onclick="answerTFNG(this,&#39;TRUE&#39;,&#39;FALSE&#39;,1,10)">TRUE</button><button class="tfng-btn" onclick="answerTFNG(this,&#39;FALSE&#39;,&#39;FALSE&#39;,1,10)">FALSE</button><button class="tfng-btn" onclick="answerTFNG(this,&#39;NOT GIVEN&#39;,&#39;FALSE&#39;,1,10)">NOT GIVEN</button></div><div class="q-feedback" id="tfb-1-10"></div></div><div class="question-item"><div class="q-number">Question 11</div><div class="q-text">Some commercial rooftop greenhouses supply local restaurants.</div><div class="tfng-options"><button class="tfng-btn" onclick="answerTFNG(this,&#39;TRUE&#39;,&#39;TRUE&#39;,1,11)">TRUE</button><button class="tfng-btn" onclick="answerTFNG(this,&#39;FALSE&#39;,&#39;TRUE&#39;,1,11)">FALSE</button><button class="tfng-btn" onclick="answerTFNG(this,&#39;NOT GIVEN&#39;,&#39;TRUE&#39;,1,11)">NOT GIVEN</button></div><div class="q-feedback" id="tfb-1-11"></div></div><div class="question-item"><div class="q-number">Question 12</div><div class="q-text">Rooftop farming is always cheaper than conventional farming.</div><div class="tfng-options"><button class="tfng-btn" onclick="answerTFNG(this,&#39;TRUE&#39;,&#39;FALSE&#39;,1,12)">TRUE</button><button class="tfng-btn" onclick="answerTFNG(this,&#39;FALSE&#39;,&#39;FALSE&#39;,1,12)">FALSE</button><button class="tfng-btn" onclick="answerTFNG(this,&#39;NOT GIVEN&#39;,&#39;FALSE&#39;,1,12)">NOT GIVEN</button></div><div class="q-feedback" id="tfb-1-12"></div></div><div class="question-item"><div class="q-number">Question 13</div><div class="q-text">Some city governments actively support rooftop agriculture.</div><div class="tfng-options"><button class="tfng-btn" onclick="answerTFNG(this,&#39;TRUE&#39;,&#39;TRUE&#39;,1,13)">TRUE</button><button class="tfng-btn" onclick="answerTFNG(this,&#39;FALSE&#39;,&#39;TRUE&#39;,1,13)">FALSE</button><button class="tfng-btn" onclick="answerTFNG(this,&#39;NOT GIVEN&#39;,&#39;TRUE&#39;,1,13)">NOT GIVEN</button></div><div class="q-feedback" id="tfb-1-13"></div></div></div>
+      </div>
+    </div>
+
+    <!-- PASSAGE 2 -->
+    <div class="q-section" id="qs-2">
+      <div class="section-score">
+        <span class="section-score-label">Passage 2 · Questions 14–26</span>
+        <div class="section-score-bar"><div class="section-score-fill" id="p2-bar"></div></div>
+        <span class="section-score-num" id="p2-score">0 / 13</span>
+      </div>
+      <div class="q-block">
+        <div class="q-block-header"><div class="q-block-title">Questions 14–18</div><div class="q-block-subtitle">Which paragraph (A–I) contains the following information?</div></div>
+        <div class="q-block-body" id="p2-para"><div class="question-item"><div class="q-number">Question 14</div><div class="q-text">a warning about the danger of outward agreement in a group</div>
+      <div class="answer-row" style="margin-top:6px;">
+        <select class="match-dropdown" id="pm-2-14"><option value="">Select</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H</option><option value="I">I</option></select>
+        <button class="reveal-btn" onclick="checkParaMatch(2,14)">Check</button>
+        <span class="correct-badge" id="pcb-2-14">✓ Correct</span>
+        <span class="wrong-badge" id="pwb-2-14"></span>
+        <span class="answer-reveal" id="par-2-14">Answer: D</span>
+      </div>
+      <div class="q-feedback" id="pfb-2-14" style="margin-top:6px;"></div></div><div class="question-item"><div class="q-number">Question 15</div><div class="q-text">the idea that some types of work are more suitable for teamwork than others</div>
+      <div class="answer-row" style="margin-top:6px;">
+        <select class="match-dropdown" id="pm-2-15"><option value="">Select</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H</option><option value="I">I</option></select>
+        <button class="reveal-btn" onclick="checkParaMatch(2,15)">Check</button>
+        <span class="correct-badge" id="pcb-2-15">✓ Correct</span>
+        <span class="wrong-badge" id="pwb-2-15"></span>
+        <span class="answer-reveal" id="par-2-15">Answer: H</span>
+      </div>
+      <div class="q-feedback" id="pfb-2-15" style="margin-top:6px;"></div></div><div class="question-item"><div class="q-number">Question 16</div><div class="q-text">a point about how different professional viewpoints can improve problem-solving</div>
+      <div class="answer-row" style="margin-top:6px;">
+        <select class="match-dropdown" id="pm-2-16"><option value="">Select</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H</option><option value="I">I</option></select>
+        <button class="reveal-btn" onclick="checkParaMatch(2,16)">Check</button>
+        <span class="correct-badge" id="pcb-2-16">✓ Correct</span>
+        <span class="wrong-badge" id="pwb-2-16"></span>
+        <span class="answer-reveal" id="par-2-16">Answer: B</span>
+      </div>
+      <div class="q-feedback" id="pfb-2-16" style="margin-top:6px;"></div></div><div class="question-item"><div class="q-number">Question 17</div><div class="q-text">an explanation that collaboration in digital settings needs deliberate management</div>
+      <div class="answer-row" style="margin-top:6px;">
+        <select class="match-dropdown" id="pm-2-17"><option value="">Select</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H</option><option value="I">I</option></select>
+        <button class="reveal-btn" onclick="checkParaMatch(2,17)">Check</button>
+        <span class="correct-badge" id="pcb-2-17">✓ Correct</span>
+        <span class="wrong-badge" id="pwb-2-17"></span>
+        <span class="answer-reveal" id="par-2-17">Answer: G</span>
+      </div>
+      <div class="q-feedback" id="pfb-2-17" style="margin-top:6px;"></div></div><div class="question-item"><div class="q-number">Question 18</div><div class="q-text">a claim that people working alone may fail to see problems in their own ideas</div>
+      <div class="answer-row" style="margin-top:6px;">
+        <select class="match-dropdown" id="pm-2-18"><option value="">Select</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option><option value="H">H</option><option value="I">I</option></select>
+        <button class="reveal-btn" onclick="checkParaMatch(2,18)">Check</button>
+        <span class="correct-badge" id="pcb-2-18">✓ Correct</span>
+        <span class="wrong-badge" id="pwb-2-18"></span>
+        <span class="answer-reveal" id="par-2-18">Answer: C</span>
+      </div>
+      <div class="q-feedback" id="pfb-2-18" style="margin-top:6px;"></div></div></div>
+      </div>
+      <div class="q-block">
+        <div class="q-block-header"><div class="q-block-title">Questions 19–23</div><div class="q-block-subtitle">Complete the summary. Choose ONE WORD ONLY from the passage.</div></div>
+        <div class="q-block-body" id="p2-summary"><div class="question-item" style="border-bottom: none;"><div class="para-completion">Collaboration can be effective because teams may benefit from cognitive <span class="inline-gap"><input class="inline-input" id="si-2-19" placeholder="19" autocomplete="off" spellcheck="false" style="width:110px;"></span>. Different members may contribute different forms of knowledge and help avoid excessively <span class="inline-gap"><input class="inline-input" id="si-2-20" placeholder="20" autocomplete="off" spellcheck="false" style="width:110px;"></span> thinking. Groups can also improve ideas through constructive <span class="inline-gap"><input class="inline-input" id="si-2-21" placeholder="21" autocomplete="off" spellcheck="false" style="width:110px;"></span>. However, teamwork can fail when members hide doubts in order to maintain <span class="inline-gap"><input class="inline-input" id="si-2-22" placeholder="22" autocomplete="off" spellcheck="false" style="width:110px;"></span>. Researchers also emphasise the importance of psychological safety, since people contribute more openly when they feel they will be treated with <span class="inline-gap"><input class="inline-input" id="si-2-23" placeholder="23" autocomplete="off" spellcheck="false" style="width:110px;"></span>.</div><button class="check-all-btn" onclick="checkSummary(2)">Check All Answers</button><div class="q-feedback" id="sfb-2" style="margin-top:8px;"></div></div></div>
+      </div>
+      <div class="q-block">
+        <div class="q-block-header"><div class="q-block-title">Questions 24–26</div><div class="q-block-subtitle">Choose the correct letter, A, B, C or D.</div></div>
+        <div class="q-block-body" id="p2-mcq"><div class="question-item"><div class="q-number">Question 24</div><div class="q-text">What does the writer say about trust in teams?</div><div class="mcq-options" data-qi="2-24"><button class="mcq-opt" onclick="answerMCQ(this,0,2,2,24)" data-idx="0"><span class="opt-letter">A</span>It matters less than technical skill</button><button class="mcq-opt" onclick="answerMCQ(this,1,2,2,24)" data-idx="1"><span class="opt-letter">B</span>It discourages people from asking questions</button><button class="mcq-opt" onclick="answerMCQ(this,2,2,2,24)" data-idx="2"><span class="opt-letter">C</span>It helps people speak honestly and take intellectual risks</button><button class="mcq-opt" onclick="answerMCQ(this,3,2,2,24)" data-idx="3"><span class="opt-letter">D</span>It only matters in scientific work</button></div><div class="q-feedback" id="fb-2-24"></div></div><div class="question-item"><div class="q-number">Question 25</div><div class="q-text">According to the passage, remote collaboration can be difficult because</div><div class="mcq-options" data-qi="2-25"><button class="mcq-opt" onclick="answerMCQ(this,0,1,2,25)" data-idx="0"><span class="opt-letter">A</span>digital tools make cooperation impossible</button><button class="mcq-opt" onclick="answerMCQ(this,1,1,2,25)" data-idx="1"><span class="opt-letter">B</span>written communication may be misunderstood</button><button class="mcq-opt" onclick="answerMCQ(this,2,1,2,25)" data-idx="2"><span class="opt-letter">C</span>international teams never share expertise</button><button class="mcq-opt" onclick="answerMCQ(this,3,1,2,25)" data-idx="3"><span class="opt-letter">D</span>people in virtual teams work too quickly</button></div><div class="q-feedback" id="fb-2-25"></div></div><div class="question-item"><div class="q-number">Question 26</div><div class="q-text">Which statement best matches the writer's overall argument?</div><div class="mcq-options" data-qi="2-26"><button class="mcq-opt" onclick="answerMCQ(this,0,2,2,26)" data-idx="0"><span class="opt-letter">A</span>Teamwork is always better than individual work</button><button class="mcq-opt" onclick="answerMCQ(this,1,2,2,26)" data-idx="1"><span class="opt-letter">B</span>Collaboration succeeds automatically when talented people meet</button><button class="mcq-opt" onclick="answerMCQ(this,2,2,2,26)" data-idx="2"><span class="opt-letter">C</span>Successful teamwork depends on structure, trust, and the right task</button><button class="mcq-opt" onclick="answerMCQ(this,3,2,2,26)" data-idx="3"><span class="opt-letter">D</span>Conflict should always be avoided in teams</button></div><div class="q-feedback" id="fb-2-26"></div></div></div>
+      </div>
+    </div>
+
+    <!-- PASSAGE 3 -->
+    <div class="q-section" id="qs-3">
+      <div class="section-score">
+        <span class="section-score-label">Passage 3 · Questions 27–40</span>
+        <div class="section-score-bar"><div class="section-score-fill" id="p3-bar"></div></div>
+        <span class="section-score-num" id="p3-score">0 / 14</span>
+      </div>
+      <div class="q-block">
+        <div class="q-block-header"><div class="q-block-title">Questions 27–32</div><div class="q-block-subtitle">YES / NO / NOT GIVEN</div></div>
+        <div class="q-block-body" id="p3-yesno"><div class="question-item"><div class="q-number">Question 27</div><div class="q-text">Museums are now expected to do more than simply preserve and display objects.</div><div class="tfng-options"><button class="tfng-btn" onclick="answerTFNG(this,&#39;YES&#39;,&#39;YES&#39;,3,27)">YES</button><button class="tfng-btn" onclick="answerTFNG(this,&#39;NO&#39;,&#39;YES&#39;,3,27)">NO</button><button class="tfng-btn" onclick="answerTFNG(this,&#39;NOT GIVEN&#39;,&#39;YES&#39;,3,27)">NOT GIVEN</button></div><div class="q-feedback" id="tfb-3-27"></div></div><div class="question-item"><div class="q-number">Question 28</div><div class="q-text">The writer believes that historical museum collections were completely neutral.</div><div class="tfng-options"><button class="tfng-btn" onclick="answerTFNG(this,&#39;YES&#39;,&#39;NO&#39;,3,28)">YES</button><button class="tfng-btn" onclick="answerTFNG(this,&#39;NO&#39;,&#39;NO&#39;,3,28)">NO</button><button class="tfng-btn" onclick="answerTFNG(this,&#39;NOT GIVEN&#39;,&#39;NO&#39;,3,28)">NOT GIVEN</button></div><div class="q-feedback" id="tfb-3-28"></div></div><div class="question-item"><div class="q-number">Question 29</div><div class="q-text">Some communities have criticised museums for excluding their perspectives.</div><div class="tfng-options"><button class="tfng-btn" onclick="answerTFNG(this,&#39;YES&#39;,&#39;YES&#39;,3,29)">YES</button><button class="tfng-btn" onclick="answerTFNG(this,&#39;NO&#39;,&#39;YES&#39;,3,29)">NO</button><button class="tfng-btn" onclick="answerTFNG(this,&#39;NOT GIVEN&#39;,&#39;YES&#39;,3,29)">NOT GIVEN</button></div><div class="q-feedback" id="tfb-3-29"></div></div><div class="question-item"><div class="q-number">Question 30</div><div class="q-text">The passage says all disputed objects should immediately be returned to their countries of origin.</div><div class="tfng-options"><button class="tfng-btn" onclick="answerTFNG(this,&#39;YES&#39;,&#39;NO&#39;,3,30)">YES</button><button class="tfng-btn" onclick="answerTFNG(this,&#39;NO&#39;,&#39;NO&#39;,3,30)">NO</button><button class="tfng-btn" onclick="answerTFNG(this,&#39;NOT GIVEN&#39;,&#39;NO&#39;,3,30)">NOT GIVEN</button></div><div class="q-feedback" id="tfb-3-30"></div></div><div class="question-item"><div class="q-number">Question 31</div><div class="q-text">Digital access has made physical museum buildings unnecessary.</div><div class="tfng-options"><button class="tfng-btn" onclick="answerTFNG(this,&#39;YES&#39;,&#39;NO&#39;,3,31)">YES</button><button class="tfng-btn" onclick="answerTFNG(this,&#39;NO&#39;,&#39;NO&#39;,3,31)">NO</button><button class="tfng-btn" onclick="answerTFNG(this,&#39;NOT GIVEN&#39;,&#39;NO&#39;,3,31)">NOT GIVEN</button></div><div class="q-feedback" id="tfb-3-31"></div></div><div class="question-item"><div class="q-number">Question 32</div><div class="q-text">The writer suggests that transparency can strengthen public trust in museums.</div><div class="tfng-options"><button class="tfng-btn" onclick="answerTFNG(this,&#39;YES&#39;,&#39;YES&#39;,3,32)">YES</button><button class="tfng-btn" onclick="answerTFNG(this,&#39;NO&#39;,&#39;YES&#39;,3,32)">NO</button><button class="tfng-btn" onclick="answerTFNG(this,&#39;NOT GIVEN&#39;,&#39;YES&#39;,3,32)">NOT GIVEN</button></div><div class="q-feedback" id="tfb-3-32"></div></div></div>
+      </div>
+      <div class="q-block">
+        <div class="q-block-header"><div class="q-block-title">Questions 33–36</div><div class="q-block-subtitle">Choose the correct letter, A, B, C or D.</div></div>
+        <div class="q-block-body" id="p3-mcq"><div class="question-item"><div class="q-number">Question 33</div><div class="q-text">According to the passage, one reason museums are rethinking exhibitions is that</div><div class="mcq-options" data-qi="3-33"><button class="mcq-opt" onclick="answerMCQ(this,0,2,3,33)" data-idx="0"><span class="opt-letter">A</span>visitors no longer care about objects</button><button class="mcq-opt" onclick="answerMCQ(this,1,2,3,33)" data-idx="1"><span class="opt-letter">B</span>museums want to avoid all expert knowledge</button><button class="mcq-opt" onclick="answerMCQ(this,2,2,3,33)" data-idx="2"><span class="opt-letter">C</span>some groups have challenged earlier interpretations</button><button class="mcq-opt" onclick="answerMCQ(this,3,2,3,33)" data-idx="3"><span class="opt-letter">D</span>most collections were recently destroyed</button></div><div class="q-feedback" id="fb-3-33"></div></div><div class="question-item"><div class="q-number">Question 34</div><div class="q-text">What is said about restitution debates?</div><div class="mcq-options" data-qi="3-34"><button class="mcq-opt" onclick="answerMCQ(this,0,3,3,34)" data-idx="0"><span class="opt-letter">A</span>They involve only legal questions</button><button class="mcq-opt" onclick="answerMCQ(this,1,3,3,34)" data-idx="1"><span class="opt-letter">B</span>They are simple and have one obvious solution</button><button class="mcq-opt" onclick="answerMCQ(this,2,3,3,34)" data-idx="2"><span class="opt-letter">C</span>They are usually irrelevant to education</button><button class="mcq-opt" onclick="answerMCQ(this,3,3,3,34)" data-idx="3"><span class="opt-letter">D</span>They include moral, practical, and historical issues</button></div><div class="q-feedback" id="fb-3-34"></div></div><div class="question-item"><div class="q-number">Question 35</div><div class="q-text">Why do some museums develop cafés, retail spaces, and commercial partnerships?</div><div class="mcq-options" data-qi="3-35"><button class="mcq-opt" onclick="answerMCQ(this,0,1,3,35)" data-idx="0"><span class="opt-letter">A</span>To reduce public access</button><button class="mcq-opt" onclick="answerMCQ(this,1,1,3,35)" data-idx="1"><span class="opt-letter">B</span>To respond to financial pressures</button><button class="mcq-opt" onclick="answerMCQ(this,2,1,3,35)" data-idx="2"><span class="opt-letter">C</span>To replace collections with entertainment</button><button class="mcq-opt" onclick="answerMCQ(this,3,1,3,35)" data-idx="3"><span class="opt-letter">D</span>To avoid digital technology</button></div><div class="q-feedback" id="fb-3-35"></div></div><div class="question-item"><div class="q-number">Question 36</div><div class="q-text">What is the writer's view of the museum of the future?</div><div class="mcq-options" data-qi="3-36"><button class="mcq-opt" onclick="answerMCQ(this,0,2,3,36)" data-idx="0"><span class="opt-letter">A</span>Every museum will follow exactly the same model</button><button class="mcq-opt" onclick="answerMCQ(this,1,2,3,36)" data-idx="1"><span class="opt-letter">B</span>Museums will stop preserving material objects</button><button class="mcq-opt" onclick="answerMCQ(this,2,2,3,36)" data-idx="2"><span class="opt-letter">C</span>Different models will exist, but all must balance preservation and change</button><button class="mcq-opt" onclick="answerMCQ(this,3,2,3,36)" data-idx="3"><span class="opt-letter">D</span>Museums should focus only on commercial success</button></div><div class="q-feedback" id="fb-3-36"></div></div></div>
+      </div>
+      <div class="q-block">
+        <div class="q-block-header"><div class="q-block-title">Questions 37–40</div><div class="q-block-subtitle">Complete each sentence with the correct ending (A–F).</div></div>
+        <div class="q-block-body" id="p3-endings"><div class="endings-box"><strong>A</strong> consulting communities and acknowledging disagreement<br><strong>B</strong> their relationships with the public and with history<br><strong>C</strong> the experience of seeing original objects in person<br><strong>D</strong> the political and cultural values of founding institutions<br><strong>E</strong> removing all objects from exhibition spaces<br><strong>F</strong> refusing to use digital tools<br></div><div class="question-item"><div class="q-number">Question 37</div>
+      <div class="q-text">Early museum displays often reflected <select class="match-dropdown" id="en-3-37"><option value="">—</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option></select></div>
+      <div class="answer-row" style="margin-top:6px;">
+        <button class="reveal-btn" onclick="checkEnding(3,37)">Check</button>
+        <span class="correct-badge" id="ecb-3-37">✓ Correct</span>
+        <span class="wrong-badge" id="ewb-3-37"></span>
+        <span class="answer-reveal" id="ear-3-37">Answer: D</span>
+      </div>
+      <div class="q-feedback" id="efb-3-37" style="margin-top:4px;"></div></div><div class="question-item"><div class="q-number">Question 38</div>
+      <div class="q-text">Recent curatorial practice sometimes involves <select class="match-dropdown" id="en-3-38"><option value="">—</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option></select></div>
+      <div class="answer-row" style="margin-top:6px;">
+        <button class="reveal-btn" onclick="checkEnding(3,38)">Check</button>
+        <span class="correct-badge" id="ecb-3-38">✓ Correct</span>
+        <span class="wrong-badge" id="ewb-3-38"></span>
+        <span class="answer-reveal" id="ear-3-38">Answer: A</span>
+      </div>
+      <div class="q-feedback" id="efb-3-38" style="margin-top:4px;"></div></div><div class="question-item"><div class="q-number">Question 39</div>
+      <div class="q-text">Physical museums still matter because many visitors value <select class="match-dropdown" id="en-3-39"><option value="">—</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option></select></div>
+      <div class="answer-row" style="margin-top:6px;">
+        <button class="reveal-btn" onclick="checkEnding(3,39)">Check</button>
+        <span class="correct-badge" id="ecb-3-39">✓ Correct</span>
+        <span class="wrong-badge" id="ewb-3-39"></span>
+        <span class="answer-reveal" id="ear-3-39">Answer: C</span>
+      </div>
+      <div class="q-feedback" id="efb-3-39" style="margin-top:4px;"></div></div><div class="question-item"><div class="q-number">Question 40</div>
+      <div class="q-text">The future authority of museums will depend increasingly on <select class="match-dropdown" id="en-3-40"><option value="">—</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option><option value="E">E</option><option value="F">F</option></select></div>
+      <div class="answer-row" style="margin-top:6px;">
+        <button class="reveal-btn" onclick="checkEnding(3,40)">Check</button>
+        <span class="correct-badge" id="ecb-3-40">✓ Correct</span>
+        <span class="wrong-badge" id="ewb-3-40"></span>
+        <span class="answer-reveal" id="ear-3-40">Answer: B</span>
+      </div>
+      <div class="q-feedback" id="efb-3-40" style="margin-top:4px;"></div></div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>ESL CONNECT · Full Interactive IELTS Reading Test · 3 passages · 40 questions · <span style="color:var(--teal);">✓ Progress auto-saved</span></footer>
+
+<script>
+// ══════════════════════════════════════════
+// DATA — PASSAGE 1
+// ══════════════════════════════════════════
+const p1MCQ = [
+  { n:1, text:"What is the main reason rooftop farming has attracted attention in cities?",
+    opts:["Cities have too much unused farmland","Urban areas need new ways to grow food locally","Most city residents want to keep livestock","Traditional farming has completely disappeared"],
+    correct:1, exp:"The passage states that 'planners and residents are looking for new ways to produce food close to where people live'." },
+  { n:2, text:"What is said about hydroponics and aeroponics?",
+    opts:["They are older than soil-based methods","They can make rooftop farming less practical","They allow more precise control of growing conditions","They are used only for flowers"],
+    correct:2, exp:"The passage says these techniques 'allow growers to control water and nutrient supply more precisely'." },
+  { n:3, text:"According to the passage, rooftop farming may help buildings by",
+    opts:["increasing transport costs","absorbing more heat from the sun","improving insulation","replacing the need for windows"],
+    correct:2, exp:"The passage says rooftop gardens can 'improve insulation'." },
+  { n:4, text:"Why do many rooftop farming projects remain limited in size?",
+    opts:["Urban residents dislike local food","Roofs are always unsuitable for agriculture","Governments ban commercial production","Buildings may have structural and access limitations"],
+    correct:3, exp:"The passage cites structural requirements, difficult access, and small lifts as reasons why 'many promising projects remain small in scale'." },
+  { n:5, text:"What is the writer's overall view of rooftop farming?",
+    opts:["It will soon replace ordinary agriculture","It is useless unless it produces large amounts of food","It can be valuable, but mainly as a complement to other food systems","It should be used only in wealthy cities"],
+    correct:2, exp:"The passage concludes that 'rooftop cultivation may become an increasingly valuable complement' to conventional agriculture." },
+];
+
+const p1Gap = [
+  { n:6, before:"In hydroponic systems, plants grow in water containing", after:".", answer:"nutrients", hint:"See paragraph 2 — water is 'enriched with ___'." },
+  { n:7, before:"Rooftop gardens may create habitats for insects and", after:".", answer:"birds", hint:"See paragraph 3 — biodiversity includes insects and ___." },
+  { n:8, before:"Before using a roof for farming, a structural", after:"is usually needed.", answer:"assessment", hint:"See paragraph 4 — 'Structural ___ are usually required'." },
+  { n:9, before:"Some researchers say rooftop farming should be judged by a broader", after:"of its sustainability.", answer:"analysis", hint:"See paragraph 6 — a broader ___ includes energy use and water efficiency." },
+];
+
+const p1TFNG = [
+  { n:10, text:"Rooftop farming is a completely new idea developed in recent years.", answer:"FALSE", exp:"The passage says 'the use of roofs for cultivation has a longer history than many people realise'." },
+  { n:11, text:"Some commercial rooftop greenhouses supply local restaurants.", answer:"TRUE", exp:"The passage states commercial greenhouses 'have been built to supply local markets and restaurants'." },
+  { n:12, text:"Rooftop farming is always cheaper than conventional farming.", answer:"FALSE", exp:"The passage says it 'often involves substantial start-up costs' and 'labour costs may also be relatively high'." },
+  { n:13, text:"Some city governments actively support rooftop agriculture.", answer:"TRUE", exp:"'Some municipal governments offer incentives or include rooftop growing spaces in new building policies'." },
+];
+
+// ══════════════════════════════════════════
+// DATA — PASSAGE 2
+// ══════════════════════════════════════════
+const p2Para = [
+  { n:14, text:"a warning about the danger of outward agreement in a group", answer:"D", exp:"Paragraph D: 'groupthink' — teams may 'appear united while actually making poor decisions'." },
+  { n:15, text:"the idea that some types of work are more suitable for teamwork than others", answer:"H", exp:"Paragraph H: 'Not every kind of work benefits equally from teamwork'." },
+  { n:16, text:"a point about how different professional viewpoints can improve problem-solving", answer:"B", exp:"Paragraph B: designer, engineer, and manager perspectives together 'examine a wider range of possibilities'." },
+  { n:17, text:"an explanation that collaboration in digital settings needs deliberate management", answer:"G", exp:"Paragraph G: 'successful virtual collaboration usually requires deliberate coordination'." },
+  { n:18, text:"a claim that people working alone may fail to see problems in their own ideas", answer:"C", exp:"Paragraph C: 'Individuals working alone may become attached to early assumptions and fail to notice weaknesses'." },
+];
+
+const p2SummaryText = "Collaboration can be effective because teams may benefit from cognitive [19]. Different members may contribute different forms of knowledge and help avoid excessively [20] thinking. Groups can also improve ideas through constructive [21]. However, teamwork can fail when members hide doubts in order to maintain [22]. Researchers also emphasise the importance of psychological safety, since people contribute more openly when they feel they will be treated with [23].";
+
+const p2SummaryAnswers = ["diversity","narrow","disagreement","harmony","respect"];
+
+const p2MCQ = [
+  { n:24, text:"What does the writer say about trust in teams?",
+    opts:["It matters less than technical skill","It discourages people from asking questions","It helps people speak honestly and take intellectual risks","It only matters in scientific work"],
+    correct:2, exp:"Paragraph E: trust 'encourages people to ask questions, admit uncertainty, and share partially developed ideas'." },
+  { n:25, text:"According to the passage, remote collaboration can be difficult because",
+    opts:["digital tools make cooperation impossible","written communication may be misunderstood","international teams never share expertise","people in virtual teams work too quickly"],
+    correct:1, exp:"Paragraph G: 'Written messages may be misunderstood, spontaneous conversation may be reduced'." },
+  { n:26, text:"Which statement best matches the writer's overall argument?",
+    opts:["Teamwork is always better than individual work","Collaboration succeeds automatically when talented people meet","Successful teamwork depends on structure, trust, and the right task","Conflict should always be avoided in teams"],
+    correct:2, exp:"Paragraph I summarises: collaboration requires diversity, trust, challenge with respect, and coordination — it is 'a skill that organisations must learn to design, support, and sustain'." },
+];
+
+// ══════════════════════════════════════════
+// DATA — PASSAGE 3
+// ══════════════════════════════════════════
+const p3YesNo = [
+  { n:27, text:"Museums are now expected to do more than simply preserve and display objects.", answer:"YES", exp:"The passage says museums 'are also expected to educate broader audiences, engage with communities, address difficult histories, and adopt digital technologies'." },
+  { n:28, text:"The writer believes that historical museum collections were completely neutral.", answer:"NO", exp:"The passage explicitly states 'Collections were not neutral' — they were shaped by decisions about what to collect and which stories to tell." },
+  { n:29, text:"Some communities have criticised museums for excluding their perspectives.", answer:"YES", exp:"'Communities whose histories were neglected or misinterpreted have increasingly challenged museums to reconsider how exhibitions are designed'." },
+  { n:30, text:"The passage says all disputed objects should immediately be returned to their countries of origin.", answer:"NO", exp:"The passage presents this as a debate with 'many intermediate positions', not a single clear conclusion." },
+  { n:31, text:"Digital access has made physical museum buildings unnecessary.", answer:"NO", exp:"'Digital access does not simply replace the physical museum. Many visitors still value the experience of encountering original objects in a shared public space'." },
+  { n:32, text:"The writer suggests that transparency can strengthen public trust in museums.", answer:"YES", exp:"'Trust must be earned through transparency about methods, provenance, interpretation, and institutional history'." },
+];
+
+const p3MCQ = [
+  { n:33, text:"According to the passage, one reason museums are rethinking exhibitions is that",
+    opts:["visitors no longer care about objects","museums want to avoid all expert knowledge","some groups have challenged earlier interpretations","most collections were recently destroyed"],
+    correct:2, exp:"Communities 'have increasingly challenged museums to reconsider how exhibitions are designed and whose voices are included'." },
+  { n:34, text:"What is said about restitution debates?",
+    opts:["They involve only legal questions","They are simple and have one obvious solution","They are usually irrelevant to education","They include moral, practical, and historical issues"],
+    correct:3, exp:"The passage describes moral duties, practical questions about ownership, legal issues, and educational concerns — 'many intermediate positions'." },
+  { n:35, text:"Why do some museums develop cafés, retail spaces, and commercial partnerships?",
+    opts:["To reduce public access","To respond to financial pressures","To replace collections with entertainment","To avoid digital technology"],
+    correct:1, exp:"'Museums in many countries face rising costs' and commercial expansion is described as a response to 'financial pressure'." },
+  { n:36, text:"What is the writer's view of the museum of the future?",
+    opts:["Every museum will follow exactly the same model","Museums will stop preserving material objects","Different models will exist, but all must balance preservation and change","Museums should focus only on commercial success"],
+    correct:2, exp:"'The museum of the future is unlikely to be defined by a single model' but all face 'the challenge of balancing preservation with change'." },
+];
+
+const p3EndingsSentences = [
+  { n:37, stem:"Early museum displays often reflected", answer:"D", exp:"D: 'the political and cultural values of founding institutions' — museums 'presented objects in ways that supported particular narratives'." },
+  { n:38, stem:"Recent curatorial practice sometimes involves", answer:"A", exp:"A: 'consulting communities and acknowledging disagreement' — curators now 'consult source communities' and 'acknowledge uncertainty or disagreement'." },
+  { n:39, stem:"Physical museums still matter because many visitors value", answer:"C", exp:"C: 'the experience of seeing original objects in person' — visitors 'value the experience of encountering original objects in a shared public space'." },
+  { n:40, stem:"The future authority of museums will depend increasingly on", answer:"B", exp:"B: 'their relationships with the public and with history' — authority will rest on 'the quality of their relationships: with collections, with communities, and with the histories'." },
+];
+
+const endings = {
+  A: "consulting communities and acknowledging disagreement",
+  B: "their relationships with the public and with history",
+  C: "the experience of seeing original objects in person",
+  D: "the political and cultural values of founding institutions",
+  E: "removing all objects from exhibition spaces",
+  F: "refusing to use digital tools",
+};
+
+// ══════════════════════════════════════════
+// PERSISTENCE
+// ══════════════════════════════════════════
+const STORE_KEY = 'ielts_practice2_v1';
+function loadState() { try { const r = localStorage.getItem(STORE_KEY); return r ? JSON.parse(r) : {}; } catch(e) { return {}; } }
+function saveState(patch) { try { const c = loadState(); localStorage.setItem(STORE_KEY, JSON.stringify({...c,...patch})); } catch(e) {} }
+function clearState() { try { localStorage.removeItem(STORE_KEY); } catch(e) {} }
+
+// ══════════════════════════════════════════
+// SCORE TRACKING
+// ══════════════════════════════════════════
+let scores = { p1:0, p2:0, p3:0 };
+const totals = { p1:13, p2:13, p3:14 };
+const answered = { p1:new Set(), p2:new Set(), p3:new Set() };
+
+function updateScore(passage, qNum, correct) {
+  const key = 'p'+passage;
+  if (!answered[key].has(qNum)) { answered[key].add(qNum); if (correct) scores[key]++; }
+  const pct = Math.round(scores[key]/totals[key]*100);
+  document.getElementById(key+'-bar').style.width = pct+'%';
+  document.getElementById(key+'-score').textContent = scores[key]+' / '+totals[key];
+  const g = scores.p1+scores.p2+scores.p3;
+  document.getElementById('global-score').textContent = g+' / '+(totals.p1+totals.p2+totals.p3);
+}
+
+// ══════════════════════════════════════════
+// BUILD + ANSWER MCQ
+// ══════════════════════════════════════════
+function buildMCQ(data, containerId, passage) {
+  const c = document.getElementById(containerId);
+  data.forEach(q => {
+    const div = document.createElement('div'); div.className = 'question-item';
+    const opts = q.opts.map((o,i)=>`<button class="mcq-opt" onclick="answerMCQ(this,${i},${q.correct},${passage},${q.n})" data-idx="${i}"><span class="opt-letter">${String.fromCharCode(65+i)}</span>${o}</button>`).join('');
+    div.innerHTML = `<div class="q-number">Question ${q.n}</div><div class="q-text">${q.text}</div><div class="mcq-options" data-qi="${passage}-${q.n}">${opts}</div><div class="q-feedback" id="fb-${passage}-${q.n}"></div>`;
+    c.appendChild(div);
+  });
+}
+function answerMCQ(btn, idx, correct, passage, qNum) {
+  const wrap = btn.closest('.mcq-options');
+  if (wrap.querySelector('.correct,.wrong')) return;
+  const btns = wrap.querySelectorAll('.mcq-opt');
+  btns.forEach(b=>b.disabled=true);
+  const isRight = idx===correct;
+  btn.classList.add(isRight?'correct':'wrong');
+  btns[correct].classList.add('correct');
+  const data = (passage===1?p1MCQ:passage===2?p2MCQ:p3MCQ).find(q=>q.n===qNum);
+  const fb = document.getElementById(`fb-${passage}-${qNum}`);
+  fb.className = 'q-feedback show '+(isRight?'correct':'wrong');
+  fb.textContent = isRight?'✓ Correct. '+data.exp:'✗ Incorrect. '+data.exp;
+  updateScore(passage,qNum,isRight);
+  saveState({[`mcq_${passage}_${qNum}`]:{chosen:idx,correct,isRight}});
+}
+function restoreMCQ(passage, qNum, chosen, correct, isRight) {
+  const wrap = document.querySelector(`[data-qi="${passage}-${qNum}"]`);
+  if (!wrap) return;
+  const btns = wrap.querySelectorAll('.mcq-opt');
+  btns.forEach(b=>b.disabled=true);
+  btns[chosen].classList.add(isRight?'correct':'wrong');
+  btns[correct].classList.add('correct');
+  const data = (passage===1?p1MCQ:passage===2?p2MCQ:p3MCQ).find(q=>q.n===qNum);
+  const fb = document.getElementById(`fb-${passage}-${qNum}`);
+  fb.className='q-feedback show '+(isRight?'correct':'wrong');
+  fb.textContent = isRight?'✓ Correct. '+data.exp:'✗ Incorrect. '+data.exp;
+  updateScore(passage,qNum,isRight);
+}
+
+// ══════════════════════════════════════════
+// BUILD + CHECK GAP
+// ══════════════════════════════════════════
+function buildGap(data, containerId, passage) {
+  const c = document.getElementById(containerId);
+  data.forEach(q => {
+    const div = document.createElement('div'); div.className='question-item';
+    div.innerHTML=`<div class="q-number">Question ${q.n}</div>
+      <div class="sentence-gap-wrap">${q.before} <span class="inline-gap"><input class="inline-input" id="gi-${passage}-${q.n}" placeholder="type answer" autocomplete="off" spellcheck="false"></span> ${q.after}</div>
+      <div class="answer-row" style="margin-top:8px;">
+        <button class="reveal-btn" onclick="checkGap(${passage},${q.n})">Check</button>
+        <span class="correct-badge" id="cb-${passage}-${q.n}">✓ Correct</span>
+        <span class="wrong-badge" id="wb-${passage}-${q.n}"></span>
+        <span class="answer-reveal" id="ar-${passage}-${q.n}">Answer: ${q.answer}</span>
+      </div>
+      <div style="font-size:11px;color:var(--ink-muted);margin-top:4px;">${q.hint}</div>`;
+    c.appendChild(div);
+  });
+}
+function checkGap(passage, qNum) {
+  const data = p1Gap.find(q=>q.n===qNum);
+  if (!data) return;
+  const input = document.getElementById(`gi-${passage}-${qNum}`);
+  const val = input.value.trim().toLowerCase();
+  const isRight = val===data.answer.toLowerCase()||val===data.answer.toLowerCase().replace(/s$/,'');
+  input.classList.remove('correct','wrong'); input.classList.add(isRight?'correct':'wrong'); input.disabled=true;
+  const cb=document.getElementById(`cb-${passage}-${qNum}`), wb=document.getElementById(`wb-${passage}-${qNum}`), ar=document.getElementById(`ar-${passage}-${qNum}`);
+  if (isRight) { cb.style.display='inline-block'; }
+  else { wb.style.display='inline-block'; wb.textContent='✗ '+(val?'"'+input.value.trim()+'"':'No answer entered'); ar.style.display='inline-block'; }
+  updateScore(passage,qNum,isRight);
+  saveState({[`gap_${passage}_${qNum}`]:{value:input.value.trim(),isRight}});
+}
+function restoreGap(passage, qNum, value, isRight) {
+  const input=document.getElementById(`gi-${passage}-${qNum}`); if (!input) return;
+  input.value=value; input.classList.add(isRight?'correct':'wrong'); input.disabled=true;
+  const cb=document.getElementById(`cb-${passage}-${qNum}`), wb=document.getElementById(`wb-${passage}-${qNum}`), ar=document.getElementById(`ar-${passage}-${qNum}`);
+  if (isRight) { cb.style.display='inline-block'; }
+  else { wb.style.display='inline-block'; wb.textContent='✗ '+(value?'"'+value+'"':'No answer entered'); ar.style.display='inline-block'; }
+  updateScore(passage,qNum,isRight);
+}
+
+// ══════════════════════════════════════════
+// BUILD + ANSWER T/F/NG
+// ══════════════════════════════════════════
+function buildTFNG(data, containerId, passage, labels) {
+  const c=document.getElementById(containerId), labs=labels||['TRUE','FALSE','NOT GIVEN'];
+  data.forEach(q=>{
+    const div=document.createElement('div'); div.className='question-item';
+    const btns=labs.map(l=>`<button class="tfng-btn" onclick="answerTFNG(this,'${l}','${q.answer}',${passage},${q.n})">${l}</button>`).join('');
+    div.innerHTML=`<div class="q-number">Question ${q.n}</div><div class="q-text">${q.text}</div><div class="tfng-options">${btns}</div><div class="q-feedback" id="tfb-${passage}-${q.n}"></div>`;
+    c.appendChild(div);
+  });
+}
+function answerTFNG(btn, choice, correct, passage, qNum) {
+  const wrap=btn.closest('.tfng-options');
+  if (wrap.querySelector('.correct,.wrong')) return;
+  wrap.querySelectorAll('.tfng-btn').forEach(b=>b.disabled=true);
+  const isRight=choice===correct;
+  btn.classList.add(isRight?'correct':'wrong');
+  if (!isRight) wrap.querySelectorAll('.tfng-btn').forEach(b=>{if(b.textContent===correct)b.classList.add('correct');});
+  const allData=[...p1TFNG,...p3YesNo]; const data=allData.find(q=>q.n===qNum);
+  const fb=document.getElementById(`tfb-${passage}-${qNum}`);
+  fb.className='q-feedback show '+(isRight?'correct':'wrong');
+  fb.textContent=isRight?'✓ Correct. '+data.exp:'✗ Incorrect. The answer is '+correct+'. '+data.exp;
+  updateScore(passage,qNum,isRight);
+  saveState({[`tfng_${passage}_${qNum}`]:{choice,correct,isRight}});
+}
+function restoreTFNG(passage, qNum, choice, correct, isRight) {
+  const fb=document.getElementById(`tfb-${passage}-${qNum}`); if(!fb) return;
+  const wrap=fb.previousElementSibling;
+  const btns=wrap.querySelectorAll('.tfng-btn');
+  btns.forEach(b=>{b.disabled=true; if(b.textContent===choice)b.classList.add(isRight?'correct':'wrong'); if(!isRight&&b.textContent===correct)b.classList.add('correct');});
+  const allData=[...p1TFNG,...p3YesNo]; const data=allData.find(q=>q.n===qNum);
+  fb.className='q-feedback show '+(isRight?'correct':'wrong');
+  fb.textContent=isRight?'✓ Correct. '+data.exp:'✗ Incorrect. The answer is '+correct+'. '+data.exp;
+  updateScore(passage,qNum,isRight);
+}
+
+// ══════════════════════════════════════════
+// BUILD + CHECK PARAGRAPH MATCHING
+// ══════════════════════════════════════════
+function buildParaMatch(data, containerId, passage) {
+  const c=document.getElementById(containerId), paraOpts=['A','B','C','D','E','F','G','H','I'];
+  data.forEach(q=>{
+    const div=document.createElement('div'); div.className='question-item';
+    const opts=paraOpts.map(p=>`<option value="${p}">${p}</option>`).join('');
+    div.innerHTML=`<div class="q-number">Question ${q.n}</div><div class="q-text">${q.text}</div>
+      <div class="answer-row" style="margin-top:6px;">
+        <select class="match-dropdown" id="pm-${passage}-${q.n}"><option value="">Select</option>${opts}</select>
+        <button class="reveal-btn" onclick="checkParaMatch(${passage},${q.n})">Check</button>
+        <span class="correct-badge" id="pcb-${passage}-${q.n}">✓ Correct</span>
+        <span class="wrong-badge" id="pwb-${passage}-${q.n}"></span>
+        <span class="answer-reveal" id="par-${passage}-${q.n}">Answer: ${q.answer}</span>
+      </div>
+      <div class="q-feedback" id="pfb-${passage}-${q.n}" style="margin-top:6px;"></div>`;
+    c.appendChild(div);
+  });
+}
+function checkParaMatch(passage, qNum) {
+  const data=p2Para.find(q=>q.n===qNum);
+  const sel=document.getElementById(`pm-${passage}-${qNum}`), val=sel.value;
+  if (!val) return;
+  const isRight=val===data.answer; sel.classList.add(isRight?'correct':'wrong'); sel.disabled=true;
+  const cb=document.getElementById(`pcb-${passage}-${qNum}`), wb=document.getElementById(`pwb-${passage}-${qNum}`), ar=document.getElementById(`par-${passage}-${qNum}`), fb=document.getElementById(`pfb-${passage}-${qNum}`);
+  if (isRight){cb.style.display='inline-block';fb.className='q-feedback show correct';fb.textContent='✓ '+data.exp;}
+  else{wb.textContent='✗ You chose: '+val;wb.style.display='inline-block';ar.style.display='inline-block';fb.className='q-feedback show wrong';fb.textContent='✗ '+data.exp;}
+  updateScore(passage,qNum,isRight);
+  saveState({[`para_${passage}_${qNum}`]:{val,isRight}});
+}
+function restoreParaMatch(passage, qNum, val, isRight) {
+  const sel=document.getElementById(`pm-${passage}-${qNum}`); if(!sel) return;
+  sel.value=val; sel.classList.add(isRight?'correct':'wrong'); sel.disabled=true;
+  const data=p2Para.find(q=>q.n===qNum);
+  const cb=document.getElementById(`pcb-${passage}-${qNum}`), wb=document.getElementById(`pwb-${passage}-${qNum}`), ar=document.getElementById(`par-${passage}-${qNum}`), fb=document.getElementById(`pfb-${passage}-${qNum}`);
+  if(isRight){cb.style.display='inline-block';fb.className='q-feedback show correct';fb.textContent='✓ '+data.exp;}
+  else{wb.textContent='✗ You chose: '+val;wb.style.display='inline-block';ar.style.display='inline-block';fb.className='q-feedback show wrong';fb.textContent='✗ '+data.exp;}
+  updateScore(passage,qNum,isRight);
+}
+
+// ══════════════════════════════════════════
+// BUILD + CHECK SUMMARY
+// ══════════════════════════════════════════
+function buildSummary(containerId, passage) {
+  const c=document.getElementById(containerId);
+  let text=p2SummaryText;
+  p2SummaryAnswers.forEach((ans,i)=>{
+    const num=19+i;
+    text=text.replace(`[${num}]`,`<span class="inline-gap"><input class="inline-input" id="si-${passage}-${num}" placeholder="${num}" autocomplete="off" spellcheck="false" style="width:110px;"></span>`);
+  });
+  const div=document.createElement('div'); div.className='question-item'; div.style.borderBottom='none';
+  div.innerHTML=`<div class="para-completion">${text}</div><button class="check-all-btn" onclick="checkSummary(${passage})">Check All Answers</button><div class="q-feedback" id="sfb-${passage}" style="margin-top:8px;"></div>`;
+  c.appendChild(div);
+}
+function checkSummary(passage) {
+  let correct=0; const savedVals={};
+  p2SummaryAnswers.forEach((ans,i)=>{
+    const num=19+i;
+    const input=document.getElementById(`si-${passage}-${num}`); if(input.disabled)return;
+    const val=input.value.trim().toLowerCase(); const isRight=val===ans.toLowerCase();
+    input.classList.remove('correct','wrong'); input.classList.add(isRight?'correct':'wrong'); input.disabled=true;
+    savedVals[num]={value:input.value.trim(),isRight};
+    if(!isRight){const sp=document.createElement('span');sp.className='answer-reveal';sp.style.display='inline-block';sp.style.marginLeft='4px';sp.style.fontSize='11px';sp.textContent=ans;input.parentNode.appendChild(sp);}
+    if(isRight)correct++;
+    updateScore(passage,num,isRight);
+  });
+  const fb=document.getElementById(`sfb-${passage}`);
+  fb.className='q-feedback show '+(correct===5?'correct':'wrong');
+  fb.textContent=correct===5?'✓ All 5 correct!':correct+'/5 correct. Incorrect answers are shown above.';
+  saveState({[`summary_${passage}`]:{vals:savedVals,scoreCorrect:correct}});
+}
+function restoreSummary(passage, vals, scoreCorrect) {
+  p2SummaryAnswers.forEach((ans,i)=>{
+    const num=19+i; const saved=vals[num]; if(!saved)return;
+    const input=document.getElementById(`si-${passage}-${num}`); if(!input)return;
+    input.value=saved.value; input.classList.add(saved.isRight?'correct':'wrong'); input.disabled=true;
+    if(!saved.isRight){const sp=document.createElement('span');sp.className='answer-reveal';sp.style.display='inline-block';sp.style.marginLeft='4px';sp.style.fontSize='11px';sp.textContent=ans;input.parentNode.appendChild(sp);}
+    updateScore(passage,num,saved.isRight);
+  });
+  const fb=document.getElementById(`sfb-${passage}`);
+  fb.className='q-feedback show '+(scoreCorrect===5?'correct':'wrong');
+  fb.textContent=scoreCorrect===5?'✓ All 5 correct!':scoreCorrect+'/5 correct. Incorrect answers are shown above.';
+}
+
+// ══════════════════════════════════════════
+// BUILD + CHECK ENDINGS
+// ══════════════════════════════════════════
+function buildEndings(data, containerId, passage) {
+  const c=document.getElementById(containerId);
+  const eBox=document.createElement('div'); eBox.className='endings-box';
+  eBox.innerHTML=Object.entries(endings).map(([k,v])=>`<strong>${k}</strong> ${v}<br>`).join('');
+  c.appendChild(eBox);
+  data.forEach(q=>{
+    const div=document.createElement('div'); div.className='question-item';
+    const opts=Object.keys(endings).map(k=>`<option value="${k}">${k}</option>`).join('');
+    div.innerHTML=`<div class="q-number">Question ${q.n}</div>
+      <div class="q-text">${q.stem} <select class="match-dropdown" id="en-${passage}-${q.n}"><option value="">—</option>${opts}</select></div>
+      <div class="answer-row" style="margin-top:6px;">
+        <button class="reveal-btn" onclick="checkEnding(${passage},${q.n})">Check</button>
+        <span class="correct-badge" id="ecb-${passage}-${q.n}">✓ Correct</span>
+        <span class="wrong-badge" id="ewb-${passage}-${q.n}"></span>
+        <span class="answer-reveal" id="ear-${passage}-${q.n}">Answer: ${q.answer}</span>
+      </div>
+      <div class="q-feedback" id="efb-${passage}-${q.n}" style="margin-top:4px;"></div>`;
+    c.appendChild(div);
+  });
+}
+function checkEnding(passage, qNum) {
+  const data=p3EndingsSentences.find(q=>q.n===qNum);
+  const sel=document.getElementById(`en-${passage}-${qNum}`), val=sel.value; if(!val)return;
+  const isRight=val===data.answer; sel.classList.add(isRight?'correct':'wrong'); sel.disabled=true;
+  const cb=document.getElementById(`ecb-${passage}-${qNum}`), wb=document.getElementById(`ewb-${passage}-${qNum}`), ar=document.getElementById(`ear-${passage}-${qNum}`), fb=document.getElementById(`efb-${passage}-${qNum}`);
+  if(isRight){cb.style.display='inline-block';fb.className='q-feedback show correct';fb.textContent='✓ '+data.exp;}
+  else{wb.textContent='✗ '+val;wb.style.display='inline-block';ar.style.display='inline-block';fb.className='q-feedback show wrong';fb.textContent='✗ '+data.exp;}
+  updateScore(passage,qNum,isRight);
+  saveState({[`ending_${passage}_${qNum}`]:{val,isRight}});
+}
+function restoreEnding(passage, qNum, val, isRight) {
+  const sel=document.getElementById(`en-${passage}-${qNum}`); if(!sel)return;
+  sel.value=val; sel.classList.add(isRight?'correct':'wrong'); sel.disabled=true;
+  const data=p3EndingsSentences.find(q=>q.n===qNum);
+  const cb=document.getElementById(`ecb-${passage}-${qNum}`), wb=document.getElementById(`ewb-${passage}-${qNum}`), ar=document.getElementById(`ear-${passage}-${qNum}`), fb=document.getElementById(`efb-${passage}-${qNum}`);
+  if(isRight){cb.style.display='inline-block';fb.className='q-feedback show correct';fb.textContent='✓ '+data.exp;}
+  else{wb.textContent='✗ '+val;wb.style.display='inline-block';ar.style.display='inline-block';fb.className='q-feedback show wrong';fb.textContent='✗ '+data.exp;}
+  updateScore(passage,qNum,isRight);
+}
+
+// ══════════════════════════════════════════
+// PASSAGE SWITCHING
+// ══════════════════════════════════════════
+function switchPassage(n, btn) {
+  document.querySelectorAll('.ptab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.q-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.passage-section').forEach(s=>s.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('qs-'+n).classList.add('active');
+  document.getElementById('ptext-'+n).classList.add('active');
+  const titles={1:'Reading Passage 1 · Rooftop Farming',2:'Reading Passage 2 · Working Together',3:'Reading Passage 3 · The Future of Museums'};
+  document.getElementById('passage-heading').textContent=titles[n];
+  saveState({activePassage:n});
+}
+
+// ══════════════════════════════════════════
+// TIMER
+// ══════════════════════════════════════════
+const timerEl=document.getElementById('timer');
+const st0=loadState();
+let secondsLeft=(st0.timerSeconds!==undefined&&st0.timerSeconds>0)?st0.timerSeconds:3600;
+function renderTimer(){
+  const m=Math.floor(secondsLeft/60),s=secondsLeft%60;
+  timerEl.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  timerEl.className='timer-display'+(secondsLeft<600?' danger':secondsLeft<1200?' warning':'');
+}
+renderTimer();
+const tick=setInterval(()=>{
+  if(secondsLeft<=0){clearInterval(tick);timerEl.textContent='00:00';timerEl.classList.add('danger');return;}
+  secondsLeft--;renderTimer();
+  if(secondsLeft%10===0)saveState({timerSeconds:secondsLeft});
+},1000);
+
+// ══════════════════════════════════════════
+// RESET
+// ══════════════════════════════════════════
+function resetTest(){
+  if(!confirm('Reset the entire test? All your answers and the timer will be cleared.'))return;
+  clearState();location.reload();
+}
+
+// ══════════════════════════════════════════
+// RESTORE ALL SAVED ANSWERS
+// ══════════════════════════════════════════
+function restoreAll(){
+  const st=loadState();
+  [[p1MCQ,1],[p2MCQ,2],[p3MCQ,3]].forEach(([data,passage])=>{
+    data.forEach(q=>{const saved=st[`mcq_${passage}_${q.n}`];if(saved)restoreMCQ(passage,q.n,saved.chosen,saved.correct,saved.isRight);});
+  });
+  p1Gap.forEach(q=>{const saved=st[`gap_1_${q.n}`];if(saved)restoreGap(1,q.n,saved.value,saved.isRight);});
+  p1TFNG.forEach(q=>{const saved=st[`tfng_1_${q.n}`];if(saved)restoreTFNG(1,q.n,saved.choice,saved.correct,saved.isRight);});
+  p2Para.forEach(q=>{const saved=st[`para_2_${q.n}`];if(saved)restoreParaMatch(2,q.n,saved.val,saved.isRight);});
+  const sumSaved=st[`summary_2`];if(sumSaved)restoreSummary(2,sumSaved.vals,sumSaved.scoreCorrect);
+  p3YesNo.forEach(q=>{const saved=st[`tfng_3_${q.n}`];if(saved)restoreTFNG(3,q.n,saved.choice,saved.correct,saved.isRight);});
+  p3EndingsSentences.forEach(q=>{const saved=st[`ending_3_${q.n}`];if(saved)restoreEnding(3,q.n,saved.val,saved.isRight);});
+  const ap=st.activePassage;
+  if(ap&&ap!==1){const tabs=document.querySelectorAll('.ptab');if(tabs[ap-1])switchPassage(ap,tabs[ap-1]);}
+}
+
+// ══════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════
+buildMCQ(p1MCQ,'p1-mcq',1);
+buildGap(p1Gap,'p1-gap',1);
+buildTFNG(p1TFNG,'p1-tfng',1,['TRUE','FALSE','NOT GIVEN']);
+buildParaMatch(p2Para,'p2-para',2);
+buildSummary('p2-summary',2);
+buildMCQ(p2MCQ,'p2-mcq',2);
+buildTFNG(p3YesNo,'p3-yesno',3,['YES','NO','NOT GIVEN']);
+buildMCQ(p3MCQ,'p3-mcq',3);
+buildEndings(p3EndingsSentences,'p3-endings',3);
+restoreAll();
+</script>
+
+
+</body></html>
